@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Prompt Poster Promosi</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Smooth transitions */
+        .transition-all { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Custom scrollbar for dropdown menus */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0b0f19; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+
+    <!-- Tailwind Config for Custom Colors/Utilities -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                            900: '#0b0f19',
+                            950: '#06080f'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-tr from-slate-950 via-slate-900 to-indigo-950 text-slate-100 antialiased min-h-screen p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-10 relative">
+        
+        <!-- Floating background decorative blobs -->
+        <div class="absolute top-10 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-40 right-1/4 w-85 h-85 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Header -->
+        <header class="relative text-center space-y-4 pt-6 pb-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/10 border border-indigo-400/20 rounded-full text-indigo-300 text-xs font-semibold tracking-wide">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse"></i> AI Prompt Suite HTML v2.5
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-none">
+                Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">Poster Prompt</span> Builder
+            </h1>
+            <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto">
+                Hasilkan instruksi (prompt) profesional, berstruktur rapi, dan konsisten untuk AI Gambar (Midjourney, DALL-E) serta AI Teks Copywriting (ChatGPT, Claude, Gemini).
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+            
+            <!-- Left Column: Form -->
+            <div class="lg:col-span-7 space-y-6 bg-slate-900/65 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-2xl border border-slate-800/80">
+                <div class="flex justify-between items-center pb-4 border-b border-slate-800">
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
+                        <div class="p-2 bg-indigo-600/10 rounded-xl text-indigo-400 border border-indigo-500/20">
+                            <i data-lucide="layout-template" class="w-5 h-5"></i>
+                        </div>
+                        Konfigurasi Desain
+                    </h2>
+                    <button id="btn-reset" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-lg hover:bg-rose-500/10 border border-transparent hover:border-rose-500/20">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Atur Ulang
+                    </button>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Type Selection -->
+                    <div class="grid grid-cols-2 p-1.5 bg-slate-950/80 rounded-2xl border border-slate-800" id="type-selector">
+                        <button data-type="promosi" class="type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-600/25 border-t border-indigo-400/30">
+                            <i data-lucide="megaphone" class="w-4 h-4"></i> Promosi Produk / Jasa
+                        </button>
+                        <button data-type="ucapan" class="type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all text-slate-400 hover:text-slate-200">
+                            <i data-lucide="party-popper" class="w-4 h-4"></i> Ucapan Hari Raya / Event
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Fields -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div id="wrapper-productName" class="md:col-span-1">
+                            <label id="label-productName" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                                Nama Produk / Brand <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" id="productName" placeholder="Contoh: Kopi Susu Aren..." class="w-full px-4 py-3.5 rounded-xl border border-slate-800 outline-none transition-all bg-slate-950/70 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
+                        </div>
+
+                        <div id="wrapper-productCategory">
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i data-lucide="tag" class="w-3.5 h-3.5 text-slate-400"></i> Kategori Produk
+                            </label>
+                            <div class="relative custom-combobox" id="combo-productCategory">
+                                <input type="text" id="productCategory" placeholder="Ketik kategori..." class="w-full pl-4 pr-12 py-3.5 rounded-xl border border-slate-800 outline-none transition-all bg-slate-950/70 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
+                                <!-- Custom Combo Box Dropdown Button -->
+                                <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-slate-800/80 border border-slate-700/80 rounded-md flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer z-10">
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hover:text-white transition-colors"></i>
+                                </button>
+                                <!-- Custom Floating List -->
+                                <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-2 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl max-h-60 overflow-y-auto custom-scrollbar">
+                                    <!-- Options injected via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Title Input -->
+                    <div class="bg-slate-950/40 p-4 rounded-2xl border border-slate-800/60">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <i data-lucide="type" class="w-3.5 h-3.5 text-indigo-400"></i> Teks Wajib Highlight / Judul Utama <span class="text-slate-500 font-normal lowercase">(opsional)</span>
+                        </label>
+                        <input type="text" id="highlightTitle" placeholder="Contoh: DISKON HINGGA 70%, MOHON MAAF LAHIR BATIN..." class="w-full px-4 py-3.5 rounded-xl border border-slate-800 outline-none transition-all bg-slate-950/80 text-white placeholder-slate-500 text-sm font-semibold tracking-wide focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
+                        <p class="text-[10px] text-slate-500 mt-2">Menyuruh AI Gambar menaruh teks besar bertekstur indah & menarik perhatian di poster.</p>
+                    </div>
+
+                    <!-- Flyer/Poster Information Balance Selector -->
+                    <div class="pt-2 border-t border-slate-800">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <i data-lucide="scale" class="w-3.5 h-3.5 text-slate-400"></i> Keseimbangan Komposisi Flyer / Poster
+                        </label>
+                        <div class="grid grid-cols-3 p-1 bg-slate-950/80 rounded-2xl border border-slate-800" id="balance-selector">
+                            <button type="button" data-balance="80-20" class="balance-btn py-2.5 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all text-slate-400 hover:text-slate-200">
+                                <span>80% Visual / 20% Teks</span>
+                                <span class="text-[9px] font-normal text-slate-500">Artistik / Minimalis</span>
+                            </button>
+                            <button type="button" data-balance="50-50" class="balance-btn py-2.5 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-600/25 border-t border-indigo-400/30">
+                                <span>50% Visual / 50% Teks</span>
+                                <span class="text-[9px] font-normal text-indigo-200">Seimbang / Standar</span>
+                            </button>
+                            <button type="button" data-balance="20-80" class="balance-btn py-2.5 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all text-slate-400 hover:text-slate-200">
+                                <span>20% Visual / 80% Teks</span>
+                                <span class="text-[9px] font-normal text-slate-500">Informasi Padat</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Goal & Audience Combo Boxes -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+                        <div>
+                            <label id="label-goal" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i data-lucide="target" class="w-3.5 h-3.5 text-slate-400"></i> Tujuan Promosi
+                            </label>
+                            <div class="relative custom-combobox" id="combo-goal">
+                                <input type="text" id="goal" placeholder="Flash Sale, Launching..." class="w-full pl-4 pr-12 py-3.5 rounded-xl border border-slate-800 outline-none transition-all bg-slate-950/70 text-white text-sm focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500">
+                                <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-slate-800/80 border border-slate-700/80 rounded-md flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer z-10">
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hover:text-white transition-colors"></i>
+                                </button>
+                                <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-2 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl max-h-60 overflow-y-auto custom-scrollbar">
+                                    <!-- Options injected via JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label id="label-audience" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i> Target Audiens
+                            </label>
+                            <div class="relative custom-combobox" id="combo-audience">
+                                <input type="text" id="audience" placeholder="Mahasiswa, Ibu-ibu..." class="w-full pl-4 pr-12 py-3.5 rounded-xl border border-slate-800 outline-none transition-all bg-slate-950/70 text-white text-sm focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500">
+                                <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-slate-800/80 border border-slate-700/80 rounded-md flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer z-10">
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hover:text-white transition-colors"></i>
+                                </button>
+                                <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-2 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl max-h-60 overflow-y-auto custom-scrollbar">
+                                    <!-- Options injected via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Themes -->
+                    <div class="pt-4 border-t border-slate-800">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Gaya Visual / Tema Desain</label>
+                        <div id="themes-container" class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Colors & Aspect Ratio -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4 border-t border-slate-800">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i data-lucide="palette" class="w-3.5 h-3.5 text-slate-400"></i> Warna Utama Poster
+                            </label>
+                            <div class="relative custom-combobox" id="combo-colors">
+                                <input type="text" id="colors" placeholder="Ketik warna..." value="Hitam & Emas (Eksklusif)" class="w-full pl-4 pr-20 py-3.5 rounded-xl border border-slate-800 outline-none transition-all bg-slate-950/70 text-white text-sm focus:border-indigo-500">
+                                
+                                <div id="color-preview" class="absolute right-12 top-1/2 -translate-y-1/2 flex gap-1.5 pointer-events-none bg-slate-900/80 px-2 py-1.5 rounded-md border border-slate-700 hidden">
+                                    <!-- Injected via JS -->
+                                </div>
+
+                                <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-slate-800/80 border border-slate-700/80 rounded-md flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer z-10">
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hover:text-white transition-colors"></i>
+                                </button>
+                                <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-2 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl max-h-60 overflow-y-auto custom-scrollbar">
+                                    <!-- Options injected via JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Aspek Rasio / Ukuran</label>
+                            <div id="aspectRatio-container" class="grid grid-cols-2 gap-2">
+                                <!-- Injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Elements detail -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Elemen / Objek Detail Gambar</label>
+                        <textarea id="elements" rows="2" placeholder="Misal: Cipratan air es yang segar di sekeliling produk, diletakkan di atas meja marmer..." class="w-full px-4 py-3.5 rounded-xl border border-slate-800 outline-none transition-all bg-slate-950/70 text-slate-300 placeholder-slate-500 text-sm focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 resize-none"></textarea>
+                    </div>
+
+                    <!-- Footer Section Toggle -->
+                    <div class="border border-slate-800 bg-slate-950/30 rounded-2xl overflow-hidden transition-all">
+                        <label class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-900/30 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="useFooter" class="w-4 h-4 rounded border-slate-700 bg-slate-950 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-slate-900 focus:ring-offset-2 cursor-pointer">
+                                <div class="flex items-center gap-2 font-bold text-sm text-slate-200">
+                                    <i data-lucide="panel-bottom" class="w-4 h-4 text-indigo-400"></i>
+                                    Aktifkan Area Footer Poster
+                                </div>
+                            </div>
+                            <span id="footer-status-badge" class="text-[10px] px-2 py-0.5 rounded font-bold uppercase transition-all bg-slate-800 text-slate-500">Mati</span>
+                        </label>
+                        
+                        <!-- Footer Fields Drawer -->
+                        <div id="footer-drawer" class="hidden p-4 border-t border-slate-800/80 bg-slate-950/40 space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 flex items-center gap-1">
+                                        <i data-lucide="hash" class="w-3 h-3 text-slate-500"></i> Tagline Slogan
+                                    </label>
+                                    <input type="text" id="tagline" placeholder="Misal: Nikmatnya Tiada Tara!" class="w-full px-3 py-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white text-xs focus:border-indigo-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-400 mb-1.5 flex items-center gap-1">
+                                        <i data-lucide="phone" class="w-3 h-3 text-slate-500"></i> WhatsApp / Kontak
+                                    </label>
+                                    <input type="text" id="contact" placeholder="Misal: WA 0812-3456-789" class="w-full px-3 py-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white text-xs focus:border-indigo-500 outline-none">
+                                </div>
+
+                                <!-- Social Media Inputs -->
+                                <div class="md:col-span-2 pt-2.5 border-t border-slate-900">
+                                    <span class="block text-[11px] font-bold text-slate-300 mb-2">Ikon Sosial Media Utama:</span>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                        <div>
+                                            <label class="block text-[10px] text-slate-500 mb-1 flex items-center gap-1.5"><i data-lucide="instagram" class="w-3 h-3 text-pink-500"></i> Instagram</label>
+                                            <input type="text" id="socIg" placeholder="@username" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg focus:outline-none focus:border-indigo-500">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] text-slate-500 mb-1 flex items-center gap-1.5"><i data-lucide="facebook" class="w-3 h-3 text-blue-500"></i> Facebook</label>
+                                            <input type="text" id="socFb" placeholder="Halaman Fans" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg focus:outline-none focus:border-indigo-500">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] text-slate-500 mb-1 flex items-center gap-1.5"><i data-lucide="music" class="w-3 h-3 text-white"></i> TikTok</label>
+                                            <input type="text" id="socTiktok" placeholder="@username" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg focus:outline-none focus:border-indigo-500">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Marketplace Inputs -->
+                                <div class="md:col-span-2 pt-1">
+                                    <span class="block text-[11px] font-bold text-slate-300 mb-2">Ikon Marketplace:</span>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                        <div>
+                                            <label class="block text-[10px] text-slate-500 mb-1 flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-3 h-3 text-orange-500"></i> Shopee</label>
+                                            <input type="text" id="markShopee" placeholder="Nama Toko" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg focus:outline-none focus:border-indigo-500">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] text-slate-500 mb-1 flex items-center gap-1.5"><i data-lucide="store" class="w-3 h-3 text-emerald-500"></i> Tokopedia</label>
+                                            <input type="text" id="markTokped" placeholder="Nama Toko" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg focus:outline-none focus:border-indigo-500">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] text-slate-500 mb-1 flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-3 h-3 text-yellow-500"></i> TikTok Shop</label>
+                                            <input type="text" id="markTiktok" placeholder="Nama Toko" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg focus:outline-none focus:border-indigo-500">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Style and Color Footer -->
+                            <div class="pt-3 border-t border-slate-900 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-400 mb-1">Gaya Warna Footer</label>
+                                    <select id="footerColorType" class="px-3 py-2 bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-lg focus:outline-none focus:border-indigo-500">
+                                        <option value="monotone" selected>Warna Solid Kustom</option>
+                                        <option value="palette">Ikuti Warna Utama Poster</option>
+                                    </select>
+                                </div>
+                                
+                                <div id="footerColor-wrapper" class="flex items-center gap-2">
+                                    <label class="text-[10px] text-slate-500 font-medium">Pilih Warna:</label>
+                                    <div class="flex items-center gap-2 bg-slate-950 p-1.5 rounded-lg border border-slate-800">
+                                        <input type="color" id="footerColor" value="#1e293b" class="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent">
+                                        <span id="footerColor-label" class="text-[10px] text-slate-300 uppercase font-mono">#1e293b</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button id="btn-generate" disabled class="w-full py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all shadow-xl bg-slate-800 text-slate-600 cursor-not-allowed border border-slate-800/40">
+                        <i data-lucide="wand-2" class="w-5 h-5"></i> Buatkan Formula Prompt
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Output & Interactive Poster Preview -->
+            <div class="lg:col-span-5 flex flex-col space-y-6">
+                
+                <!-- INTERACTIVE MINI POSTER LAYOUT (Visual Preview Guide) -->
+                <div class="bg-slate-900/65 backdrop-blur-md p-5 rounded-3xl border border-slate-800/80 flex flex-col items-center">
+                    <div class="w-full flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
+                        <span class="text-xs font-bold text-slate-300 tracking-wider uppercase flex items-center gap-1.5">
+                            <i data-lucide="layout-template" class="w-3.5 h-3.5 text-cyan-400"></i> Sketsa Layout Poster
+                        </span>
+                        <span id="preview-ar-badge" class="text-[10px] bg-slate-800 text-indigo-300 px-2 py-0.5 rounded font-mono font-bold">AR 1:1</span>
+                    </div>
+
+                    <!-- Frame Size -->
+                    <div id="preview-frame" class="w-64 h-64 transition-all duration-300 flex items-center justify-center bg-slate-950/80 border-2 border-slate-800 rounded-2xl relative shadow-inner overflow-hidden p-3">
+                        
+                        <!-- Canvas content -->
+                        <div class="w-full h-full rounded-lg bg-gradient-to-b from-slate-900 to-slate-950 flex flex-col justify-between p-3 relative text-center">
+                            
+                            <div class="absolute inset-0 opacity-10 pointer-events-none flex flex-wrap gap-2 overflow-hidden">
+                                <div class="w-full h-full bg-[radial-gradient(#818cf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            </div>
+
+                            <div class="relative z-10" id="preview-category-area">
+                                <span id="preview-category" class="text-[8px] tracking-widest text-indigo-400 uppercase font-bold block">
+                                    KATEGORI PRODUK
+                                </span>
+                            </div>
+
+                            <!-- Main Visual / Texts layout based on balance -->
+                            <div class="my-auto relative z-10 px-1 w-full flex flex-col justify-center">
+                                <h3 id="preview-title" class="text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-300 leading-tight uppercase tracking-wider line-clamp-2">
+                                    JUDUL UTAMA POSTER
+                                </h3>
+                                <p id="preview-theme" class="text-[8px] text-slate-400 mt-1 max-w-[80%] mx-auto truncate font-medium">
+                                    [Visual: Minimalis Modern]
+                                </p>
+                                
+                                <!-- Mock information lines for 20-80 mode -->
+                                <div id="preview-text-lines" class="hidden mt-3 space-y-1.5 max-w-[90%] mx-auto p-1.5 bg-slate-900/60 rounded border border-slate-800/40 text-[5px] text-slate-500">
+                                    <div class="h-1 bg-slate-700/60 rounded w-11/12 mx-auto"></div>
+                                    <div class="h-1 bg-slate-700/60 rounded w-full mx-auto"></div>
+                                    <div class="h-1 bg-slate-700/60 rounded w-9/12 mx-auto"></div>
+                                </div>
+                            </div>
+
+                            <!-- Mock Footer -->
+                            <div id="preview-footer" class="hidden relative z-10 mt-2 p-1.5 rounded border border-slate-800 text-left" style="background-color: #1e1b4b">
+                                <div class="flex justify-between items-center text-[7px] text-white">
+                                    <span id="preview-tagline" class="font-semibold uppercase tracking-wider truncate max-w-[50%]">Tagline/Slogan</span>
+                                    <span id="preview-contact" class="font-mono text-slate-300 scale-90">Hubungi Kami</span>
+                                </div>
+                                <div id="preview-socials" class="flex items-center gap-1.5 mt-1 border-t border-white/10 pt-1 text-[6px] text-slate-400">
+                                    <!-- Social icons injected here via JS -->
+                                </div>
+                            </div>
+                            <!-- Mock No Footer -->
+                            <div id="preview-no-footer" class="text-[7px] text-slate-600 italic border-t border-dashed border-slate-800 pt-1">
+                                Tanpa footer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prompt Output Control Panel -->
+                <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl flex-grow flex flex-col border border-slate-800" id="results-panel">
+                    <!-- Tabs Selection -->
+                    <div class="flex border-b border-slate-800 p-1 bg-slate-950/60">
+                        <button onclick="switchTab('image')" id="btn-tab-image" class="flex-1 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-white bg-indigo-600/10 text-indigo-400 border border-indigo-500/20">
+                            <i data-lucide="image" class="w-3.5 h-3.5"></i> Prompt Gambar (AI Image)
+                        </button>
+                        <button onclick="switchTab('text')" id="btn-tab-text" class="flex-1 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-900/30">
+                            <i data-lucide="type" class="w-3.5 h-3.5"></i> Prompt Teks Copywriting
+                        </button>
+                    </div>
+
+                    <!-- Tab Content Image -->
+                    <div id="tab-image" class="p-5 flex-grow flex flex-col bg-slate-900/40">
+                        <div class="flex flex-col h-full space-y-4">
+                            <div class="text-[11px] text-slate-400 bg-slate-950/80 p-3 rounded-xl border border-slate-800 flex gap-2">
+                                <span class="text-indigo-400">💡</span>
+                                <span>Salin prompt bahasa Inggris di bawah ini dan masukkan ke <strong>Midjourney, DALL-E, atau Gemini Imagen</strong>.</span>
+                            </div>
+                            <div class="relative flex-grow">
+                                <textarea id="output-image" readonly placeholder="Silakan ketik detail produk/hari raya di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-44 p-4 bg-slate-950 text-slate-300 rounded-xl border border-slate-800 outline-none resize-none font-mono text-xs leading-relaxed"></textarea>
+                            </div>
+                            <button id="btn-copy-image" disabled class="w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-850 text-slate-600 cursor-not-allowed border border-slate-850/50">
+                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-image"></i> <span id="text-copy-image">Salin Prompt Gambar AI</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content Text -->
+                    <div id="tab-text" class="p-5 flex-grow flex flex-col bg-slate-900/40 hidden">
+                        <div class="flex flex-col h-full space-y-4">
+                            <div class="text-[11px] text-slate-400 bg-slate-950/80 p-3 rounded-xl border border-slate-800 flex gap-2">
+                                <span class="text-purple-400">💡</span>
+                                <span>Masukkan prompt di bawah ini ke <strong>ChatGPT, Claude, atau Gemini</strong> untuk mendapatkan formula copywriting terstruktur.</span>
+                            </div>
+                            <div class="relative flex-grow">
+                                <textarea id="output-text" readonly placeholder="Silakan ketik detail produk/hari raya di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-44 p-4 bg-slate-950 text-slate-300 rounded-xl border border-slate-800 outline-none resize-none font-mono text-xs leading-relaxed"></textarea>
+                            </div>
+                            <button id="btn-copy-text" disabled class="w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-850 text-slate-600 cursor-not-allowed border border-slate-850/50">
+                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-text"></i> <span id="text-copy-text">Salin Prompt Teks Copy</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // --- DATA STATE & LISTS ---
+        let state = {
+            posterType: 'promosi',
+            productName: '',
+            productCategory: '',
+            highlightTitle: '',
+            balance: '50-50', // New Visual vs Text Balance field
+            goal: '',
+            audience: '',
+            theme: 'Minimalis Modern',
+            colors: 'Hitam & Emas (Eksklusif)',
+            elements: '',
+            aspectRatio: '1:1',
+            useFooter: false,
+            tagline: '',
+            contact: '',
+            socIg: '',
+            socFb: '',
+            socTiktok: '',
+            markShopee: '',
+            markTokped: '',
+            markTiktok: '',
+            footerColorType: 'monotone',
+            footerColor: '#1e293b'
+        };
+
+        const lists = {
+            themes: [
+                { id: 'Minimalis Modern', name: 'Minimalis', desc: 'Bersih, elegan, ruang kosong luas', icon: '✨', gradient: 'from-slate-100 to-slate-200' },
+                { id: 'Pop Art', name: 'Pop Art', desc: 'Warna cerah, retro komik, berani', icon: '💥', gradient: 'from-pink-400 to-yellow-300' },
+                { id: 'Cyberpunk', name: 'Cyberpunk', desc: 'Neon, futuristik, teknologi tinggi', icon: '🌃', gradient: 'from-purple-900 via-indigo-950 to-blue-900 text-white' },
+                { id: 'Elegan Mewah', name: 'Elegan/Mewah', desc: 'Emas, hitam, eksklusif, premium', icon: '💎', gradient: 'from-amber-950 to-stone-900 text-amber-100' },
+                { id: 'Vintage Retro', name: 'Vintage/Retro', desc: 'Klasik, tekstur kertas, nostalgia', icon: '📻', gradient: 'from-orange-100 to-amber-100' },
+                { id: '3D Claymation', name: '3D Render', desc: 'Bentuk membulat, imut, Pixar style', icon: '🧸', gradient: 'from-sky-200 to-teal-100' },
+            ],
+            aspectRatios: [
+                { id: '1:1', label: '1:1 Square', desc: 'Instagram Feed, WhatsApp Status' },
+                { id: '9:16', label: '9:16 Portrait', desc: 'Instagram Story, Reels, TikTok' },
+                { id: '4:5', label: '4:5 Portrait', desc: 'Instagram Portrait Post' },
+                { id: '16:9', label: '16:9 Landscape', desc: 'Banner Web, YouTube Thumbnail' },
+            ],
+            productCategories: ["Makanan & Minuman", "Fashion & Pakaian", "Kesehatan & Kecantikan", "Elektronik & Gadget", "Rumah & Properti", "Jasa & Layanan", "Otomotif", "Pendidikan & Kursus", "Olahraga & Outdoor"],
+            goalPromo: ["Flash Sale / Diskon", "Peluncuran Produk Baru", "Brand Awareness", "Giveaway / Kuis", "Pre-Order", "Promo Spesial / Bundling", "Meningkatkan Penjualan"],
+            goalUcapan: ["Ucapan Selamat", "Undangan Event / Acara", "Permintaan Maaf", "Pemberitahuan / Info", "Pesan Inspiratif", "Pengumuman Libur"],
+            audience: ["Anak Muda / Gen Z", "Ibu Rumah Tangga", "Pekerja Kantoran / Profesional", "Anak-anak & Orang Tua", "Masyarakat Umum", "Mahasiswa & Pelajar", "Pecinta Teknologi", "Pecinta Olahraga"],
+            palettes: [
+                { name: "Hitam & Emas (Eksklusif)", colors: ["#0f172a", "#fbbf24"] },
+                { name: "Pastel Lembut (Feminim)", colors: ["#fbcfe8", "#ddd6fe"] },
+                { name: "Monokrom Hitam Putih", colors: ["#18181b", "#fafafa"] },
+                { name: "Neon Cerah (Cyberpunk)", colors: ["#ec4899", "#06b6d4"] },
+                { name: "Hijau & Coklat (Earthy)", colors: ["#15803d", "#78350f"] },
+                { name: "Biru & Putih (Profesional)", colors: ["#1d4ed8", "#ffffff"] },
+                { name: "Merah & Kuning (Promo/Food)", colors: ["#b91c1c", "#eab308"] },
+                { name: "Warm Tone (Vintage)", colors: ["#ea580c", "#ffedd5"] }
+            ]
+        };
+
+        // --- DOM Elements ---
+        const els = {
+            productName: document.getElementById('productName'),
+            productCategory: document.getElementById('productCategory'),
+            highlightTitle: document.getElementById('highlightTitle'),
+            goal: document.getElementById('goal'),
+            audience: document.getElementById('audience'),
+            colors: document.getElementById('colors'),
+            elements: document.getElementById('elements'),
+            useFooter: document.getElementById('useFooter'),
+            tagline: document.getElementById('tagline'),
+            contact: document.getElementById('contact'),
+            socIg: document.getElementById('socIg'),
+            socFb: document.getElementById('socFb'),
+            socTiktok: document.getElementById('socTiktok'),
+            markShopee: document.getElementById('markShopee'),
+            markTokped: document.getElementById('markTokped'),
+            markTiktok: document.getElementById('markTiktok'),
+            footerColorType: document.getElementById('footerColorType'),
+            footerColor: document.getElementById('footerColor'),
+
+            wrapperProdName: document.getElementById('wrapper-productName'),
+            wrapperProdCat: document.getElementById('wrapper-productCategory'),
+            labelProdName: document.getElementById('label-productName'),
+            labelGoal: document.getElementById('label-goal'),
+            labelAudience: document.getElementById('label-audience'),
+            footerDrawer: document.getElementById('footer-drawer'),
+            footerStatusBadge: document.getElementById('footer-status-badge'),
+            footerColorWrapper: document.getElementById('footerColor-wrapper'),
+            btnGenerate: document.getElementById('btn-generate'),
+        };
+
+        // --- INIT & RENDER ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderThemes();
+            renderAspectRatios();
+            setupCustomCombobox('combo-productCategory', lists.productCategories);
+            setupCustomCombobox('combo-audience', lists.audience);
+            setupColorsCombobox();
+            setupBalanceSelector();
+            updateDynamicSelects();
+            
+            attachEventListeners();
+            lucide.createIcons();
+            updateUI();
+            updateLivePreview();
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.combo-menu').forEach(menu => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Custom Combobox Builder (Supports custom typed value & big dropdown list)
+        function setupCustomCombobox(wrapperId, options) {
+            const wrapper = document.getElementById(wrapperId);
+            const input = wrapper.querySelector('input');
+            const trigger = wrapper.querySelector('.combo-trigger');
+            const menu = wrapper.querySelector('.combo-menu');
+
+            // Populate Dropdown
+            menu.innerHTML = options.map(opt => `
+                <div class="combo-item px-4 py-3 text-sm font-medium text-slate-200 hover:bg-indigo-600 hover:text-white transition-colors cursor-pointer text-left border-b border-slate-800/40 last:border-0" data-value="${opt}">
+                    ${opt}
+                </div>
+            `).join('');
+
+            // Toggle Dropdown List on trigger click
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Close other dropdowns first
+                document.querySelectorAll('.combo-menu').forEach(m => {
+                    if (m !== menu) m.classList.add('hidden');
+                });
+                menu.classList.toggle('hidden');
+            });
+
+            // Avoid closing when typing inside
+            input.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.combo-menu').forEach(m => {
+                    if (m !== menu) m.classList.add('hidden');
+                });
+            });
+
+            // Dropdown Item Selected
+            menu.querySelectorAll('.combo-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const val = e.currentTarget.dataset.value;
+                    input.value = val;
+                    state[input.id] = val;
+                    menu.classList.add('hidden');
+                    updateLivePreview();
+                });
+            });
+        }
+
+        // Custom Dropdown specifically for colors with rich palette previews
+        function setupColorsCombobox() {
+            const wrapper = document.getElementById('combo-colors');
+            const input = document.getElementById('colors');
+            const trigger = wrapper.querySelector('.combo-trigger');
+            const menu = wrapper.querySelector('.combo-menu');
+
+            menu.innerHTML = lists.palettes.map(p => {
+                const previewCircles = p.colors.map(c => `
+                    <span class="w-3.5 h-3.5 rounded-full border border-slate-700 shadow-sm" style="background-color: ${c}"></span>
+                `).join('');
+
+                return `
+                    <div class="combo-item px-4 py-3 text-sm font-medium text-slate-200 hover:bg-indigo-600 hover:text-white transition-colors cursor-pointer flex items-center justify-between border-b border-slate-800/40 last:border-0" data-value="${p.name}">
+                        <span>${p.name}</span>
+                        <div class="flex gap-1.5">${previewCircles}</div>
+                    </div>
+                `;
+            }).join('');
+
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.combo-menu').forEach(m => {
+                    if (m !== menu) m.classList.add('hidden');
+                });
+                menu.classList.toggle('hidden');
+            });
+
+            input.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.combo-menu').forEach(m => {
+                    if (m !== menu) m.classList.add('hidden');
+                });
+            });
+
+            menu.querySelectorAll('.combo-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const val = e.currentTarget.dataset.value;
+                    input.value = val;
+                    state.colors = val;
+                    menu.classList.add('hidden');
+                    checkColorPreview();
+                    updateLivePreview();
+                });
+            });
+        }
+
+        // Dynamic Update on Goal Combobox list based on selected poster type
+        function updateDynamicSelects() {
+            const isPromo = state.posterType === 'promosi';
+            const options = isPromo ? lists.goalPromo : lists.goalUcapan;
+            setupCustomCombobox('combo-goal', options);
+        }
+
+        // Setup Composition Balance Buttons
+        function setupBalanceSelector() {
+            document.querySelectorAll('.balance-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    state.balance = e.currentTarget.dataset.balance;
+                    
+                    // Render Selector States
+                    document.querySelectorAll('.balance-btn').forEach(b => {
+                        if(b.dataset.balance === state.balance) {
+                            b.className = "balance-btn py-2.5 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-600/25 border-t border-indigo-400/30";
+                            b.querySelector('span:last-child').className = "text-[9px] font-normal text-indigo-200";
+                        } else {
+                            b.className = "balance-btn py-2.5 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all text-slate-400 hover:text-slate-200";
+                            b.querySelector('span:last-child').className = "text-[9px] font-normal text-slate-500";
+                        }
+                    });
+
+                    updateLivePreview();
+                });
+            });
+        }
+
+        function renderThemes() {
+            const container = document.getElementById('themes-container');
+            container.innerHTML = lists.themes.map(t => `
+                <div class="theme-btn cursor-pointer p-4 rounded-2xl border-2 transition-all relative overflow-hidden flex flex-col justify-between ${state.theme === t.id ? 'border-indigo-500 bg-slate-850 shadow-lg shadow-indigo-500/5' : 'border-slate-800/80 bg-slate-950/40 hover:border-slate-700 hover:bg-slate-900/30'}" data-id="${t.id}">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${t.gradient}"></div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-2xl mt-1">${t.icon}</span>
+                        ${state.theme === t.id ? '<span class="p-0.5 bg-indigo-50 text-white rounded-full"><i data-lucide="check-circle-2" class="w-3 h-3"></i></span>' : ''}
+                    </div>
+                    <div>
+                        <div class="font-bold text-white text-xs mb-1">${t.name}</div>
+                        <div class="text-[10px] text-slate-400 leading-tight">${t.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    state.theme = e.currentTarget.dataset.id;
+                    renderThemes();
+                    lucide.createIcons();
+                    updateLivePreview();
+                });
+            });
+        }
+
+        function renderAspectRatios() {
+            const container = document.getElementById('aspectRatio-container');
+            container.innerHTML = lists.aspectRatios.map(ar => {
+                let boxClass = '';
+                if(ar.id === '1:1') boxClass = 'w-6 h-6';
+                else if(ar.id === '9:16') boxClass = 'w-4 h-8';
+                else if(ar.id === '4:5') boxClass = 'w-5 h-6';
+                else boxClass = 'w-8 h-4';
+
+                return `
+                <button type="button" class="ar-btn p-3 rounded-xl border-2 text-left flex items-start gap-2 transition-all ${state.aspectRatio === ar.id ? 'border-indigo-500 bg-indigo-500/10 text-white shadow-md' : 'border-slate-800 bg-slate-950/30 text-slate-400 hover:border-slate-700 hover:text-slate-300'}" data-id="${ar.id}">
+                    <div class="flex-shrink-0 flex items-center justify-center bg-slate-800 rounded border border-slate-700 p-0.5 mt-0.5">
+                        <div class="border-2 border-dashed ${boxClass} border-indigo-400/40 rounded-sm"></div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-white block">${ar.label}</div>
+                        <span class="text-[9px] text-slate-400 block leading-tight">${ar.desc}</span>
+                    </div>
+                </button>
+            `}).join('');
+
+            document.querySelectorAll('.ar-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    state.aspectRatio = e.currentTarget.dataset.id;
+                    renderAspectRatios();
+                    updateLivePreview();
+                });
+            });
+        }
+
+        // --- EVENT LISTENERS & UI UPDATES ---
+        function attachEventListeners() {
+            ['productName', 'productCategory', 'highlightTitle', 'goal', 'audience', 'colors', 'elements', 'tagline', 'contact', 'socIg', 'socFb', 'socTiktok', 'markShopee', 'markTokped', 'markTiktok', 'footerColor'].forEach(key => {
+                if(els[key]) {
+                    els[key].addEventListener('input', (e) => {
+                        state[key] = e.target.value;
+                        if(key === 'productName') updateGenerateBtn();
+                        if(key === 'colors') checkColorPreview();
+                        if(key === 'footerColor') document.getElementById('footerColor-label').textContent = e.target.value;
+                        updateLivePreview();
+                    });
+                }
+            });
+
+            ['footerColorType'].forEach(key => {
+                els[key].addEventListener('change', (e) => {
+                    state[key] = e.target.value;
+                    updateUI();
+                    updateLivePreview();
+                });
+            });
+
+            // Poster Type Toggle
+            document.querySelectorAll('.type-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    state.posterType = e.currentTarget.dataset.type;
+                    updateDynamicSelects();
+                    updateUI();
+                    updateLivePreview();
+                    
+                    document.querySelectorAll('.type-btn').forEach(b => {
+                        if(b.dataset.type === state.posterType) {
+                            let gradient = state.posterType === 'promosi' ? 'from-indigo-600 to-indigo-700' : 'from-purple-600 to-purple-700';
+                            let shadow = state.posterType === 'promosi' ? 'shadow-indigo-600/25' : 'shadow-purple-600/25';
+                            let border = state.posterType === 'promosi' ? 'border-indigo-400/30' : 'border-purple-400/30';
+                            b.className = `type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all bg-gradient-to-r ${gradient} text-white shadow-lg ${shadow} border-t ${border}`;
+                        } else {
+                            b.className = `type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all text-slate-400 hover:text-slate-200`;
+                        }
+                    });
+                });
+            });
+
+            els.useFooter.addEventListener('change', (e) => {
+                state.useFooter = e.target.checked;
+                updateUI();
+                updateLivePreview();
+            });
+
+            document.getElementById('btn-reset').addEventListener('click', resetForm);
+            els.btnGenerate.addEventListener('click', generatePrompts);
+            document.getElementById('btn-copy-image').addEventListener('click', () => copyToClipboard('image'));
+            document.getElementById('btn-copy-text').addEventListener('click', () => copyToClipboard('text'));
+        }
+
+        function updateUI() {
+            const isPromo = state.posterType === 'promosi';
+            
+            els.labelProdName.innerHTML = (isPromo ? 'Nama Produk / Brand' : 'Nama Hari Raya / Event') + ' <span class="text-rose-500">*</span>';
+            els.labelGoal.innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5 text-slate-400"></i> ` + (isPromo ? 'Tujuan Promosi' : 'Pesan Tambahan');
+            els.labelAudience.innerHTML = `<i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i> ` + (isPromo ? 'Target Audiens' : 'Ditujukan / Dari');
+            
+            els.productName.placeholder = isPromo ? "Contoh: Kopi Susu Aren..." : "Contoh: Idul Fitri 1446 H...";
+            els.goal.placeholder = isPromo ? "Flash Sale, Launching..." : "Mohon maaf lahir batin...";
+            els.audience.placeholder = isPromo ? "Mahasiswa, Ibu-ibu..." : "Rekan kerja...";
+
+            if(isPromo) {
+                els.wrapperProdCat.classList.remove('hidden');
+                els.wrapperProdName.classList.remove('md:col-span-2');
+                els.wrapperProdName.classList.add('md:col-span-1');
+            } else {
+                els.wrapperProdCat.classList.add('hidden');
+                els.wrapperProdName.classList.remove('md:col-span-1');
+                els.wrapperProdName.classList.add('md:col-span-2');
+            }
+
+            if(state.useFooter) {
+                els.footerDrawer.classList.remove('hidden');
+                els.footerStatusBadge.textContent = 'AKTIF';
+                els.footerStatusBadge.className = 'text-[10px] px-2 py-0.5 rounded font-bold uppercase transition-all bg-indigo-500/20 text-indigo-300';
+            } else {
+                els.footerDrawer.classList.add('hidden');
+                els.footerStatusBadge.textContent = 'MATI';
+                els.footerStatusBadge.className = 'text-[10px] px-2 py-0.5 rounded font-bold uppercase transition-all bg-slate-800 text-slate-500';
+            }
+
+            if(state.footerColorType === 'monotone') {
+                els.footerColorWrapper.classList.remove('hidden');
+            } else {
+                els.footerColorWrapper.classList.add('hidden');
+            }
+
+            checkColorPreview();
+            updateGenerateBtn();
+            lucide.createIcons();
+        }
+
+        function checkColorPreview() {
+            const previewEl = document.getElementById('color-preview');
+            const matched = lists.palettes.find(p => p.name === state.colors);
+            if(matched) {
+                previewEl.innerHTML = matched.colors.map(c => `<span class="w-3.5 h-3.5 rounded-full border border-slate-400 shadow-sm" style="background-color: ${c}"></span>`).join('');
+                previewEl.classList.remove('hidden');
+            } else {
+                previewEl.classList.add('hidden');
+            }
+        }
+
+        function updateGenerateBtn() {
+            if(state.productName.trim() !== '') {
+                els.btnGenerate.disabled = false;
+                els.btnGenerate.className = "w-full py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all shadow-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white hover:opacity-95 shadow-indigo-600/20 active:scale-[0.98] cursor-pointer";
+            } else {
+                els.btnGenerate.disabled = true;
+                els.btnGenerate.className = "w-full py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all shadow-xl bg-slate-800 text-slate-600 cursor-not-allowed border border-slate-800/40";
+            }
+        }
+
+        function resetForm() {
+            state = {
+                posterType: 'promosi', productName: '', productCategory: '', highlightTitle: '', balance: '50-50', goal: '', audience: '', theme: 'Minimalis Modern', colors: 'Hitam & Emas (Eksklusif)', elements: '', aspectRatio: '1:1',
+                useFooter: false, tagline: '', contact: '', socIg: '', socFb: '', socTiktok: '', markShopee: '', markTokped: '', markTiktok: '', footerColorType: 'monotone', footerColor: '#1e293b'
+            };
+            
+            Object.keys(els).forEach(key => {
+                if(els[key] && typeof state[key] !== 'undefined') {
+                    if(els[key].type === 'checkbox') els[key].checked = state[key];
+                    else els[key].value = state[key];
+                }
+            });
+            
+            document.getElementById('output-image').value = '';
+            document.getElementById('output-text').value = '';
+            document.getElementById('btn-copy-image').disabled = true;
+            document.getElementById('btn-copy-image').className = "w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-850 text-slate-600 cursor-not-allowed border border-slate-850/50";
+            document.getElementById('btn-copy-text').disabled = true;
+            document.getElementById('btn-copy-text').className = "w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-850 text-slate-600 cursor-not-allowed border border-slate-850/50";
+            
+            // Trigger segment click visual back to standard
+            const targetBtn = document.querySelector('[data-balance="50-50"]');
+            if(targetBtn) targetBtn.click();
+
+            renderThemes();
+            renderAspectRatios();
+            updateUI();
+            updateLivePreview();
+        }
+
+        // --- TABS & PREVIEW LOGIC ---
+        function switchTab(tab) {
+            document.getElementById('tab-image').classList.add('hidden');
+            document.getElementById('tab-text').classList.add('hidden');
+            document.getElementById(`tab-${tab}`).classList.remove('hidden');
+
+            const btnImg = document.getElementById('btn-tab-image');
+            const btnText = document.getElementById('btn-tab-text');
+
+            if(tab === 'image') {
+                btnImg.className = "flex-1 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-white bg-indigo-600/10 text-indigo-400 border border-indigo-500/20";
+                btnText.className = "flex-1 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-900/30";
+            } else {
+                btnText.className = "flex-1 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-white bg-purple-600/10 text-purple-400 border border-purple-500/20";
+                btnImg.className = "flex-1 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-900/30";
+            }
+        }
+
+        function updateLivePreview() {
+            // Aspect Ratio
+            document.getElementById('preview-ar-badge').textContent = `AR ${state.aspectRatio}`;
+            const frame = document.getElementById('preview-frame');
+            frame.className = `transition-all duration-300 flex items-center justify-center bg-slate-950/80 border-2 border-slate-800 rounded-2xl relative shadow-inner overflow-hidden p-3 ${
+                state.aspectRatio === '1:1' ? 'w-64 h-64' :
+                state.aspectRatio === '9:16' ? 'w-44 h-72' :
+                state.aspectRatio === '4:5' ? 'w-56 h-70' : 'w-72 h-44'
+            }`;
+
+            // Texts
+            document.getElementById('preview-category').textContent = state.productCategory || (state.posterType === 'promosi' ? 'KATEGORI PRODUK' : 'KATEGORI EVENT');
+            document.getElementById('preview-title').textContent = state.highlightTitle || (state.productName ? `PROMO ${state.productName}` : 'JUDUL UTAMA POSTER');
+            document.getElementById('preview-theme').textContent = `[Visual: ${state.theme}]`;
+
+            // Adjust Live Layout guide based on Balance selection
+            const textLines = document.getElementById('preview-text-lines');
+            const categoryArea = document.getElementById('preview-category-area');
+            const previewTitle = document.getElementById('preview-title');
+
+            if (state.balance === '80-20') {
+                // Highly visual - Hide line blocks, smaller text, hide category
+                textLines.classList.add('hidden');
+                categoryArea.classList.add('hidden');
+                previewTitle.className = "text-[10px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-300 leading-tight uppercase tracking-wide line-clamp-1 opacity-80 mt-1";
+            } else if (state.balance === '20-80') {
+                // Info rich - Show layout lines block, large headline, category visible
+                textLines.classList.remove('hidden');
+                categoryArea.classList.remove('hidden');
+                previewTitle.className = "text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-300 leading-none uppercase tracking-wider line-clamp-2";
+            } else {
+                // Balanced (50-50)
+                textLines.classList.add('hidden');
+                categoryArea.classList.remove('hidden');
+                previewTitle.className = "text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-300 leading-tight uppercase tracking-wider line-clamp-2";
+            }
+
+            // Footer rendering
+            const footerEl = document.getElementById('preview-footer');
+            const noFooterEl = document.getElementById('preview-no-footer');
+            
+            if(state.useFooter) {
+                footerEl.classList.remove('hidden');
+                noFooterEl.classList.add('hidden');
+                
+                footerEl.style.backgroundColor = state.footerColorType === 'monotone' ? state.footerColor : '#1e1b4b';
+                document.getElementById('preview-tagline').textContent = state.tagline || 'Tagline/Slogan';
+                document.getElementById('preview-contact').textContent = state.contact || 'Hubungi Kami';
+                
+                let socHtml = '';
+                if(state.socIg) socHtml += `<span class="flex items-center gap-0.5"><i data-lucide="instagram" class="w-2 h-2 text-pink-400"></i> ${state.socIg}</span>`;
+                if(state.socFb) socHtml += `<span class="flex items-center gap-0.5"><i data-lucide="facebook" class="w-2 h-2 text-blue-400"></i> ${state.socFb}</span>`;
+                if(state.markShopee) socHtml += `<span class="flex items-center gap-0.5"><i data-lucide="shopping-bag" class="w-2 h-2 text-orange-400"></i> ${state.markShopee}</span>`;
+                
+                document.getElementById('preview-socials').innerHTML = socHtml;
+                lucide.createIcons();
+            } else {
+                footerEl.classList.add('hidden');
+                noFooterEl.classList.remove('hidden');
+            }
+        }
+
+        // --- PROMPT GENERATION LOGIC ---
+        function generatePrompts() {
+            const isPromo = state.posterType === 'promosi';
+            const typeName = isPromo ? 'advertisement poster' : 'greeting card/event poster';
+            const typeNameID = isPromo ? 'poster promosi' : 'poster ucapan hari raya/event';
+            
+            const safeProduct = state.productName || (isPromo ? '[Nama Produk/Layanan]' : '[Nama Hari Raya/Event]');
+            const safeCategory = state.productCategory || 'Umum';
+            const safeGoal = state.goal || (isPromo ? 'menarik perhatian' : 'menyampaikan pesan hangat');
+            const safeAudience = state.audience || (isPromo ? 'masyarakat umum' : 'keluarga/klien/publik');
+            const safeColors = state.colors || 'warna yang sesuai dengan tema';
+            const safeElements = state.elements || 'elemen pendukung yang estetis';
+
+            const highlightImgInstruction = state.highlightTitle ? ` Prominently feature bold, stylish typography displaying the text: "${state.highlightTitle}".` : '';
+            const highlightTxtInstruction = state.highlightTitle ? `- Judul / Teks Wajib Highlight: "${state.highlightTitle}"\n` : '';
+
+            // Composition balance details added into instructions
+            let balanceImgDetail = '';
+            let balanceTxtDetail = '';
+            
+            if (state.balance === '80-20') {
+                balanceImgDetail = `The composition is highly artistic and minimalist, dominated by the visual graphic (80% visual focus). There is only a small, elegant negative space (20% layout) reserved at the bottom or corner for minimal branding text.`;
+                balanceTxtDetail = `- Gaya Penulisan: Super minimalis (80% Visual, 20% Teks). Batasi jumlah kata sekecil mungkin. Fokus hanya pada 1 headline pemikat dan 1 CTA singkat.`;
+            } else if (state.balance === '20-80') {
+                balanceImgDetail = `The poster layout is designed like an info-rich flyer, with a dense editorial grid structure (20% visual graphic, 80% text layout space). It includes expansive clean blocks of negative space structured specifically for comprehensive informational text, bullet points, and details.`;
+                balanceTxtDetail = `- Gaya Penulisan: Sangat lengkap, padat informasi, dan edukatif (20% Visual, 80% Teks). Tulis copywriting secara detail dengan penjelasan lengkap untuk setiap fitur, syarat & ketentuan, manfaat, serta info detail lainnya.`;
+            } else {
+                balanceImgDetail = `A clean, balanced composition (50% visual graphic, 50% copy layout space) with generous, modern negative space designed for prominent typography and structured headlines.`;
+                balanceTxtDetail = `- Gaya Penulisan: Seimbang dan dinamis (50% Visual, 50% Teks). Buat headline yang memikat, sub-headline penjelas, serta 3 poin utama penawaran secara ringkas.`;
+            }
+
+            let footerImageInstruction = '';
+            if (state.useFooter) {
+                let activeIcons = [];
+                if (state.socIg) activeIcons.push('Instagram');
+                if (state.socFb) activeIcons.push('Facebook');
+                if (state.socTiktok) activeIcons.push('TikTok');
+                if (state.markShopee) activeIcons.push('Shopee');
+                if (state.markTokped) activeIcons.push('Tokopedia');
+                if (state.markTiktok) activeIcons.push('TikTok Shop');
+
+                const colorDesc = state.footerColorType === 'monotone' ? `a clean solid color (${state.footerColor})` : `a color palette matching the main theme`;
+                let iconText = activeIcons.length > 0 ? ` Make sure to include recognizable minimal icons for: ${activeIcons.join(', ')} next to their respective text.` : '';
+                footerImageInstruction = `Include a clear, distinct footer area at the bottom using ${colorDesc} with negative space specifically reserved for tagline, contact, and social media text.${iconText}`;
+            }
+
+            // Image Prompt Structure
+            const imgPrompt = `A high-quality, professional ${typeName} design for "${safeProduct}"${isPromo ? ` (Category: ${safeCategory})` : ''}.${highlightImgInstruction} \nComposition: ${balanceImgDetail}\nVisual style: ${state.theme}. \nColor scheme: ${safeColors}. \nKey visual elements to include: ${safeElements}. \nThe overall mood should feel designed to achieve ${safeGoal} and strongly appeal to ${safeAudience}. \nInclude clean, negative space for typography layout. ${footerImageInstruction}\nMasterpiece, highly detailed, visually striking, 8k resolution, commercial photography style. \n--ar ${state.aspectRatio.replace(':', ':')} --v 6.0`;
+
+            let footerTextInstruction = '';
+            if (state.useFooter) {
+                let socialTexts = [];
+                if (state.socIg) socialTexts.push(`- Instagram: ${state.socIg}`);
+                if (state.socFb) socialTexts.push(`- Facebook: ${state.socFb}`);
+                if (state.socTiktok) socialTexts.push(`- TikTok: ${state.socTiktok}`);
+                if (state.markShopee) socialTexts.push(`- Shopee: ${state.markShopee}`);
+                if (state.markTokped) socialTexts.push(`- Tokopedia: ${state.markTokped}`);
+                if (state.markTiktok) socialTexts.push(`- TikTok Shop: ${state.markTiktok}`);
+                
+                let sosmedString = socialTexts.length > 0 ? `\nMedia Sosial & Marketplace:\n${socialTexts.join('\n')}` : '';
+                footerTextInstruction = `\n\n5. [FOOTER / KONTAK]: Tambahkan informasi berikut di bagian bawah:\n- Tagline: ${state.tagline || '[Isi Tagline]'}\n- Kontak: ${state.contact || '[No. WhatsApp/Telepon]'}${sosmedString}`;
+            }
+
+            const promoStructure = `1. [HEADLINE]: Sangat singkat (maksimal 5 kata), memikat, dan *punchy*.\n2. [SUB-HEADLINE]: Penjelasan singkat dari penawaran/produk (1-2 kalimat, opsional).\n3. [BODY TEXT / BULLET POINTS]: Maksimal 3 poin keunggulan utama atau detail penawaran. Buat padat dan jelas.\n4. [CALL TO ACTION / CTA]: Kalimat ajakan bertindak yang kuat dan mendesak (contoh: "Beli Sekarang", "Klaim Diskon", dll).`;
+            const greetingStructure = `1. [HEADLINE UCAPAN]: Besar, hangat, dan relevan (contoh: "Selamat Hari Raya...").\n2. [PESAN / DOA]: 1-2 kalimat pesan hangat, harapan, atau doa yang tulus.\n3. [DARI / PENGIRIM]: "Salam hangat dari..." atau nama entitas yang merayakan.`;
+
+            // Text Copywriting Prompt Structure
+            const txtPrompt = `Bertindaklah sebagai Copywriter Profesional kelas dunia. \nTolong buatkan teks copywriting untuk ${typeNameID} dengan detail berikut:\n\n- ${isPromo ? 'Nama Produk/Layanan' : 'Nama Hari Raya/Event'}: ${safeProduct}\n${isPromo ? `- Kategori Produk: ${safeCategory}\n` : ''}${highlightTxtInstruction}- ${isPromo ? 'Tujuan Promosi' : 'Pesan Khusus/Tujuan'}: ${safeGoal}\n- ${isPromo ? 'Target Audiens' : 'Ditujukan Kepada'}: ${safeAudience}\n- Tema Visual Poster: ${state.theme} (Dominasi warna: ${safeColors})\n${balanceTxtDetail}\n\nMohon berikan struktur copy berikut:\n${isPromo ? promoStructure : greetingStructure}${footerTextInstruction}\n\nGunakan nada bahasa yang persuasif, natural, dan sangat relevan dengan audiens (${safeAudience}). Jangan menggunakan bahasa yang terlalu kaku.`;
+
+            document.getElementById('output-image').value = imgPrompt;
+            document.getElementById('output-text').value = txtPrompt;
+
+            // Enable copy buttons
+            document.getElementById('btn-copy-image').disabled = false;
+            document.getElementById('btn-copy-image').className = "w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-indigo-600/20 text-indigo-400 hover:bg-indigo-600/30 border border-indigo-500/30 active:scale-[0.98] cursor-pointer";
+            
+            document.getElementById('btn-copy-text').disabled = false;
+            document.getElementById('btn-copy-text').className = "w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-purple-600/20 text-purple-400 hover:bg-purple-600/30 border border-purple-500/30 active:scale-[0.98] cursor-pointer";
+
+            // Scroll to results smooth
+            document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+
+        async function copyToClipboard(type) {
+            const textToCopy = document.getElementById(`output-${type}`).value;
+            if(!textToCopy) return;
+
+            const handleSuccess = () => {
+                const btn = document.getElementById(`btn-copy-${type}`);
+                const icon = document.getElementById(`icon-copy-${type}`);
+                const text = document.getElementById(`text-copy-${type}`);
+                
+                const originalText = text.textContent;
+                const originalClass = btn.className;
+
+                btn.className = "w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-emerald-500/15 text-emerald-400 border border-emerald-500/30";
+                icon.setAttribute('data-lucide', 'check');
+                text.textContent = "Berhasil Disalin!";
+                lucide.createIcons();
+
+                setTimeout(() => {
+                    btn.className = originalClass;
+                    icon.setAttribute('data-lucide', 'copy');
+                    text.textContent = originalText;
+                    lucide.createIcons();
+                }, 2000);
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    handleSuccess();
+                } catch (err) {
+                    fallbackCopy(textToCopy, handleSuccess);
+                }
+            } else {
+                fallbackCopy(textToCopy, handleSuccess);
+            }
+        }
+
+        function fallbackCopy(text, onSuccess) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                onSuccess();
+            } catch (err) {
+                console.error('Fallback copy failed', err);
+            }
+            textArea.remove();
+        }
+    </script>
+</body>
+</html>
