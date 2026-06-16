@@ -23,6 +23,9 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #f8fafc; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Color Picker clean styling */
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch { border: none; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
     </style>
 
 </head>
@@ -37,7 +40,7 @@
         <!-- Header -->
         <header class="relative text-center space-y-4 pt-6 pb-2">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-indigo-100 shadow-sm rounded-full text-indigo-600 text-xs font-bold tracking-wide">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v2.5
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v3.0
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-none">
                 Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Poster Prompt</span> Builder
@@ -171,40 +174,72 @@
                         </div>
                     </div>
 
-                    <!-- Colors & Aspect Ratio -->
+                    <!-- Colors: Utama & Background -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-5 border-t border-slate-100">
+                        
+                        <!-- Main Color -->
                         <div>
                             <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                                 <i data-lucide="palette" class="w-3.5 h-3.5 text-slate-400"></i> Warna Utama Poster
                             </label>
-                            <div class="relative custom-combobox" id="combo-colors">
-                                <input type="text" id="colors" placeholder="Ketik warna..." value="Hitam & Emas (Eksklusif)" class="w-full pl-4 pr-20 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 font-medium text-sm focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
-                                
-                                <div id="color-preview" class="absolute right-12 top-1/2 -translate-y-1/2 flex gap-1.5 pointer-events-none bg-white px-2 py-1.5 rounded-md border border-slate-200 shadow-sm hidden">
-                                    <!-- Injected via JS -->
+                            <div class="flex gap-2">
+                                <div class="flex-shrink-0 flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-1 shadow-sm w-[46px] h-[46px]">
+                                    <input type="color" id="colorsPicker" value="#fbbf24" class="w-full h-full rounded cursor-pointer border-0 p-0 bg-transparent">
                                 </div>
+                                <div class="relative custom-combobox flex-grow" id="combo-colors">
+                                    <input type="text" id="colors" placeholder="Ketik/Pilih Warna..." value="Hitam & Emas (Eksklusif)" class="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 font-medium text-sm focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+                                    
+                                    <div id="color-preview" class="absolute right-10 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none bg-white px-2 py-1.5 rounded-md border border-slate-200 shadow-sm hidden">
+                                        <!-- Injected via JS -->
+                                    </div>
 
-                                <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 shadow-sm transition-colors cursor-pointer z-10">
-                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i>
-                                </button>
-                                <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-2 rounded-xl bg-white border border-slate-100 shadow-2xl shadow-slate-300/50 max-h-60 overflow-y-auto custom-scrollbar ring-1 ring-black/5">
-                                    <!-- Options injected via JS -->
+                                    <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 shadow-sm transition-colors cursor-pointer z-10">
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i>
+                                    </button>
+                                    <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-2 rounded-xl bg-white border border-slate-100 shadow-2xl shadow-slate-300/50 max-h-60 overflow-y-auto custom-scrollbar ring-1 ring-black/5">
+                                        <!-- Options injected via JS -->
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Background Color -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i data-lucide="image" class="w-3.5 h-3.5 text-slate-400"></i> Warna Background
+                            </label>
+                            <div class="flex gap-2">
+                                <div class="flex-shrink-0 flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-1 shadow-sm w-[46px] h-[46px]">
+                                    <input type="color" id="bgColorPicker" value="#ffffff" class="w-full h-full rounded cursor-pointer border-0 p-0 bg-transparent">
+                                </div>
+                                <div class="relative custom-combobox flex-grow" id="combo-bgColor">
+                                    <input type="text" id="bgColor" placeholder="Ketik/Pilih Tema Latar..." value="Putih Bersih (Clean White)" class="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 font-medium text-sm focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+                                    
+                                    <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 shadow-sm transition-colors cursor-pointer z-10">
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i>
+                                    </button>
+                                    <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-2 rounded-xl bg-white border border-slate-100 shadow-2xl shadow-slate-300/50 max-h-60 overflow-y-auto custom-scrollbar ring-1 ring-black/5">
+                                        <!-- Options injected via JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Aspect Ratio & Elements detail -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">Aspek Rasio / Ukuran</label>
+                            <div id="aspectRatio-container" class="grid grid-cols-2 gap-2 h-[100px]">
+                                <!-- Injected via JS -->
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">Aspek Rasio / Ukuran</label>
-                            <div id="aspectRatio-container" class="grid grid-cols-2 gap-2">
-                                <!-- Injected via JS -->
-                            </div>
+                            <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">Elemen / Objek Detail Gambar</label>
+                            <textarea id="elements" placeholder="Misal: Cipratan air es yang segar, diletakkan di atas meja kayu estetik..." class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 placeholder-slate-400 text-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 resize-none font-medium h-[100px]"></textarea>
                         </div>
-                    </div>
-
-                    <!-- Elements detail -->
-                    <div class="pt-2">
-                        <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">Elemen / Objek Detail Gambar</label>
-                        <textarea id="elements" rows="2" placeholder="Misal: Cipratan air es yang segar, diletakkan di atas meja kayu estetik..." class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 placeholder-slate-400 text-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 resize-none font-medium"></textarea>
                     </div>
 
                     <!-- Footer Section Toggle -->
@@ -321,38 +356,38 @@
                     <!-- Frame Size -->
                     <div id="preview-frame" class="w-64 h-64 transition-all duration-300 flex items-center justify-center bg-slate-100 border border-slate-200 rounded-2xl relative shadow-inner overflow-hidden p-3">
                         
-                        <!-- Canvas content (Kept dark to mimic design canvas) -->
-                        <div class="w-full h-full rounded-lg bg-gradient-to-b from-slate-800 to-slate-950 flex flex-col justify-between p-3 relative text-center shadow-md">
+                        <!-- Dynamic Canvas content -->
+                        <div id="preview-canvas-bg" class="w-full h-full rounded-lg flex flex-col justify-between p-3 relative text-center shadow-md transition-all duration-300 overflow-hidden" style="background-color: #ffffff;">
                             
-                            <div class="absolute inset-0 opacity-10 pointer-events-none flex flex-wrap gap-2 overflow-hidden">
-                                <div class="w-full h-full bg-[radial-gradient(#818cf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            <div class="absolute inset-0 opacity-[0.03] pointer-events-none flex flex-wrap gap-2 overflow-hidden">
+                                <div class="w-full h-full bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
                             </div>
 
                             <div class="relative z-10" id="preview-category-area">
-                                <span id="preview-category" class="text-[8px] tracking-widest text-indigo-300 uppercase font-bold block">
+                                <span id="preview-category" class="text-[8px] tracking-widest text-indigo-600 uppercase font-bold block">
                                     KATEGORI PRODUK
                                 </span>
                             </div>
 
                             <!-- Main Visual / Texts layout based on balance -->
                             <div class="my-auto relative z-10 px-1 w-full flex flex-col justify-center">
-                                <h3 id="preview-title" class="text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-slate-200 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-md">
+                                <h3 id="preview-title" class="text-xs font-extrabold text-slate-800 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm">
                                     JUDUL UTAMA POSTER
                                 </h3>
-                                <p id="preview-theme" class="text-[8px] text-slate-400 mt-1 max-w-[80%] mx-auto truncate font-medium">
+                                <p id="preview-theme" class="text-[8px] text-slate-500 mt-1 max-w-[80%] mx-auto truncate font-medium">
                                     [Visual: Minimalis Modern]
                                 </p>
                                 
                                 <!-- Mock information lines for 20-80 mode -->
-                                <div id="preview-text-lines" class="hidden mt-3 space-y-1.5 max-w-[90%] mx-auto p-1.5 bg-slate-900/60 rounded border border-slate-700/50 text-[5px] text-slate-500">
-                                    <div class="h-1 bg-slate-500/60 rounded w-11/12 mx-auto"></div>
-                                    <div class="h-1 bg-slate-500/60 rounded w-full mx-auto"></div>
-                                    <div class="h-1 bg-slate-500/60 rounded w-9/12 mx-auto"></div>
+                                <div id="preview-text-lines" class="hidden mt-3 space-y-1.5 max-w-[90%] mx-auto p-1.5 bg-black/5 rounded border border-black/5 text-[5px] text-slate-500">
+                                    <div class="h-1 bg-black/20 rounded w-11/12 mx-auto"></div>
+                                    <div class="h-1 bg-black/20 rounded w-full mx-auto"></div>
+                                    <div class="h-1 bg-black/20 rounded w-9/12 mx-auto"></div>
                                 </div>
                             </div>
 
                             <!-- Mock Footer -->
-                            <div id="preview-footer" class="hidden relative z-10 mt-2 p-1.5 rounded border border-slate-700 text-left shadow-lg" style="background-color: #1e1b4b">
+                            <div id="preview-footer" class="hidden relative z-10 mt-2 p-1.5 rounded border border-black/10 text-left shadow-lg" style="background-color: #1e1b4b">
                                 <div class="flex justify-between items-center text-[7px] text-white">
                                     <span id="preview-tagline" class="font-bold uppercase tracking-wider truncate max-w-[50%] drop-shadow-md">Tagline/Slogan</span>
                                     <span id="preview-contact" class="font-mono text-slate-200 scale-90 font-medium">Hubungi Kami</span>
@@ -362,7 +397,7 @@
                                 </div>
                             </div>
                             <!-- Mock No Footer -->
-                            <div id="preview-no-footer" class="text-[7px] text-slate-500 font-medium italic border-t border-dashed border-slate-700 pt-1.5">
+                            <div id="preview-no-footer" class="text-[7px] text-slate-500/80 font-medium italic border-t border-dashed border-black/10 pt-1.5">
                                 Area visual penuh (tanpa footer)
                             </div>
                         </div>
@@ -431,6 +466,7 @@
             audience: '',
             theme: 'Minimalis Modern',
             colors: 'Hitam & Emas (Eksklusif)',
+            bgColor: 'Putih Bersih (Clean White)', // New Background field
             elements: '',
             aspectRatio: '1:1',
             useFooter: false,
@@ -474,6 +510,11 @@
                 { name: "Biru & Putih (Profesional)", colors: ["#1d4ed8", "#ffffff"] },
                 { name: "Merah & Kuning (Promo/Food)", colors: ["#b91c1c", "#eab308"] },
                 { name: "Warm Tone (Vintage)", colors: ["#ea580c", "#ffedd5"] }
+            ],
+            bgColors: [
+                "Putih Bersih (Clean White)", 
+                "Hitam Gelap (Dark Mode)", 
+                "Gradasi Lembut (Soft Gradient)"
             ]
         };
 
@@ -485,6 +526,9 @@
             goal: document.getElementById('goal'),
             audience: document.getElementById('audience'),
             colors: document.getElementById('colors'),
+            colorsPicker: document.getElementById('colorsPicker'),
+            bgColor: document.getElementById('bgColor'),
+            bgColorPicker: document.getElementById('bgColorPicker'),
             elements: document.getElementById('elements'),
             useFooter: document.getElementById('useFooter'),
             tagline: document.getElementById('tagline'),
@@ -515,6 +559,7 @@
             renderAspectRatios();
             setupCustomCombobox('combo-productCategory', lists.productCategories);
             setupCustomCombobox('combo-audience', lists.audience);
+            setupCustomCombobox('combo-bgColor', lists.bgColors); // Init new Bg Combo
             setupColorsCombobox();
             setupBalanceSelector();
             updateDynamicSelects();
@@ -535,7 +580,7 @@
         // Custom Combobox Builder
         function setupCustomCombobox(wrapperId, options) {
             const wrapper = document.getElementById(wrapperId);
-            const input = wrapper.querySelector('input');
+            const input = wrapper.querySelector('input[type="text"]');
             const trigger = wrapper.querySelector('.combo-trigger');
             const menu = wrapper.querySelector('.combo-menu');
 
@@ -682,7 +727,7 @@
                 else boxClass = 'w-8 h-4';
 
                 return `
-                <button type="button" class="ar-btn p-3 rounded-xl border-2 text-left flex items-start gap-3 transition-all ${state.aspectRatio === ar.id ? 'border-indigo-500 bg-indigo-50/50 text-indigo-800 shadow-md' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:shadow-sm'}" data-id="${ar.id}">
+                <button type="button" class="ar-btn p-2.5 rounded-xl border-2 text-left flex items-start gap-3 transition-all ${state.aspectRatio === ar.id ? 'border-indigo-500 bg-indigo-50/50 text-indigo-800 shadow-md' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:shadow-sm'}" data-id="${ar.id}">
                     <div class="flex-shrink-0 flex items-center justify-center rounded border p-1 mt-0.5 ${state.aspectRatio === ar.id ? 'bg-white border-indigo-200 shadow-sm' : 'bg-slate-50 border-slate-200'}">
                         <div class="border-2 border-dashed ${boxClass} ${state.aspectRatio === ar.id ? 'border-indigo-400' : 'border-slate-300'} rounded-sm"></div>
                     </div>
@@ -704,7 +749,8 @@
 
         // --- EVENT LISTENERS & UI UPDATES ---
         function attachEventListeners() {
-            ['productName', 'productCategory', 'highlightTitle', 'goal', 'audience', 'colors', 'elements', 'tagline', 'contact', 'socIg', 'socFb', 'socTiktok', 'markShopee', 'markTokped', 'markTiktok', 'footerColor'].forEach(key => {
+            // Text Inputs
+            ['productName', 'productCategory', 'highlightTitle', 'goal', 'audience', 'colors', 'bgColor', 'elements', 'tagline', 'contact', 'socIg', 'socFb', 'socTiktok', 'markShopee', 'markTokped', 'markTiktok', 'footerColor'].forEach(key => {
                 if(els[key]) {
                     els[key].addEventListener('input', (e) => {
                         state[key] = e.target.value;
@@ -715,6 +761,23 @@
                     });
                 }
             });
+
+            // Color Pickers logic
+            if(els.colorsPicker) {
+                els.colorsPicker.addEventListener('input', (e) => {
+                    state.colors = e.target.value;
+                    els.colors.value = e.target.value;
+                    checkColorPreview();
+                    updateLivePreview();
+                });
+            }
+            if(els.bgColorPicker) {
+                els.bgColorPicker.addEventListener('input', (e) => {
+                    state.bgColor = e.target.value;
+                    els.bgColor.value = e.target.value;
+                    updateLivePreview();
+                });
+            }
 
             ['footerColorType'].forEach(key => {
                 els[key].addEventListener('change', (e) => {
@@ -819,7 +882,7 @@
 
         function resetForm() {
             state = {
-                posterType: 'promosi', productName: '', productCategory: '', highlightTitle: '', balance: '50-50', goal: '', audience: '', theme: 'Minimalis Modern', colors: 'Hitam & Emas (Eksklusif)', elements: '', aspectRatio: '1:1',
+                posterType: 'promosi', productName: '', productCategory: '', highlightTitle: '', balance: '50-50', goal: '', audience: '', theme: 'Minimalis Modern', colors: 'Hitam & Emas (Eksklusif)', bgColor: 'Putih Bersih (Clean White)', elements: '', aspectRatio: '1:1',
                 useFooter: false, tagline: '', contact: '', socIg: '', socFb: '', socTiktok: '', markShopee: '', markTokped: '', markTiktok: '', footerColorType: 'monotone', footerColor: '#1e293b'
             };
             
@@ -829,6 +892,8 @@
                     else els[key].value = state[key];
                 }
             });
+            if(els.colorsPicker) els.colorsPicker.value = '#fbbf24';
+            if(els.bgColorPicker) els.bgColorPicker.value = '#ffffff';
             
             document.getElementById('output-image').value = '';
             document.getElementById('output-text').value = '';
@@ -864,6 +929,45 @@
         }
 
         function updateLivePreview() {
+            // Setup Background Color of the preview canvas
+            const canvasBg = document.getElementById('preview-canvas-bg');
+            let currentBgStyle = '';
+            let isLightBg = true;
+            const bgVal = state.bgColor.toLowerCase();
+
+            if (bgVal.includes('hitam') || bgVal.includes('dark') || bgVal.includes('gelap')) {
+                currentBgStyle = '#0f172a';
+                isLightBg = false;
+            } else if (bgVal.includes('putih') || bgVal.includes('clean') || bgVal.includes('cerah')) {
+                currentBgStyle = '#ffffff';
+                isLightBg = true;
+            } else if (bgVal.includes('gradasi') || bgVal.includes('gradient')) {
+                currentBgStyle = 'linear-gradient(135deg, #e0e7ff, #f3e8ff)';
+                isLightBg = true;
+            } else if (state.bgColor.startsWith('#')) {
+                currentBgStyle = state.bgColor;
+                // Basic brightness calculation to adjust text color
+                const hex = state.bgColor.replace('#', '');
+                if (hex.length === 6) {
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+                    isLightBg = yiq >= 128;
+                }
+            } else {
+                currentBgStyle = '#ffffff'; // Fallback
+                isLightBg = true;
+            }
+
+            if (currentBgStyle.includes('gradient')) {
+                canvasBg.style.background = currentBgStyle;
+            } else {
+                canvasBg.style.background = '';
+                canvasBg.style.backgroundColor = currentBgStyle;
+            }
+
+            // Aspect ratio sizing
             document.getElementById('preview-ar-badge').textContent = `AR ${state.aspectRatio}`;
             const frame = document.getElementById('preview-frame');
             frame.className = `transition-all duration-300 flex items-center justify-center bg-slate-100 border border-slate-200 rounded-2xl relative shadow-inner overflow-hidden p-3 ${
@@ -872,26 +976,51 @@
                 state.aspectRatio === '4:5' ? 'w-56 h-70' : 'w-72 h-44'
             }`;
 
+            // Adapt Text Colors dynamically based on Background
+            const previewCategory = document.getElementById('preview-category');
+            const previewTitle = document.getElementById('preview-title');
+            const previewTheme = document.getElementById('preview-theme');
+            
             document.getElementById('preview-category').textContent = state.productCategory || (state.posterType === 'promosi' ? 'KATEGORI PRODUK' : 'KATEGORI EVENT');
             document.getElementById('preview-title').textContent = state.highlightTitle || (state.productName ? `PROMO ${state.productName}` : 'JUDUL UTAMA POSTER');
             document.getElementById('preview-theme').textContent = `[Visual: ${state.theme}]`;
 
+            // Adjust Layout guide based on Balance
             const textLines = document.getElementById('preview-text-lines');
             const categoryArea = document.getElementById('preview-category-area');
-            const previewTitle = document.getElementById('preview-title');
 
-            if (state.balance === '80-20') {
-                textLines.classList.add('hidden');
-                categoryArea.classList.add('hidden');
-                previewTitle.className = "text-[10px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-slate-200 leading-tight uppercase tracking-wide line-clamp-1 opacity-80 mt-1 drop-shadow-md";
-            } else if (state.balance === '20-80') {
-                textLines.classList.remove('hidden');
-                categoryArea.classList.remove('hidden');
-                previewTitle.className = "text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-slate-200 leading-none uppercase tracking-wider line-clamp-2 drop-shadow-md";
+            if (isLightBg) {
+                previewCategory.className = "text-[8px] tracking-widest text-indigo-600 uppercase font-bold block";
+                if (state.balance === '80-20') {
+                    textLines.classList.add('hidden');
+                    categoryArea.classList.add('hidden');
+                    previewTitle.className = "text-[10px] font-bold text-slate-800 leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-sm";
+                } else if (state.balance === '20-80') {
+                    textLines.classList.remove('hidden');
+                    categoryArea.classList.remove('hidden');
+                    previewTitle.className = "text-sm font-extrabold text-slate-900 leading-none uppercase tracking-wider line-clamp-2 drop-shadow-sm";
+                } else {
+                    textLines.classList.add('hidden');
+                    categoryArea.classList.remove('hidden');
+                    previewTitle.className = "text-xs font-extrabold text-slate-900 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm";
+                }
+                previewTheme.className = "text-[8px] text-slate-500 mt-1 max-w-[80%] mx-auto truncate font-medium";
             } else {
-                textLines.classList.add('hidden');
-                categoryArea.classList.remove('hidden');
-                previewTitle.className = "text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-slate-200 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-md";
+                previewCategory.className = "text-[8px] tracking-widest text-indigo-300 uppercase font-bold block";
+                if (state.balance === '80-20') {
+                    textLines.classList.add('hidden');
+                    categoryArea.classList.add('hidden');
+                    previewTitle.className = "text-[10px] font-bold text-white leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-md";
+                } else if (state.balance === '20-80') {
+                    textLines.classList.remove('hidden');
+                    categoryArea.classList.remove('hidden');
+                    previewTitle.className = "text-sm font-extrabold text-white leading-none uppercase tracking-wider line-clamp-2 drop-shadow-md";
+                } else {
+                    textLines.classList.add('hidden');
+                    categoryArea.classList.remove('hidden');
+                    previewTitle.className = "text-xs font-extrabold text-white leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-md";
+                }
+                previewTheme.className = "text-[8px] text-slate-400 mt-1 max-w-[80%] mx-auto truncate font-medium";
             }
 
             const footerEl = document.getElementById('preview-footer');
@@ -928,6 +1057,7 @@
             const safeGoal = state.goal || (isPromo ? 'menarik perhatian' : 'menyampaikan pesan hangat');
             const safeAudience = state.audience || (isPromo ? 'masyarakat umum' : 'keluarga/klien/publik');
             const safeColors = state.colors || 'warna yang sesuai dengan tema';
+            const safeBgColor = state.bgColor || 'Putih Bersih';
             const safeElements = state.elements || 'elemen pendukung yang estetis';
 
             const highlightImgInstruction = state.highlightTitle ? ` Prominently feature bold, stylish typography displaying the text: "${state.highlightTitle}".` : '';
@@ -962,7 +1092,7 @@
                 footerImageInstruction = `Include a clear, distinct footer area at the bottom using ${colorDesc} with negative space specifically reserved for tagline, contact, and social media text.${iconText}`;
             }
 
-            const imgPrompt = `A high-quality, professional ${typeName} design for "${safeProduct}"${isPromo ? ` (Category: ${safeCategory})` : ''}.${highlightImgInstruction} \nComposition: ${balanceImgDetail}\nVisual style: ${state.theme}. \nColor scheme: ${safeColors}. \nKey visual elements to include: ${safeElements}. \nThe overall mood should feel designed to achieve ${safeGoal} and strongly appeal to ${safeAudience}. \nInclude clean, negative space for typography layout. ${footerImageInstruction}\nMasterpiece, highly detailed, visually striking, 8k resolution, commercial photography style. \n--ar ${state.aspectRatio.replace(':', ':')} --v 6.0`;
+            const imgPrompt = `A high-quality, professional ${typeName} design for "${safeProduct}"${isPromo ? ` (Category: ${safeCategory})` : ''}.${highlightImgInstruction} \nComposition: ${balanceImgDetail}\nVisual style: ${state.theme}. \nMain Color scheme: ${safeColors}. \nBackground Color/Style: ${safeBgColor}. \nKey visual elements to include: ${safeElements}. \nThe overall mood should feel designed to achieve ${safeGoal} and strongly appeal to ${safeAudience}. \nInclude clean, negative space for typography layout. ${footerImageInstruction}\nMasterpiece, highly detailed, visually striking, 8k resolution, commercial photography style. \n--ar ${state.aspectRatio.replace(':', ':')} --v 6.0`;
 
             let footerTextInstruction = '';
             if (state.useFooter) {
@@ -981,7 +1111,7 @@
             const promoStructure = `1. [HEADLINE]: Sangat singkat (maksimal 5 kata), memikat, dan *punchy*.\n2. [SUB-HEADLINE]: Penjelasan singkat dari penawaran/produk (1-2 kalimat, opsional).\n3. [BODY TEXT / BULLET POINTS]: Maksimal 3 poin keunggulan utama atau detail penawaran. Buat padat dan jelas.\n4. [CALL TO ACTION / CTA]: Kalimat ajakan bertindak yang kuat dan mendesak (contoh: "Beli Sekarang", "Klaim Diskon", dll).`;
             const greetingStructure = `1. [HEADLINE UCAPAN]: Besar, hangat, dan relevan (contoh: "Selamat Hari Raya...").\n2. [PESAN / DOA]: 1-2 kalimat pesan hangat, harapan, atau doa yang tulus.\n3. [DARI / PENGIRIM]: "Salam hangat dari..." atau nama entitas yang merayakan.`;
 
-            const txtPrompt = `Bertindaklah sebagai Copywriter Profesional kelas dunia. \nTolong buatkan teks copywriting untuk ${typeNameID} dengan detail berikut:\n\n- ${isPromo ? 'Nama Produk/Layanan' : 'Nama Hari Raya/Event'}: ${safeProduct}\n${isPromo ? `- Kategori Produk: ${safeCategory}\n` : ''}${highlightTxtInstruction}- ${isPromo ? 'Tujuan Promosi' : 'Pesan Khusus/Tujuan'}: ${safeGoal}\n- ${isPromo ? 'Target Audiens' : 'Ditujukan Kepada'}: ${safeAudience}\n- Tema Visual Poster: ${state.theme} (Dominasi warna: ${safeColors})\n${balanceTxtDetail}\n\nMohon berikan struktur copy berikut:\n${isPromo ? promoStructure : greetingStructure}${footerTextInstruction}\n\nGunakan nada bahasa yang persuasif, natural, dan sangat relevan dengan audiens (${safeAudience}). Jangan menggunakan bahasa yang terlalu kaku.`;
+            const txtPrompt = `Bertindaklah sebagai Copywriter Profesional kelas dunia. \nTolong buatkan teks copywriting untuk ${typeNameID} dengan detail berikut:\n\n- ${isPromo ? 'Nama Produk/Layanan' : 'Nama Hari Raya/Event'}: ${safeProduct}\n${isPromo ? `- Kategori Produk: ${safeCategory}\n` : ''}${highlightTxtInstruction}- ${isPromo ? 'Tujuan Promosi' : 'Pesan Khusus/Tujuan'}: ${safeGoal}\n- ${isPromo ? 'Target Audiens' : 'Ditujukan Kepada'}: ${safeAudience}\n- Tema Visual Poster: ${state.theme} (Dominasi warna: ${safeColors})\n- Tema Latar Background: ${safeBgColor}\n${balanceTxtDetail}\n\nMohon berikan struktur copy berikut:\n${isPromo ? promoStructure : greetingStructure}${footerTextInstruction}\n\nGunakan nada bahasa yang persuasif, natural, dan sangat relevan dengan audiens (${safeAudience}). Jangan menggunakan bahasa yang terlalu kaku.`;
 
             document.getElementById('output-image').value = imgPrompt;
             document.getElementById('output-text').value = txtPrompt;
