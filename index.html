@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta viewport khusus untuk mencegah zoom otomatis di HP saat klik input -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Generator Prompt Poster Promosi</title>
     
     <!-- Tailwind CSS -->
@@ -18,65 +19,68 @@
         body { font-family: 'Inter', sans-serif; }
         /* Smooth transitions */
         .transition-all { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
-        /* Custom scrollbar for dropdown menus */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f8fafc; }
+        /* Custom scrollbar for menus and horizontal scrolls */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Hide default scrollbar for horizontal mobile swipe but keep functionality */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         /* Color Picker clean styling */
         input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
         input[type="color"]::-webkit-color-swatch { border: none; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
     </style>
 
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen p-4 md:p-8">
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen p-3 md:p-8">
 
-    <div class="max-w-7xl mx-auto space-y-10 relative">
+    <div class="max-w-7xl mx-auto space-y-8 relative">
         
         <!-- Floating background decorative blobs -->
-        <div class="absolute top-10 left-1/4 w-96 h-96 bg-purple-300/30 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute top-40 right-1/4 w-85 h-85 bg-indigo-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-10 left-0 md:left-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-40 right-0 md:right-1/4 w-64 md:w-85 h-64 md:h-85 bg-indigo-300/30 rounded-full blur-3xl pointer-events-none"></div>
 
         <!-- Header -->
-        <header class="relative text-center space-y-4 pt-6 pb-2">
+        <header class="relative text-center space-y-3 pt-6 pb-2 px-2">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-indigo-100 shadow-sm rounded-full text-indigo-600 text-xs font-bold tracking-wide">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v4.0 (Studio Edition)
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v4.5 (by Bfrets Studio)
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-none">
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
                 Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Prompt</span> Builder
             </h1>
-            <p class="text-sm md:text-base text-slate-500 max-w-2xl mx-auto font-medium">
-                Hasilkan instruksi (prompt) profesional untuk Desain Promosi, Flyer Event, hingga Foto Model Majalah / Studio untuk Midjourney, DALL-E, dan ChatGPT.
+            <p class="text-xs md:text-sm text-slate-500 max-w-2xl mx-auto font-medium px-4">
+                Hasilkan instruksi (prompt) profesional untuk Desain Promosi, Flyer Event, hingga Foto Model Studio untuk AI.
             </p>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative z-10">
             
             <!-- Left Column: Form -->
-            <div class="lg:col-span-7 space-y-6 bg-white p-6 md:p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
-                <div class="flex justify-between items-center pb-4 border-b border-slate-100">
-                    <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
+            <div class="lg:col-span-7 space-y-6 bg-white p-4 sm:p-6 md:p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-100">
+                    <h2 class="text-lg md:text-xl font-bold text-slate-800 flex items-center gap-2.5">
                         <div class="p-2 bg-indigo-50 rounded-xl text-indigo-600 border border-indigo-100">
-                            <i data-lucide="layout-template" class="w-5 h-5"></i>
+                            <i data-lucide="layout-template" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </div>
                         Konfigurasi Visual
                     </h2>
-                    <button id="btn-reset" class="text-xs font-semibold text-slate-400 hover:text-rose-500 flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-lg hover:bg-rose-50 border border-transparent">
-                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Atur Ulang
+                    <button id="btn-reset" class="w-full sm:w-auto text-xs font-semibold text-slate-500 hover:text-rose-500 flex items-center justify-center gap-1.5 transition-colors px-3 py-2 rounded-lg bg-slate-50 hover:bg-rose-50 border border-slate-200 hover:border-rose-200">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Reset Form
                     </button>
                 </div>
 
                 <div class="space-y-6">
                     <!-- Type Selection -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60" id="type-selector">
-                        <button data-type="promosi" class="type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50">
+                    <div class="flex flex-col sm:flex-row p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60 gap-1" id="type-selector">
+                        <button data-type="promosi" class="type-btn flex-1 py-3 px-2 rounded-xl font-bold text-[12px] md:text-[13px] flex items-center justify-center gap-2 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50">
                             <i data-lucide="megaphone" class="w-4 h-4 text-indigo-500"></i> Promosi Produk
                         </button>
-                        <button data-type="model" class="type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
-                            <i data-lucide="camera" class="w-4 h-4"></i> Foto Model / Studio
+                        <button data-type="model" class="type-btn flex-1 py-3 px-2 rounded-xl font-bold text-[12px] md:text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
+                            <i data-lucide="camera" class="w-4 h-4"></i> Model Studio
                         </button>
-                        <button data-type="ucapan" class="type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
-                            <i data-lucide="party-popper" class="w-4 h-4"></i> Ucapan / Event
+                        <button data-type="ucapan" class="type-btn flex-1 py-3 px-2 rounded-xl font-bold text-[12px] md:text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
+                            <i data-lucide="party-popper" class="w-4 h-4"></i> Ucapan Event
                         </button>
                     </div>
 
@@ -87,6 +91,34 @@
                                 Nama Produk / Brand <span class="text-rose-500">*</span>
                             </label>
                             <input type="text" id="productName" placeholder="Contoh: Kopi Susu Aren..." class="w-full px-4 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 placeholder-slate-400 text-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 font-medium">
+                            
+                            <!-- Model Attributes (Gender & Age) - Hidden by default -->
+                            <div id="wrapper-modelAttributes" class="grid grid-cols-2 gap-2 mt-3 hidden">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                                        <i data-lucide="user" class="w-3 h-3"></i> Gender
+                                    </label>
+                                    <div class="relative custom-combobox" id="combo-modelGender">
+                                        <input type="text" id="modelGender" placeholder="Pilih..." class="w-full pl-3 pr-8 py-2.5 rounded-lg border border-slate-200 outline-none transition-all bg-white text-slate-900 text-xs focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 font-medium">
+                                        <button type="button" class="combo-trigger absolute right-1.5 top-1/2 -translate-y-1/2 w-6 h-6 bg-slate-50 rounded flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer z-10">
+                                            <i data-lucide="chevron-down" class="w-3 h-3 text-slate-500"></i>
+                                        </button>
+                                        <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-1 rounded-lg bg-white border border-slate-100 shadow-xl max-h-48 overflow-y-auto custom-scrollbar ring-1 ring-black/5"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                                        <i data-lucide="calendar" class="w-3 h-3"></i> Usia
+                                    </label>
+                                    <div class="relative custom-combobox" id="combo-modelAge">
+                                        <input type="text" id="modelAge" placeholder="Usia..." class="w-full pl-3 pr-8 py-2.5 rounded-lg border border-slate-200 outline-none transition-all bg-white text-slate-900 text-xs focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 font-medium">
+                                        <button type="button" class="combo-trigger absolute right-1.5 top-1/2 -translate-y-1/2 w-6 h-6 bg-slate-50 rounded flex items-center justify-center hover:bg-slate-100 transition-colors cursor-pointer z-10">
+                                            <i data-lucide="chevron-down" class="w-3 h-3 text-slate-500"></i>
+                                        </button>
+                                        <div class="combo-menu hidden absolute left-0 right-0 z-50 mt-1 rounded-lg bg-white border border-slate-100 shadow-xl max-h-48 overflow-y-auto custom-scrollbar ring-1 ring-black/5"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div id="wrapper-productCategory">
@@ -106,30 +138,30 @@
                     </div>
 
                     <!-- Highlight Title Input -->
-                    <div class="bg-indigo-50/50 border border-indigo-100 p-5 rounded-2xl relative overflow-hidden" id="wrapper-highlightTitle">
+                    <div class="bg-indigo-50/50 border border-indigo-100 p-4 md:p-5 rounded-2xl relative overflow-hidden" id="wrapper-highlightTitle">
                         <div class="absolute -right-4 -top-4 text-indigo-500/10"><i data-lucide="type" class="w-24 h-24"></i></div>
                         <label class="block text-[11px] font-bold text-indigo-800 uppercase tracking-wider mb-2 flex items-center gap-1.5 relative z-10">
-                            <i data-lucide="type" class="w-3.5 h-3.5 text-indigo-500"></i> Teks Wajib Highlight / Judul Utama <span class="text-indigo-400 font-normal lowercase">(opsional)</span>
+                            <i data-lucide="type" class="w-3.5 h-3.5 text-indigo-500"></i> Teks Wajib Highlight / Judul <span class="text-indigo-400 font-normal lowercase">(opsional)</span>
                         </label>
-                        <input type="text" id="highlightTitle" placeholder="Contoh: DISKON HINGGA 70%, MOHON MAAF LAHIR BATIN..." class="w-full px-4 py-3.5 rounded-xl border border-indigo-200 outline-none transition-all bg-white text-indigo-950 placeholder-indigo-300 text-sm font-bold tracking-wide focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 relative z-10 shadow-sm">
-                        <p class="text-[10px] text-indigo-500/80 mt-2 font-medium relative z-10">Meminta AI Gambar merender teks besar yang indah & estetik di poster visual.</p>
+                        <input type="text" id="highlightTitle" placeholder="Misal: DISKON 70%, GRAND OPENING..." class="w-full px-4 py-3.5 rounded-xl border border-indigo-200 outline-none transition-all bg-white text-indigo-950 placeholder-indigo-300 text-sm font-bold tracking-wide focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 relative z-10 shadow-sm">
+                        <p class="text-[10px] text-indigo-500/80 mt-2 font-medium relative z-10">AI akan merender teks besar yang indah di poster visual.</p>
                     </div>
 
                     <!-- Flyer/Poster Information Balance Selector -->
                     <div class="pt-4 border-t border-slate-100" id="wrapper-balance">
                         <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                            <i data-lucide="scale" class="w-3.5 h-3.5 text-slate-400"></i> Keseimbangan Komposisi (Desain Visual vs Teks Copywriting)
+                            <i data-lucide="scale" class="w-3.5 h-3.5 text-slate-400"></i> Keseimbangan Komposisi (Visual vs Teks)
                         </label>
-                        <div class="grid grid-cols-3 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60" id="balance-selector">
-                            <button type="button" data-balance="80-20" class="balance-btn py-3 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
+                        <div class="flex flex-col sm:flex-row p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60 gap-1" id="balance-selector">
+                            <button type="button" data-balance="80-20" class="balance-btn flex-1 py-3 px-2 rounded-xl font-bold text-[11px] flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-1 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
                                 <span class="text-slate-700">80% Visual / 20% Teks</span>
                                 <span class="text-[9px] font-medium text-slate-500">Artistik / Minimalis</span>
                             </button>
-                            <button type="button" data-balance="50-50" class="balance-btn py-3 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50">
+                            <button type="button" data-balance="50-50" class="balance-btn flex-1 py-3 px-2 rounded-xl font-bold text-[11px] flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-1 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50">
                                 <span class="text-indigo-700">50% Visual / 50% Teks</span>
                                 <span class="text-[9px] font-medium text-indigo-400">Seimbang / Standar</span>
                             </button>
-                            <button type="button" data-balance="20-80" class="balance-btn py-3 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
+                            <button type="button" data-balance="20-80" class="balance-btn flex-1 py-3 px-2 rounded-xl font-bold text-[11px] flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-1 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
                                 <span class="text-slate-700">20% Visual / 80% Teks</span>
                                 <span class="text-[9px] font-medium text-slate-500">Informasi Padat</span>
                             </button>
@@ -208,7 +240,7 @@
 
                         <!-- Background Color -->
                         <div>
-                            <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <label id="label-bgColor" class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                                 <i data-lucide="image" class="w-3.5 h-3.5 text-slate-400"></i> Latar Belakang (Background)
                             </label>
                             <div class="flex gap-2">
@@ -216,7 +248,7 @@
                                     <input type="color" id="bgColorPicker" value="#ffffff" class="w-full h-full rounded cursor-pointer border-0 p-0 bg-transparent">
                                 </div>
                                 <div class="relative custom-combobox flex-grow" id="combo-bgColor">
-                                    <input type="text" id="bgColor" placeholder="Ketik/Pilih Tema Latar..." value="Putih Bersih (Clean White)" class="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 font-medium text-sm focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+                                    <input type="text" id="bgColor" placeholder="Ketik Tema Latar..." value="Putih Bersih (Clean White)" class="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 font-medium text-sm focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
                                     
                                     <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 shadow-sm transition-colors cursor-pointer z-10">
                                         <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i>
@@ -234,7 +266,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-3">
                         <div class="flex flex-col h-full">
                             <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">Aspek Rasio / Ukuran</label>
-                            <div id="aspectRatio-container" class="grid grid-cols-2 gap-2 flex-grow">
+                            <div id="aspectRatio-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-grow">
                                 <!-- Injected via JS -->
                             </div>
                         </div>
@@ -245,20 +277,22 @@
                         </div>
                     </div>
 
-                    <!-- IMAGE UPLOADS: Product / Brand / Store -->
+                    <!-- IMAGE UPLOADS: Swipeable horizontal on Mobile -->
                     <div class="pt-5 border-t border-slate-100" id="wrapper-upload">
                         <div class="flex justify-between items-end mb-3">
                             <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                                <i data-lucide="upload-cloud" class="w-3.5 h-3.5 text-indigo-500"></i> Referensi Visual Gambar (Opsional)
+                                <i data-lucide="upload-cloud" class="w-3.5 h-3.5 text-indigo-500"></i> Referensi Visual (Opsional)
                             </label>
                         </div>
-                        <div class="grid grid-cols-3 gap-3">
+                        
+                        <!-- Scrollable Row for Mobile -->
+                        <div class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 hide-scroll custom-scrollbar">
                             <!-- Product Image -->
-                            <div class="relative group">
+                            <div class="relative group flex-none w-[38%] min-w-[120px] sm:w-auto sm:flex-1 snap-start">
                                 <input type="file" id="upload-product" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                                <div id="preview-box-product" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
+                                <div id="preview-box-product" class="h-24 sm:h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
                                     <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
-                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Subjek Utama</span>
+                                    <span class="text-[9px] sm:text-[10px] font-bold text-slate-500 text-center px-1 leading-tight">Subjek Utama</span>
                                 </div>
                                 <button type="button" id="remove-product" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
                                     <i data-lucide="x" class="w-3.5 h-3.5"></i>
@@ -266,11 +300,11 @@
                             </div>
                             
                             <!-- Brand Logo -->
-                            <div class="relative group">
+                            <div class="relative group flex-none w-[38%] min-w-[120px] sm:w-auto sm:flex-1 snap-start">
                                 <input type="file" id="upload-brand" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                                <div id="preview-box-brand" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
+                                <div id="preview-box-brand" class="h-24 sm:h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
                                     <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
-                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Logo Merk / Brand</span>
+                                    <span class="text-[9px] sm:text-[10px] font-bold text-slate-500 text-center px-1 leading-tight">Logo Merk / Brand</span>
                                 </div>
                                 <button type="button" id="remove-brand" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
                                     <i data-lucide="x" class="w-3.5 h-3.5"></i>
@@ -278,40 +312,40 @@
                             </div>
                             
                             <!-- Store/Company Logo -->
-                            <div class="relative group">
+                            <div class="relative group flex-none w-[38%] min-w-[120px] sm:w-auto sm:flex-1 snap-start">
                                 <input type="file" id="upload-store" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                                <div id="preview-box-store" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
+                                <div id="preview-box-store" class="h-24 sm:h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
                                     <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
-                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Latar Belakang / Ref</span>
+                                    <span class="text-[9px] sm:text-[10px] font-bold text-slate-500 text-center px-1 leading-tight">Latar Belakang/Ref</span>
                                 </div>
                                 <button type="button" id="remove-store" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
                                     <i data-lucide="x" class="w-3.5 h-3.5"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="mt-2.5 bg-blue-50/50 border border-blue-100 rounded-lg p-2.5 flex items-start gap-2">
+                        <div class="mt-2 bg-blue-50/50 border border-blue-100 rounded-lg p-2.5 flex items-start gap-2">
                             <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0"></i>
                             <p class="text-[10px] text-blue-800 font-medium leading-relaxed">
-                                <strong class="text-blue-900">Kolase Otomatis:</strong> Gambar yang diunggah akan digabung otomatis. Setelah menekan tombol <strong>Buatkan Formula Prompt</strong>, Anda bisa menyalin atau mengunduh hasilnya di bagian bawah panel layar hasil.
+                                <strong class="text-blue-900">Kolase Otomatis:</strong> Gambar akan digabung otomatis & dapat disalin setelah tombol <strong>Buat Prompt</strong> ditekan. (Bisa geser ke samping di HP).
                             </p>
                         </div>
                     </div>
 
                     <!-- Footer Section Toggle -->
                     <div class="border border-slate-200 bg-slate-50/50 rounded-2xl overflow-hidden transition-all shadow-sm" id="wrapper-footerToggle">
-                        <label class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-100/50 transition-colors">
+                        <label class="flex items-center justify-between p-3 md:p-4 cursor-pointer hover:bg-slate-100/50 transition-colors">
                             <div class="flex items-center gap-3">
                                 <input type="checkbox" id="useFooter" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                                <div class="flex items-center gap-2 font-bold text-sm text-slate-700">
+                                <div class="flex items-center gap-2 font-bold text-xs md:text-sm text-slate-700">
                                     <i data-lucide="panel-bottom" class="w-4 h-4 text-indigo-500"></i>
-                                    Aktifkan Area Footer Poster (Sosial Media & Kontak)
+                                    Aktifkan Area Footer Poster
                                 </div>
                             </div>
-                            <span id="footer-status-badge" class="text-[10px] px-2.5 py-1 rounded font-bold uppercase transition-all bg-slate-200 text-slate-500 tracking-wider">Mati</span>
+                            <span id="footer-status-badge" class="text-[9px] md:text-[10px] px-2.5 py-1 rounded font-bold uppercase transition-all bg-slate-200 text-slate-500 tracking-wider">Mati</span>
                         </label>
                         
                         <!-- Footer Fields Drawer -->
-                        <div id="footer-drawer" class="hidden p-5 border-t border-slate-200 bg-white space-y-4">
+                        <div id="footer-drawer" class="hidden p-4 md:p-5 border-t border-slate-200 bg-white space-y-4">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-[11px] font-bold text-slate-600 mb-1.5 flex items-center gap-1">
@@ -372,13 +406,13 @@
                             <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
                                 <div>
                                     <label class="block text-[11px] font-bold text-slate-600 mb-1.5">Gaya Warna Footer</label>
-                                    <select id="footerColorType" class="px-3 py-2 bg-slate-50 border border-slate-200 text-slate-800 font-medium text-xs rounded-lg focus:outline-none focus:bg-white focus:border-indigo-500">
+                                    <select id="footerColorType" class="w-full sm:w-auto px-3 py-2 bg-slate-50 border border-slate-200 text-slate-800 font-medium text-xs rounded-lg focus:outline-none focus:bg-white focus:border-indigo-500">
                                         <option value="monotone" selected>Warna Solid Kustom</option>
                                         <option value="palette">Ikuti Warna Utama Poster</option>
                                     </select>
                                 </div>
                                 
-                                <div id="footerColor-wrapper" class="flex items-center gap-2">
+                                <div id="footerColor-wrapper" class="flex items-center gap-2 w-full sm:w-auto justify-end">
                                     <label class="text-[10px] text-slate-500 font-bold">Pilih Warna:</label>
                                     <div class="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg border border-slate-200 shadow-sm">
                                         <input type="color" id="footerColor" value="#1e293b" class="w-7 h-7 rounded cursor-pointer border-0 p-0 bg-transparent">
@@ -400,66 +434,65 @@
             <div class="lg:col-span-5 flex flex-col space-y-6">
                 
                 <!-- INTERACTIVE MINI POSTER LAYOUT (Visual Preview Guide) -->
-                <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 flex flex-col items-center">
+                <div class="bg-white p-4 md:p-5 rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 flex flex-col items-center">
                     <div class="w-full flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
                         <span class="text-xs font-bold text-slate-800 tracking-wider uppercase flex items-center gap-1.5">
-                            <i data-lucide="layout-template" class="w-4 h-4 text-indigo-500"></i> Sketsa Layout Visual
+                            <i data-lucide="layout-template" class="w-4 h-4 text-indigo-500"></i> Sketsa Visual
                         </span>
                         <span id="preview-ar-badge" class="text-[10px] bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded font-mono font-bold border border-indigo-100">AR 1:1</span>
                     </div>
 
-                    <!-- Frame Size -->
-                    <div id="preview-frame" class="w-64 h-64 transition-all duration-300 flex items-center justify-center bg-slate-100 border border-slate-200 rounded-2xl relative shadow-inner overflow-hidden p-3">
-                        
-                        <!-- Dynamic Canvas content -->
-                        <div id="preview-canvas-bg" class="w-full h-full rounded-lg flex flex-col justify-between p-3 relative text-center shadow-md transition-all duration-300 overflow-hidden" style="background-color: #ffffff;">
+                    <!-- Frame Size Container -->
+                    <div id="preview-frame-wrapper" class="w-full flex justify-center pb-2">
+                        <div id="preview-frame" class="transition-all duration-300 flex items-center justify-center bg-slate-100 border border-slate-200 rounded-2xl relative shadow-inner overflow-hidden p-2 w-full max-w-[280px]" style="aspect-ratio: 1/1;">
                             
-                            <div class="absolute inset-0 opacity-[0.03] pointer-events-none flex flex-wrap gap-2 overflow-hidden">
-                                <div class="w-full h-full bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                            </div>
-
-                            <div class="relative z-10" id="preview-category-area">
-                                <span id="preview-category" class="text-[8px] tracking-widest text-indigo-600 uppercase font-bold block">
-                                    KATEGORI VISUAL
-                                </span>
-                            </div>
-
-                            <!-- Main Visual / Texts layout based on balance -->
-                            <div class="my-auto relative z-10 px-1 w-full flex flex-col justify-center items-center">
-                                <!-- Upload Indicators in preview -->
-                                <div id="preview-uploads-indicator" class="flex gap-1 justify-center mb-1.5 hidden">
-                                    <div id="p-ind-prod" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
-                                    <div id="p-ind-brand" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
-                                    <div id="p-ind-store" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
-                                </div>
-                                <h3 id="preview-title" class="text-xs font-extrabold text-slate-800 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm">
-                                    JUDUL UTAMA VISUAL
-                                </h3>
-                                <p id="preview-theme" class="text-[8px] text-slate-500 mt-1 max-w-[80%] mx-auto truncate font-medium">
-                                    [Visual: Minimalis Modern]
-                                </p>
+                            <!-- Dynamic Canvas content -->
+                            <div id="preview-canvas-bg" class="w-full h-full rounded-lg flex flex-col justify-between p-3 relative text-center shadow-md transition-all duration-300 overflow-hidden" style="background-color: #ffffff;">
                                 
-                                <!-- Mock information lines for 20-80 mode -->
-                                <div id="preview-text-lines" class="hidden mt-3 space-y-1.5 w-full max-w-[90%] mx-auto p-1.5 bg-black/5 rounded border border-black/5 text-[5px] text-slate-500">
-                                    <div class="h-1 bg-black/20 rounded w-11/12 mx-auto"></div>
-                                    <div class="h-1 bg-black/20 rounded w-full mx-auto"></div>
-                                    <div class="h-1 bg-black/20 rounded w-9/12 mx-auto"></div>
+                                <div class="absolute inset-0 opacity-[0.03] pointer-events-none flex flex-wrap gap-2 overflow-hidden">
+                                    <div class="w-full h-full bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
                                 </div>
-                            </div>
 
-                            <!-- Mock Footer -->
-                            <div id="preview-footer" class="hidden relative z-10 mt-2 p-1.5 rounded border border-black/10 text-left shadow-lg" style="background-color: #1e1b4b">
-                                <div class="flex justify-between items-center text-[7px] text-white">
-                                    <span id="preview-tagline" class="font-bold uppercase tracking-wider truncate max-w-[50%] drop-shadow-md">Tagline/Slogan</span>
-                                    <span id="preview-contact" class="font-mono text-slate-200 scale-90 font-medium">Hubungi Kami</span>
+                                <div class="relative z-10" id="preview-category-area">
+                                    <span id="preview-category" class="text-[7px] md:text-[8px] tracking-widest text-indigo-600 uppercase font-bold block break-words">
+                                        KATEGORI VISUAL
+                                    </span>
                                 </div>
-                                <div id="preview-socials" class="flex items-center gap-1.5 mt-1 border-t border-white/20 pt-1 text-[6px] text-slate-300">
-                                    <!-- Social icons injected here via JS -->
+
+                                <!-- Main Visual / Texts layout based on balance -->
+                                <div class="my-auto relative z-10 px-1 w-full flex flex-col justify-center items-center">
+                                    <!-- Upload Indicators in preview -->
+                                    <div id="preview-uploads-indicator" class="flex gap-1 justify-center mb-1.5 hidden">
+                                        <div id="p-ind-prod" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
+                                        <div id="p-ind-brand" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
+                                        <div id="p-ind-store" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
+                                    </div>
+                                    <h3 id="preview-title" class="text-xs font-extrabold text-slate-800 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm break-words px-2 w-full">
+                                        JUDUL UTAMA VISUAL
+                                    </h3>
+                                    <p id="preview-theme" class="text-[7px] md:text-[8px] text-slate-500 mt-1 max-w-[90%] mx-auto truncate font-medium">
+                                        [Visual: Minimalis]
+                                    </p>
+                                    
+                                    <!-- Mock information lines for 20-80 mode -->
+                                    <div id="preview-text-lines" class="hidden mt-3 space-y-1 w-full max-w-[90%] mx-auto p-1.5 bg-black/5 rounded border border-black/5 text-[5px]">
+                                        <div class="h-1 bg-black/20 rounded w-11/12 mx-auto"></div>
+                                        <div class="h-1 bg-black/20 rounded w-full mx-auto"></div>
+                                        <div class="h-1 bg-black/20 rounded w-9/12 mx-auto"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Mock No Footer -->
-                            <div id="preview-no-footer" class="text-[7px] text-slate-500/80 font-medium italic border-t border-dashed border-black/10 pt-1.5">
-                                Area visual penuh (tanpa footer)
+
+                                <!-- Mock Footer -->
+                                <div id="preview-footer" class="hidden relative z-10 mt-2 p-1.5 rounded border border-black/10 text-left shadow-lg" style="background-color: #1e1b4b">
+                                    <div class="flex justify-between items-center text-[6px] md:text-[7px] text-white">
+                                        <span id="preview-tagline" class="font-bold uppercase tracking-wider truncate max-w-[50%] drop-shadow-md">Tagline/Slogan</span>
+                                        <span id="preview-contact" class="font-mono text-slate-200 scale-90 font-medium truncate">Hubungi Kami</span>
+                                    </div>
+                                </div>
+                                <!-- Mock No Footer -->
+                                <div id="preview-no-footer" class="text-[6px] md:text-[7px] text-slate-500/80 font-medium italic border-t border-dashed border-black/10 pt-1.5">
+                                    Area visual penuh
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -468,24 +501,24 @@
                 <!-- Prompt Output Control Panel -->
                 <div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-200 flex-grow flex flex-col" id="results-panel">
                     <!-- Tabs Selection -->
-                    <div class="flex border-b border-slate-100 p-1.5 bg-slate-50">
-                        <button onclick="switchTab('image')" id="btn-tab-image" class="flex-1 py-3 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl bg-white text-indigo-600 shadow-sm border border-slate-200/50">
-                            <i data-lucide="image" class="w-3.5 h-3.5 text-indigo-500"></i> Prompt Gambar AI
+                    <div class="grid grid-cols-2 border-b border-slate-100 p-1.5 bg-slate-50 gap-1">
+                        <button onclick="switchTab('image')" id="btn-tab-image" class="py-3 text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-colors rounded-xl bg-white text-indigo-600 shadow-sm border border-slate-200/50">
+                            <i data-lucide="image" class="w-3.5 h-3.5 text-indigo-500"></i> Prompt AI Gambar
                         </button>
-                        <button onclick="switchTab('text')" id="btn-tab-text" class="flex-1 py-3 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
+                        <button onclick="switchTab('text')" id="btn-tab-text" class="py-3 text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-colors rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
                             <i data-lucide="type" class="w-3.5 h-3.5"></i> Prompt Copywriting
                         </button>
                     </div>
 
                     <!-- Tab Content Image -->
-                    <div id="tab-image" class="p-5 flex-grow flex flex-col bg-white">
+                    <div id="tab-image" class="p-4 md:p-5 flex-grow flex flex-col bg-white">
                         <div class="flex flex-col h-full space-y-4">
-                            <div class="text-[11px] text-indigo-800 bg-indigo-50/80 p-3.5 rounded-xl border border-indigo-100 flex gap-2 font-medium">
+                            <div class="text-[10px] md:text-[11px] text-indigo-800 bg-indigo-50/80 p-3 rounded-xl border border-indigo-100 flex gap-2 font-medium">
                                 <span class="text-indigo-500"><i data-lucide="info" class="w-4 h-4"></i></span>
                                 <span>Salin instruksi ini dan tempel (paste) ke <strong>Midjourney, DALL-E, atau Gemini Gambar</strong>.</span>
                             </div>
                             <div class="relative flex-grow">
-                                <textarea id="output-image" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-48 p-4 pr-12 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 selection:bg-indigo-100"></textarea>
+                                <textarea id="output-image" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-40 md:h-48 p-3 md:p-4 pr-12 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-[11px] sm:text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 selection:bg-indigo-100"></textarea>
                                 <button id="btn-floating-copy-image" class="hidden absolute top-3 right-3 p-2 bg-white border border-slate-200 text-slate-400 rounded-lg shadow-sm hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-all z-10" title="Salin Prompt">
                                     <i data-lucide="copy" class="w-4 h-4" id="icon-floating-copy-image"></i>
                                 </button>
@@ -497,14 +530,14 @@
                     </div>
 
                     <!-- Tab Content Text -->
-                    <div id="tab-text" class="p-5 flex-grow flex flex-col bg-white hidden">
+                    <div id="tab-text" class="p-4 md:p-5 flex-grow flex flex-col bg-white hidden">
                         <div class="flex flex-col h-full space-y-4">
-                            <div class="text-[11px] text-purple-800 bg-purple-50/80 p-3.5 rounded-xl border border-purple-100 flex gap-2 font-medium">
+                            <div class="text-[10px] md:text-[11px] text-purple-800 bg-purple-50/80 p-3 rounded-xl border border-purple-100 flex gap-2 font-medium">
                                 <span class="text-purple-500"><i data-lucide="info" class="w-4 h-4"></i></span>
                                 <span>Tempel (paste) prompt ini ke <strong>ChatGPT atau Claude</strong> untuk mendapatkan kerangka copywriting yang memikat.</span>
                             </div>
                             <div class="relative flex-grow">
-                                <textarea id="output-text" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-48 p-4 pr-12 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-purple-500/10 focus:border-purple-500 selection:bg-purple-100"></textarea>
+                                <textarea id="output-text" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-40 md:h-48 p-3 md:p-4 pr-12 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-[11px] sm:text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-purple-500/10 focus:border-purple-500 selection:bg-purple-100"></textarea>
                                 <button id="btn-floating-copy-text" class="hidden absolute top-3 right-3 p-2 bg-white border border-slate-200 text-slate-400 rounded-lg shadow-sm hover:bg-purple-50 hover:text-purple-600 hover:border-purple-200 transition-all z-10" title="Salin Prompt">
                                     <i data-lucide="copy" class="w-4 h-4" id="icon-floating-copy-text"></i>
                                 </button>
@@ -515,19 +548,19 @@
                         </div>
                     </div>
                     
-                    <!-- Generated Image Output Container (Appears when there are images) -->
-                    <div id="generated-image-container" class="hidden p-5 border-t border-slate-100 bg-slate-50 flex flex-col items-center">
+                    <!-- Generated Image Output Container -->
+                    <div id="generated-image-container" class="hidden p-4 md:p-5 border-t border-slate-100 bg-slate-50 flex flex-col items-center">
                         <span class="text-[11px] font-bold text-slate-600 mb-3 flex items-center gap-1.5"><i data-lucide="image" class="w-4 h-4 text-indigo-500"></i> Kolase Referensi Visual (Siap Digunakan)</span>
-                        <img id="generated-image-result" src="" alt="Referensi" class="max-h-48 rounded-xl border border-slate-200 shadow-sm mb-3">
-                        <div class="flex gap-3">
-                            <button id="btn-copy-image-only" class="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-lg shadow-sm hover:bg-indigo-700 transition-all flex items-center gap-2">
+                        <img id="generated-image-result" src="" alt="Referensi" class="max-h-40 md:max-h-48 rounded-xl border border-slate-200 shadow-sm mb-3">
+                        <div class="flex flex-col sm:flex-row gap-2 md:gap-3 w-full sm:w-auto">
+                            <button id="btn-copy-image-only" class="w-full sm:w-auto justify-center px-4 py-2.5 bg-indigo-600 text-white text-xs font-bold rounded-lg shadow-sm hover:bg-indigo-700 transition-all flex items-center gap-2">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin Gambar Ini
                             </button>
-                            <a id="btn-download-image" href="#" download="referensi-poster.png" class="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-bold rounded-lg shadow-sm hover:bg-slate-50 hover:text-indigo-600 transition-all flex items-center gap-2">
+                            <a id="btn-download-image" href="#" download="referensi-poster.png" class="w-full sm:w-auto justify-center px-4 py-2.5 bg-white border border-slate-200 text-slate-700 text-xs font-bold rounded-lg shadow-sm hover:bg-slate-50 hover:text-indigo-600 transition-all flex items-center gap-2">
                                 <i data-lucide="download" class="w-3.5 h-3.5"></i> Unduh Gambar
                             </a>
                         </div>
-                        <p class="text-[9px] text-slate-400 mt-2 text-center max-w-sm leading-relaxed">Gambar ini wajib Anda lampirkan bersama teks prompt di atas. Jika tombol Salin Gambar gagal karena izin browser, silakan gunakan tombol <strong>Unduh Gambar</strong>.</p>
+                        <p class="text-[9px] text-slate-400 mt-2.5 text-center max-w-sm leading-relaxed px-2">Gambar wajib dilampirkan dengan teks prompt. Jika "Salin Gambar" gagal (Izin Browser), gunakan "Unduh Gambar".</p>
                     </div>
                 </div>
 
@@ -541,6 +574,8 @@
         let state = {
             posterType: 'promosi',
             productName: '',
+            modelGender: '',
+            modelAge: '',
             productCategory: '',
             highlightTitle: '',
             balance: '50-50', 
@@ -592,7 +627,9 @@
             // New Model Photography Lists
             modelCategories: ["Fashion Editorial", "Beauty Close-up", "Street Style Photography", "Corporate Headshot", "Fitness / Sport Active", "Glamour Magazine Cover", "Fantasy / Cosplay", "Vintage / Retro Portrait"],
             modelLighting: ["Studio Softbox Light", "Cinematic Dramatic Lighting", "Golden Hour Sunlight", "Neon Cyberpunk Glow", "Moody Low-Key Lighting", "Bright High-Key Setup", "Rembrandt Lighting"],
-            modelShot: ["Full Body Shot", "Medium Shot (Waist Up)", "Close-up Portrait", "Extreme Close-up Face", "Low Angle Shot (Heroic)", "High Angle Shot", "Over the Shoulder"],
+            modelShot: ["Eye-Level Shot", "Low Angle (Heroic)", "High Angle (Bird's Eye)", "Dutch Angle (Tilted)", "Over-the-Shoulder", "Close-Up (Face focus)", "Extreme Close-Up (Macro)", "Medium Shot (Waist Up)", "Cowboy Shot (Mid-thigh up)", "Full Body Shot (Wide Angle)", "Top-Down (Flat Lay)"],
+            modelGenderList: ["Wanita", "Pria", "Androgini / Uniseks", "Anak Laki-laki", "Anak Perempuan", "Bebas/Tidak Spesifik"],
+            modelAgeList: ["Bayi / Balita (0-4 thn)", "Anak-anak (5-12 thn)", "Remaja (13-19 thn)", "Dewasa Muda (20-29 thn)", "Dewasa (30-39 thn)", "Paruh Baya (40-55 thn)", "Lansia (55+ thn)", "Bebas/Tidak Spesifik"],
             
             palettes: [
                 { name: "Hitam & Emas (Eksklusif)", colors: ["#0f172a", "#fbbf24"] },
@@ -609,13 +646,19 @@
                 "Hitam Gelap (Dark Mode)", 
                 "Gradasi Lembut (Soft Gradient)",
                 "Studio Backdrop (Neutral Grey)",
-                "Outdoor City Street"
+                "Canvas Texture Backdrop",
+                "Outdoor City Street",
+                "Natural Nature / Forest",
+                "Cinematic Night Street",
+                "Neon Cyberpunk Alley"
             ]
         };
 
         // --- DOM Elements ---
         const els = {
             productName: document.getElementById('productName'),
+            modelGender: document.getElementById('modelGender'),
+            modelAge: document.getElementById('modelAge'),
             productCategory: document.getElementById('productCategory'),
             highlightTitle: document.getElementById('highlightTitle'),
             goal: document.getElementById('goal'),
@@ -638,6 +681,7 @@
             footerColor: document.getElementById('footerColor'),
 
             wrapperProdName: document.getElementById('wrapper-productName'),
+            wrapperModelAttributes: document.getElementById('wrapper-modelAttributes'),
             wrapperProdCat: document.getElementById('wrapper-productCategory'),
             wrapperHighlightTitle: document.getElementById('wrapper-highlightTitle'),
             wrapperBalance: document.getElementById('wrapper-balance'),
@@ -647,6 +691,7 @@
             labelProdCat: document.getElementById('label-productCategory'),
             labelGoal: document.getElementById('label-goal'),
             labelAudience: document.getElementById('label-audience'),
+            labelBgColor: document.getElementById('label-bgColor'),
             footerDrawer: document.getElementById('footer-drawer'),
             footerStatusBadge: document.getElementById('footer-status-badge'),
             footerColorWrapper: document.getElementById('footerColor-wrapper'),
@@ -660,6 +705,8 @@
             setupCustomCombobox('combo-productCategory', lists.productCategories);
             setupCustomCombobox('combo-audience', lists.audience);
             setupCustomCombobox('combo-bgColor', lists.bgColors);
+            setupCustomCombobox('combo-modelGender', lists.modelGenderList);
+            setupCustomCombobox('combo-modelAge', lists.modelAgeList);
             setupColorsCombobox();
             setupBalanceSelector();
             updateDynamicSelects();
@@ -682,6 +729,7 @@
         // Custom Combobox Builder
         function setupCustomCombobox(wrapperId, options) {
             const wrapper = document.getElementById(wrapperId);
+            if (!wrapper) return;
             const input = wrapper.querySelector('input[type="text"]');
             const trigger = wrapper.querySelector('.combo-trigger');
             const menu = wrapper.querySelector('.combo-menu');
@@ -726,11 +774,11 @@
 
             menu.innerHTML = lists.palettes.map(p => {
                 const previewCircles = p.colors.map(c => `
-                    <span class="w-3.5 h-3.5 rounded-full border border-slate-200 shadow-sm" style="background-color: ${c}"></span>
+                    <span class="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full border border-slate-200 shadow-sm" style="background-color: ${c}"></span>
                 `).join('');
 
                 return `
-                    <div class="combo-item px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 transition-colors cursor-pointer flex items-center justify-between border-b border-slate-50 last:border-0" data-value="${p.name}">
+                    <div class="combo-item px-3 md:px-4 py-3 text-[12px] md:text-sm font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 transition-colors cursor-pointer flex items-center justify-between border-b border-slate-50 last:border-0" data-value="${p.name}">
                         <span>${p.name}</span>
                         <div class="flex gap-1.5">${previewCircles}</div>
                     </div>
@@ -839,11 +887,11 @@
                     
                     document.querySelectorAll('.balance-btn').forEach(b => {
                         if(b.dataset.balance === state.balance) {
-                            b.className = "balance-btn py-3 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50";
+                            b.className = "balance-btn flex-1 py-3 px-2 rounded-xl font-bold text-[11px] flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-1 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50";
                             b.querySelector('span:first-child').className = "text-indigo-700";
                             b.querySelector('span:last-child').className = "text-[9px] font-medium text-indigo-400";
                         } else {
-                            b.className = "balance-btn py-3 px-1 rounded-xl font-bold text-[10px] sm:text-xs flex flex-col items-center justify-center gap-1 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent";
+                            b.className = "balance-btn flex-1 py-3 px-2 rounded-xl font-bold text-[11px] flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-1 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent";
                             b.querySelector('span:first-child').className = "text-slate-700";
                             b.querySelector('span:last-child').className = "text-[9px] font-medium text-slate-500";
                         }
@@ -884,19 +932,19 @@
             const container = document.getElementById('aspectRatio-container');
             container.innerHTML = lists.aspectRatios.map(ar => {
                 let boxClass = '';
-                if(ar.id === '1:1') boxClass = 'w-6 h-6';
-                else if(ar.id === '9:16') boxClass = 'w-4 h-8';
-                else if(ar.id === '4:5') boxClass = 'w-5 h-6';
-                else boxClass = 'w-8 h-4';
+                if(ar.id === '1:1') boxClass = 'w-5 h-5 md:w-6 md:h-6';
+                else if(ar.id === '9:16') boxClass = 'w-3.5 h-6 md:w-4 md:h-8';
+                else if(ar.id === '4:5') boxClass = 'w-4 h-5 md:w-5 md:h-6';
+                else boxClass = 'w-6 h-3.5 md:w-8 md:h-4';
 
                 return `
-                <button type="button" class="ar-btn p-2.5 rounded-xl border-2 text-left flex items-start gap-3 transition-all ${state.aspectRatio === ar.id ? 'border-indigo-500 bg-indigo-50/50 text-indigo-800 shadow-md' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:shadow-sm'}" data-id="${ar.id}">
-                    <div class="flex-shrink-0 flex items-center justify-center rounded border p-1 mt-0.5 ${state.aspectRatio === ar.id ? 'bg-white border-indigo-200 shadow-sm' : 'bg-slate-50 border-slate-200'}">
+                <button type="button" class="ar-btn p-2 md:p-2.5 rounded-xl border-2 text-left flex items-start gap-2 md:gap-3 transition-all ${state.aspectRatio === ar.id ? 'border-indigo-500 bg-indigo-50/50 text-indigo-800 shadow-md' : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:shadow-sm'}" data-id="${ar.id}">
+                    <div class="flex-shrink-0 flex items-center justify-center rounded border p-1 md:mt-0.5 ${state.aspectRatio === ar.id ? 'bg-white border-indigo-200 shadow-sm' : 'bg-slate-50 border-slate-200'}">
                         <div class="border-2 border-dashed ${boxClass} ${state.aspectRatio === ar.id ? 'border-indigo-400' : 'border-slate-300'} rounded-sm"></div>
                     </div>
-                    <div>
-                        <div class="text-xs font-bold block ${state.aspectRatio === ar.id ? 'text-indigo-700' : 'text-slate-800'}">${ar.label}</div>
-                        <span class="text-[9px] text-slate-500 block leading-tight font-medium mt-0.5">${ar.desc}</span>
+                    <div class="flex flex-col justify-center h-full">
+                        <div class="text-[11px] md:text-xs font-bold block ${state.aspectRatio === ar.id ? 'text-indigo-700' : 'text-slate-800'}">${ar.label}</div>
+                        <span class="text-[8px] md:text-[9px] text-slate-500 block leading-tight font-medium mt-0.5">${ar.desc}</span>
                     </div>
                 </button>
             `}).join('');
@@ -913,7 +961,7 @@
         // --- EVENT LISTENERS & UI UPDATES ---
         function attachEventListeners() {
             // Text Inputs
-            ['productName', 'productCategory', 'highlightTitle', 'goal', 'audience', 'colors', 'bgColor', 'elements', 'tagline', 'contact', 'socIg', 'socFb', 'socTiktok', 'markShopee', 'markTokped', 'markTiktok', 'footerColor'].forEach(key => {
+            ['productName', 'modelGender', 'modelAge', 'productCategory', 'highlightTitle', 'goal', 'audience', 'colors', 'bgColor', 'elements', 'tagline', 'contact', 'socIg', 'socFb', 'socTiktok', 'markShopee', 'markTokped', 'markTiktok', 'footerColor'].forEach(key => {
                 if(els[key]) {
                     els[key].addEventListener('input', (e) => {
                         state[key] = e.target.value;
@@ -963,9 +1011,9 @@
                             if (state.posterType === 'ucapan') accentColor = 'text-purple-600';
                             if (state.posterType === 'model') accentColor = 'text-pink-600';
                             
-                            b.className = `type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all bg-white ${accentColor} shadow-sm border border-slate-200/50`;
+                            b.className = `type-btn flex-1 py-3 px-2 rounded-xl font-bold text-[12px] md:text-[13px] flex items-center justify-center gap-2 transition-all bg-white ${accentColor} shadow-sm border border-slate-200/50`;
                         } else {
-                            b.className = `type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent`;
+                            b.className = `type-btn flex-1 py-3 px-2 rounded-xl font-bold text-[12px] md:text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent`;
                         }
                     });
                 });
@@ -1022,12 +1070,14 @@
                 els.labelGoal.innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5 text-slate-400"></i> Tujuan Promosi`;
                 els.labelAudience.innerHTML = `<i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i> Target Audiens`;
                 els.labelProdCat.innerHTML = `<i data-lucide="tag" class="w-3.5 h-3.5 text-slate-400"></i> Kategori Produk`;
+                els.labelBgColor.innerHTML = `<i data-lucide="image" class="w-3.5 h-3.5 text-slate-400"></i> Latar Belakang (Background)`;
                 
                 els.productName.placeholder = "Contoh: Kopi Susu Aren...";
                 els.goal.placeholder = "Flash Sale, Launching...";
                 els.audience.placeholder = "Mahasiswa, Ibu-ibu...";
                 els.productCategory.placeholder = "Ketik kategori...";
 
+                els.wrapperModelAttributes.classList.add('hidden');
                 els.wrapperProdCat.classList.remove('hidden');
                 els.wrapperProdName.classList.remove('md:col-span-2');
                 els.wrapperProdName.classList.add('md:col-span-1');
@@ -1042,11 +1092,13 @@
                 els.labelProdName.innerHTML = 'Nama Hari Raya / Event <span class="text-rose-500">*</span>';
                 els.labelGoal.innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5 text-slate-400"></i> Pesan Tambahan`;
                 els.labelAudience.innerHTML = `<i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i> Ditujukan / Dari`;
+                els.labelBgColor.innerHTML = `<i data-lucide="image" class="w-3.5 h-3.5 text-slate-400"></i> Latar Belakang (Background)`;
                 
                 els.productName.placeholder = "Contoh: Idul Fitri 1446 H...";
                 els.goal.placeholder = "Mohon maaf lahir batin...";
                 els.audience.placeholder = "Rekan kerja...";
 
+                els.wrapperModelAttributes.classList.add('hidden');
                 els.wrapperProdCat.classList.add('hidden');
                 els.wrapperProdName.classList.remove('md:col-span-1');
                 els.wrapperProdName.classList.add('md:col-span-2');
@@ -1063,12 +1115,14 @@
                 els.labelGoal.innerHTML = `<i data-lucide="sun" class="w-3.5 h-3.5 text-slate-400"></i> Pencahayaan (Lighting)`;
                 els.labelAudience.innerHTML = `<i data-lucide="camera" class="w-3.5 h-3.5 text-slate-400"></i> Sudut Kamera (Angle)`;
                 els.labelProdCat.innerHTML = `<i data-lucide="user" class="w-3.5 h-3.5 text-slate-400"></i> Gaya Fotografi`;
+                els.labelBgColor.innerHTML = `<i data-lucide="image" class="w-3.5 h-3.5 text-slate-400"></i> Latar Belakang (Kustom/Warna)`;
                 
-                els.productName.placeholder = "Contoh: Wanita Asia usia 25 bergaun merah...";
+                els.productName.placeholder = "Contoh: Wanita Asia bergaun merah...";
                 els.goal.placeholder = "Studio lighting, Cinematic...";
                 els.audience.placeholder = "Close-up, Full Body...";
                 els.productCategory.placeholder = "Pilih gaya foto...";
 
+                els.wrapperModelAttributes.classList.remove('hidden');
                 els.wrapperProdCat.classList.remove('hidden');
                 els.wrapperProdName.classList.remove('md:col-span-2');
                 els.wrapperProdName.classList.add('md:col-span-1');
@@ -1103,7 +1157,7 @@
             const previewEl = document.getElementById('color-preview');
             const matched = lists.palettes.find(p => p.name === state.colors);
             if(matched) {
-                previewEl.innerHTML = matched.colors.map(c => `<span class="w-3.5 h-3.5 rounded-full border border-slate-200 shadow-sm" style="background-color: ${c}"></span>`).join('');
+                previewEl.innerHTML = matched.colors.map(c => `<span class="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full border border-slate-200 shadow-sm" style="background-color: ${c}"></span>`).join('');
                 previewEl.classList.remove('hidden');
             } else {
                 previewEl.classList.add('hidden');
@@ -1122,7 +1176,7 @@
 
         function resetForm() {
             state = {
-                posterType: 'promosi', productName: '', productCategory: '', highlightTitle: '', balance: '50-50', goal: '', audience: '', theme: 'Minimalis Modern', colors: 'Hitam & Emas (Eksklusif)', bgColor: 'Putih Bersih (Clean White)', elements: '', aspectRatio: '1:1',
+                posterType: 'promosi', productName: '', modelGender: '', modelAge: '', productCategory: '', highlightTitle: '', balance: '50-50', goal: '', audience: '', theme: 'Minimalis Modern', colors: 'Hitam & Emas (Eksklusif)', bgColor: 'Putih Bersih (Clean White)', elements: '', aspectRatio: '1:1',
                 useFooter: false, tagline: '', contact: '', socIg: '', socFb: '', socTiktok: '', markShopee: '', markTokped: '', markTiktok: '', footerColorType: 'monotone', footerColor: '#1e293b',
                 imgProduct: null, imgBrand: null, imgStore: null
             };
@@ -1173,11 +1227,11 @@
             const btnText = document.getElementById('btn-tab-text');
 
             if(tab === 'image') {
-                btnImg.className = "flex-1 py-3 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl bg-white text-indigo-600 shadow-sm border border-slate-200/50";
-                btnText.className = "flex-1 py-3 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent";
+                btnImg.className = "py-3 text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-colors rounded-xl bg-white text-indigo-600 shadow-sm border border-slate-200/50";
+                btnText.className = "py-3 text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-colors rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent";
             } else {
-                btnText.className = "flex-1 py-3 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl bg-white text-purple-600 shadow-sm border border-slate-200/50";
-                btnImg.className = "flex-1 py-3 text-xs font-bold flex items-center justify-center gap-2 transition-colors rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent";
+                btnText.className = "py-3 text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-colors rounded-xl bg-white text-purple-600 shadow-sm border border-slate-200/50";
+                btnImg.className = "py-3 text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1.5 transition-colors rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent";
             }
         }
 
@@ -1220,14 +1274,23 @@
                 canvasBg.style.backgroundColor = currentBgStyle;
             }
 
-            // Aspect ratio sizing
+            // Aspect ratio sizing fix for mobile scaling
             document.getElementById('preview-ar-badge').textContent = `AR ${state.aspectRatio}`;
             const frame = document.getElementById('preview-frame');
-            frame.className = `transition-all duration-300 flex items-center justify-center bg-slate-100 border border-slate-200 rounded-2xl relative shadow-inner overflow-hidden p-3 ${
-                state.aspectRatio === '1:1' ? 'w-64 h-64' :
-                state.aspectRatio === '9:16' ? 'w-44 h-72' :
-                state.aspectRatio === '4:5' ? 'w-56 h-70' : 'w-72 h-44'
-            }`;
+            
+            if(state.aspectRatio === '1:1') {
+                frame.style.aspectRatio = '1 / 1';
+                frame.style.maxWidth = '280px';
+            } else if (state.aspectRatio === '9:16') {
+                frame.style.aspectRatio = '9 / 16';
+                frame.style.maxWidth = '200px';
+            } else if (state.aspectRatio === '4:5') {
+                frame.style.aspectRatio = '4 / 5';
+                frame.style.maxWidth = '240px';
+            } else if (state.aspectRatio === '16:9') {
+                frame.style.aspectRatio = '16 / 9';
+                frame.style.maxWidth = '320px';
+            }
 
             // Adapt Text Colors dynamically based on Background
             const previewCategory = document.getElementById('preview-category');
@@ -1238,7 +1301,12 @@
 
             if (isModel) {
                 document.getElementById('preview-category').textContent = state.productCategory || 'GAYA FOTOGRAFI';
-                document.getElementById('preview-title').textContent = state.productName ? `MODEL: ${state.productName}` : 'SUBJEK / KARAKTER';
+                
+                let agePreview = state.modelAge && state.modelAge !== 'Bebas/Tidak Spesifik' ? `, ${state.modelAge.split(' ')[0]}` : '';
+                let genderPreview = state.modelGender && state.modelGender !== 'Bebas/Tidak Spesifik' ? ` (${state.modelGender})` : '';
+                let subjectPreview = state.productName ? `${state.productName}${genderPreview}${agePreview}` : `SUBJEK FOTO${genderPreview}${agePreview}`;
+                document.getElementById('preview-title').textContent = subjectPreview;
+                
                 document.getElementById('preview-theme').textContent = `[Style: ${state.theme}]`;
             } else {
                 document.getElementById('preview-category').textContent = state.productCategory || (state.posterType === 'promosi' ? 'KATEGORI PRODUK' : 'KATEGORI EVENT');
@@ -1251,37 +1319,37 @@
             const categoryArea = document.getElementById('preview-category-area');
 
             if (isLightBg) {
-                previewCategory.className = "text-[8px] tracking-widest text-indigo-600 uppercase font-bold block";
+                previewCategory.className = "text-[7px] md:text-[8px] tracking-widest text-indigo-600 uppercase font-bold block break-words";
                 if (state.balance === '80-20' || isModel) { // Models always have minimal text interference
                     textLines.classList.add('hidden');
                     categoryArea.classList.add('hidden');
-                    previewTitle.className = "text-[10px] font-bold text-slate-800 leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-sm";
+                    previewTitle.className = "text-[10px] font-bold text-slate-800 leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-sm break-words px-2 w-full";
                 } else if (state.balance === '20-80') {
                     textLines.classList.remove('hidden');
                     categoryArea.classList.remove('hidden');
-                    previewTitle.className = "text-sm font-extrabold text-slate-900 leading-none uppercase tracking-wider line-clamp-2 drop-shadow-sm";
+                    previewTitle.className = "text-sm font-extrabold text-slate-900 leading-none uppercase tracking-wider line-clamp-2 drop-shadow-sm break-words px-2 w-full";
                 } else {
                     textLines.classList.add('hidden');
                     categoryArea.classList.remove('hidden');
-                    previewTitle.className = "text-xs font-extrabold text-slate-900 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm";
+                    previewTitle.className = "text-xs font-extrabold text-slate-900 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm break-words px-2 w-full";
                 }
-                previewTheme.className = "text-[8px] text-slate-500 mt-1 max-w-[80%] mx-auto truncate font-medium";
+                previewTheme.className = "text-[7px] md:text-[8px] text-slate-500 mt-1 max-w-[90%] mx-auto truncate font-medium";
             } else {
-                previewCategory.className = "text-[8px] tracking-widest text-indigo-300 uppercase font-bold block";
+                previewCategory.className = "text-[7px] md:text-[8px] tracking-widest text-indigo-300 uppercase font-bold block break-words";
                 if (state.balance === '80-20' || isModel) {
                     textLines.classList.add('hidden');
                     categoryArea.classList.add('hidden');
-                    previewTitle.className = "text-[10px] font-bold text-white leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-md";
+                    previewTitle.className = "text-[10px] font-bold text-white leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-md break-words px-2 w-full";
                 } else if (state.balance === '20-80') {
                     textLines.classList.remove('hidden');
                     categoryArea.classList.remove('hidden');
-                    previewTitle.className = "text-sm font-extrabold text-white leading-none uppercase tracking-wider line-clamp-2 drop-shadow-md";
+                    previewTitle.className = "text-sm font-extrabold text-white leading-none uppercase tracking-wider line-clamp-2 drop-shadow-md break-words px-2 w-full";
                 } else {
                     textLines.classList.add('hidden');
                     categoryArea.classList.remove('hidden');
-                    previewTitle.className = "text-xs font-extrabold text-white leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-md";
+                    previewTitle.className = "text-xs font-extrabold text-white leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-md break-words px-2 w-full";
                 }
-                previewTheme.className = "text-[8px] text-slate-400 mt-1 max-w-[80%] mx-auto truncate font-medium";
+                previewTheme.className = "text-[7px] md:text-[8px] text-slate-400 mt-1 max-w-[90%] mx-auto truncate font-medium";
             }
 
             // Update Upload Indicators in Preview
@@ -1362,16 +1430,20 @@
 
             if (isModel) {
                 // FOTO MODEL LOGIC
-                const subject = state.productName || '[Subjek Foto]';
+                let subjectDesc = state.productName || '[Subjek Foto]';
+                let ageStr = state.modelAge && state.modelAge !== "Bebas/Tidak Spesifik" ? `, ${state.modelAge}` : '';
+                let genderStr = state.modelGender && state.modelGender !== "Bebas/Tidak Spesifik" ? ` (${state.modelGender})` : '';
+                
+                const finalSubject = `${subjectDesc}${genderStr}${ageStr}`;
                 const style = state.productCategory || 'Professional Portrait';
                 const lighting = state.goal || 'Studio Lighting';
                 const shot = state.audience || 'Medium Shot';
                 
-                imgPrompt = `A high-end, professional magazine editorial photography of ${subject}. \nPhotography Style/Theme: ${style}. \nShot Type/Camera Angle: ${shot}. \nLighting: ${lighting}. \nColor Palette: ${safeColors}. \nBackground: ${safeBgColor}. \nAdditional Attire/Details: ${safeElements}. ${uploadReferencesNoticeImage}\nShot on 85mm lens, f/1.8, extremely detailed, highly realistic texture, 8k resolution, photorealistic masterpiece. \n--ar ${state.aspectRatio.replace(':', ':')} --style raw --v 6.0`;
+                imgPrompt = `A high-end, professional magazine editorial photography of ${finalSubject}. \nPhotography Style/Theme: ${style}. \nShot Type/Camera Angle: ${shot}. \nLighting: ${lighting}. \nColor Palette: ${safeColors}. \nBackground: ${safeBgColor}. \nAdditional Attire/Details: ${safeElements}. ${uploadReferencesNoticeImage}\nShot on 85mm lens, f/1.8, extremely detailed, highly realistic texture, 8k resolution, photorealistic masterpiece. \n--ar ${state.aspectRatio.replace(':', ':')} --style raw --v 6.0`;
 
                 const txtStructure = `1. [HEADLINE / CATCHPHRASE]: Kalimat pembuka yang memikat dan estetik (maks 6 kata).\n2. [CAPTION / DESKRIPSI]: Deskripsi editorial yang anggun dan sesuai dengan suasana foto (1-2 paragraf pendek).\n3. [HASHTAGS]: 5-7 hashtag relevan dan populer di Instagram (contoh: #FashionEditorial #OOTD).`;
 
-                txtPrompt = `Bertindaklah sebagai Manajer Media Sosial dan Copywriter Fashion/Editorial kelas dunia. \nTolong buatkan caption editorial Instagram / Majalah untuk mendampingi sebuah karya foto model dengan detail berikut:\n\n- Subjek Foto: ${subject}\n- Gaya / Tema Visual: ${style}\n- Pencahayaan / Mood: ${lighting}\n- Angle Kamera: ${shot}\n- Warna Dominan: ${safeColors}\n- Detail Pakaian/Latar: ${safeElements}${uploadReferencesNoticeText}\n\nMohon berikan struktur copy berikut:\n${txtStructure}\n\nGunakan nada bahasa yang elegan, modern, artistik dan sangat memikat.`;
+                txtPrompt = `Bertindaklah sebagai Manajer Media Sosial dan Copywriter Fashion/Editorial kelas dunia. \nTolong buatkan caption editorial Instagram / Majalah untuk mendampingi sebuah karya foto model dengan detail berikut:\n\n- Subjek Foto: ${finalSubject}\n- Gaya / Tema Visual: ${style}\n- Pencahayaan / Mood: ${lighting}\n- Angle Kamera: ${shot}\n- Warna Dominan: ${safeColors}\n- Latar Belakang: ${safeBgColor}\n- Detail Pakaian/Atribut: ${safeElements}${uploadReferencesNoticeText}\n\nMohon berikan struktur copy berikut:\n${txtStructure}\n\nGunakan nada bahasa yang elegan, modern, artistik dan sangat memikat.`;
 
             } else {
                 // POSTER PROMOSI / UCAPAN LOGIC
@@ -1468,7 +1540,8 @@
             btnGen.innerHTML = origHtml;
             lucide.createIcons();
 
-            document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'end' });
+            // Smoothly scroll down specifically on mobile
+            document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // --- COMPOSITE IMAGE GENERATOR ---
