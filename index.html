@@ -40,7 +40,7 @@
         <!-- Header -->
         <header class="relative text-center space-y-4 pt-6 pb-2">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-indigo-100 shadow-sm rounded-full text-indigo-600 text-xs font-bold tracking-wide">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v3.0
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v3.5 (With Image Sync)
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-none">
                 Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Poster Prompt</span> Builder
@@ -242,6 +242,58 @@
                         </div>
                     </div>
 
+                    <!-- IMAGE UPLOADS: Product / Brand / Store -->
+                    <div class="pt-5 border-t border-slate-100">
+                        <div class="flex justify-between items-end mb-3">
+                            <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                                <i data-lucide="upload-cloud" class="w-3.5 h-3.5 text-indigo-500"></i> Referensi Visual Gambar (Opsional)
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <!-- Product Image -->
+                            <div class="relative group">
+                                <input type="file" id="upload-product" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                                <div id="preview-box-product" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
+                                    <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
+                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Gambar Produk</span>
+                                </div>
+                                <button type="button" id="remove-product" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
+                                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Brand Logo -->
+                            <div class="relative group">
+                                <input type="file" id="upload-brand" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                                <div id="preview-box-brand" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
+                                    <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
+                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Logo Merk / Brand</span>
+                                </div>
+                                <button type="button" id="remove-brand" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
+                                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Store/Company Logo -->
+                            <div class="relative group">
+                                <input type="file" id="upload-store" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                                <div id="preview-box-store" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
+                                    <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
+                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Logo Toko / PT</span>
+                                </div>
+                                <button type="button" id="remove-store" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
+                                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-2.5 bg-blue-50/50 border border-blue-100 rounded-lg p-2.5 flex items-start gap-2">
+                            <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0"></i>
+                            <p class="text-[10px] text-blue-800 font-medium leading-relaxed">
+                                <strong class="text-blue-900">Kolase Otomatis:</strong> Gambar yang diunggah akan digabungkan menjadi satu gambar referensi. Saat Anda menekan tombol <strong>Salin Prompt</strong>, gambar referensi ini akan <span class="underline">ikut tersalin (Clipboard)</span> bersama teks untuk ditempel/paste di ChatGPT atau Discord!
+                            </p>
+                        </div>
+                    </div>
+
                     <!-- Footer Section Toggle -->
                     <div class="border border-slate-200 bg-slate-50/50 rounded-2xl overflow-hidden transition-all shadow-sm">
                         <label class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-100/50 transition-colors">
@@ -370,7 +422,13 @@
                             </div>
 
                             <!-- Main Visual / Texts layout based on balance -->
-                            <div class="my-auto relative z-10 px-1 w-full flex flex-col justify-center">
+                            <div class="my-auto relative z-10 px-1 w-full flex flex-col justify-center items-center">
+                                <!-- Upload Indicators in preview -->
+                                <div id="preview-uploads-indicator" class="flex gap-1 justify-center mb-1.5 hidden">
+                                    <div id="p-ind-prod" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
+                                    <div id="p-ind-brand" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
+                                    <div id="p-ind-store" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
+                                </div>
                                 <h3 id="preview-title" class="text-xs font-extrabold text-slate-800 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm">
                                     JUDUL UTAMA POSTER
                                 </h3>
@@ -379,7 +437,7 @@
                                 </p>
                                 
                                 <!-- Mock information lines for 20-80 mode -->
-                                <div id="preview-text-lines" class="hidden mt-3 space-y-1.5 max-w-[90%] mx-auto p-1.5 bg-black/5 rounded border border-black/5 text-[5px] text-slate-500">
+                                <div id="preview-text-lines" class="hidden mt-3 space-y-1.5 w-full max-w-[90%] mx-auto p-1.5 bg-black/5 rounded border border-black/5 text-[5px] text-slate-500">
                                     <div class="h-1 bg-black/20 rounded w-11/12 mx-auto"></div>
                                     <div class="h-1 bg-black/20 rounded w-full mx-auto"></div>
                                     <div class="h-1 bg-black/20 rounded w-9/12 mx-auto"></div>
@@ -424,10 +482,13 @@
                                 <span>Salin instruksi ini dan tempel (paste) ke <strong>Midjourney, DALL-E, atau Gemini Gambar</strong>.</span>
                             </div>
                             <div class="relative flex-grow">
-                                <textarea id="output-image" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-48 p-4 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 selection:bg-indigo-100"></textarea>
+                                <textarea id="output-image" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-48 p-4 pr-12 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 selection:bg-indigo-100"></textarea>
+                                <button id="btn-floating-copy-image" class="hidden absolute top-3 right-3 p-2 bg-white border border-slate-200 text-slate-400 rounded-lg shadow-sm hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-all z-10" title="Salin Prompt">
+                                    <i data-lucide="copy" class="w-4 h-4" id="icon-floating-copy-image"></i>
+                                </button>
                             </div>
-                            <button id="btn-copy-image" disabled class="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed">
-                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-image"></i> <span id="text-copy-image">Salin Prompt Gambar AI</span>
+                            <button id="btn-copy-image" disabled class="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed relative overflow-hidden group">
+                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-image"></i> <span id="text-copy-image">Salin Prompt + Gambar Referensi</span>
                             </button>
                         </div>
                     </div>
@@ -440,10 +501,13 @@
                                 <span>Tempel (paste) prompt ini ke <strong>ChatGPT atau Claude</strong> untuk mendapatkan kerangka copywriting yang memikat.</span>
                             </div>
                             <div class="relative flex-grow">
-                                <textarea id="output-text" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-48 p-4 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-purple-500/10 focus:border-purple-500 selection:bg-purple-100"></textarea>
+                                <textarea id="output-text" readonly placeholder="Silakan ketik detail di panel kiri, lalu klik 'Buatkan Formula Prompt'." class="w-full h-48 p-4 pr-12 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 outline-none resize-none font-mono text-xs leading-relaxed focus:bg-white focus:ring-4 focus:ring-purple-500/10 focus:border-purple-500 selection:bg-purple-100"></textarea>
+                                <button id="btn-floating-copy-text" class="hidden absolute top-3 right-3 p-2 bg-white border border-slate-200 text-slate-400 rounded-lg shadow-sm hover:bg-purple-50 hover:text-purple-600 hover:border-purple-200 transition-all z-10" title="Salin Prompt">
+                                    <i data-lucide="copy" class="w-4 h-4" id="icon-floating-copy-text"></i>
+                                </button>
                             </div>
-                            <button id="btn-copy-text" disabled class="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed">
-                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-text"></i> <span id="text-copy-text">Salin Prompt Teks Copy</span>
+                            <button id="btn-copy-text" disabled class="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed relative overflow-hidden group">
+                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-text"></i> <span id="text-copy-text">Salin Prompt + Gambar Referensi</span>
                             </button>
                         </div>
                     </div>
@@ -461,12 +525,12 @@
             productName: '',
             productCategory: '',
             highlightTitle: '',
-            balance: '50-50', // Visual vs Text Balance field
+            balance: '50-50', 
             goal: '',
             audience: '',
             theme: 'Minimalis Modern',
             colors: 'Hitam & Emas (Eksklusif)',
-            bgColor: 'Putih Bersih (Clean White)', // New Background field
+            bgColor: 'Putih Bersih (Clean White)',
             elements: '',
             aspectRatio: '1:1',
             useFooter: false,
@@ -479,7 +543,12 @@
             markTokped: '',
             markTiktok: '',
             footerColorType: 'monotone',
-            footerColor: '#1e293b'
+            footerColor: '#1e293b',
+            
+            // Image References Upload
+            imgProduct: null,
+            imgBrand: null,
+            imgStore: null
         };
 
         const lists = {
@@ -559,11 +628,13 @@
             renderAspectRatios();
             setupCustomCombobox('combo-productCategory', lists.productCategories);
             setupCustomCombobox('combo-audience', lists.audience);
-            setupCustomCombobox('combo-bgColor', lists.bgColors); // Init new Bg Combo
+            setupCustomCombobox('combo-bgColor', lists.bgColors);
             setupColorsCombobox();
             setupBalanceSelector();
             updateDynamicSelects();
             
+            setupImageUploads();
+
             attachEventListeners();
             lucide.createIcons();
             updateUI();
@@ -616,7 +687,6 @@
             });
         }
 
-        // Custom Dropdown specifically for colors with rich palette previews
         function setupColorsCombobox() {
             const wrapper = document.getElementById('combo-colors');
             const input = document.getElementById('colors');
@@ -660,6 +730,61 @@
                     checkColorPreview();
                     updateLivePreview();
                 });
+            });
+        }
+
+        // --- Image Upload Logics ---
+        function setupImageUploads() {
+            handleSingleUpload('upload-product', 'preview-box-product', 'remove-product', 'imgProduct');
+            handleSingleUpload('upload-brand', 'preview-box-brand', 'remove-brand', 'imgBrand');
+            handleSingleUpload('upload-store', 'preview-box-store', 'remove-store', 'imgStore');
+        }
+
+        function handleSingleUpload(inputId, previewBoxId, removeBtnId, stateKey) {
+            const input = document.getElementById(inputId);
+            const previewBox = document.getElementById(previewBoxId);
+            const removeBtn = document.getElementById(removeBtnId);
+
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const dataUrl = event.target.result;
+                        state[stateKey] = dataUrl;
+                        
+                        previewBox.style.backgroundImage = `url(${dataUrl})`;
+                        previewBox.style.backgroundSize = 'contain';
+                        previewBox.style.backgroundRepeat = 'no-repeat';
+                        previewBox.style.backgroundPosition = 'center';
+                        
+                        // Hide internal icon and text
+                        previewBox.querySelector('i').classList.add('hidden');
+                        previewBox.querySelector('span').classList.add('hidden');
+                        
+                        // Show remove btn
+                        removeBtn.classList.remove('hidden');
+                        input.classList.add('hidden'); // Disable click
+                        
+                        updateLivePreview();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                state[stateKey] = null;
+                input.value = '';
+                previewBox.style.backgroundImage = 'none';
+                
+                previewBox.querySelector('i').classList.remove('hidden');
+                previewBox.querySelector('span').classList.remove('hidden');
+                
+                removeBtn.classList.add('hidden');
+                input.classList.remove('hidden');
+                
+                updateLivePreview();
             });
         }
 
@@ -813,8 +938,12 @@
 
             document.getElementById('btn-reset').addEventListener('click', resetForm);
             els.btnGenerate.addEventListener('click', generatePrompts);
-            document.getElementById('btn-copy-image').addEventListener('click', () => copyToClipboard('image'));
-            document.getElementById('btn-copy-text').addEventListener('click', () => copyToClipboard('text'));
+            document.getElementById('btn-copy-image').addEventListener('click', () => copyToClipboardWithImage('image'));
+            document.getElementById('btn-copy-text').addEventListener('click', () => copyToClipboardWithImage('text'));
+            
+            // Listener untuk tombol salin melayang (Floating button)
+            document.getElementById('btn-floating-copy-image').addEventListener('click', () => copyToClipboardWithImage('image'));
+            document.getElementById('btn-floating-copy-text').addEventListener('click', () => copyToClipboardWithImage('text'));
         }
 
         function updateUI() {
@@ -883,7 +1012,8 @@
         function resetForm() {
             state = {
                 posterType: 'promosi', productName: '', productCategory: '', highlightTitle: '', balance: '50-50', goal: '', audience: '', theme: 'Minimalis Modern', colors: 'Hitam & Emas (Eksklusif)', bgColor: 'Putih Bersih (Clean White)', elements: '', aspectRatio: '1:1',
-                useFooter: false, tagline: '', contact: '', socIg: '', socFb: '', socTiktok: '', markShopee: '', markTokped: '', markTiktok: '', footerColorType: 'monotone', footerColor: '#1e293b'
+                useFooter: false, tagline: '', contact: '', socIg: '', socFb: '', socTiktok: '', markShopee: '', markTokped: '', markTiktok: '', footerColorType: 'monotone', footerColor: '#1e293b',
+                imgProduct: null, imgBrand: null, imgStore: null
             };
             
             Object.keys(els).forEach(key => {
@@ -895,12 +1025,20 @@
             if(els.colorsPicker) els.colorsPicker.value = '#fbbf24';
             if(els.bgColorPicker) els.bgColorPicker.value = '#ffffff';
             
+            // Clear Upload Previews
+            ['product', 'brand', 'store'].forEach(key => {
+                document.getElementById(`remove-${key}`).click();
+            });
+            
             document.getElementById('output-image').value = '';
             document.getElementById('output-text').value = '';
             document.getElementById('btn-copy-image').disabled = true;
-            document.getElementById('btn-copy-image').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed";
+            document.getElementById('btn-copy-image').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed relative overflow-hidden group";
             document.getElementById('btn-copy-text').disabled = true;
-            document.getElementById('btn-copy-text').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed";
+            document.getElementById('btn-copy-text').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed relative overflow-hidden group";
+            
+            document.getElementById('btn-floating-copy-image').classList.add('hidden');
+            document.getElementById('btn-floating-copy-text').classList.add('hidden');
             
             const targetBtn = document.querySelector('[data-balance="50-50"]');
             if(targetBtn) targetBtn.click();
@@ -1023,6 +1161,27 @@
                 previewTheme.className = "text-[8px] text-slate-400 mt-1 max-w-[80%] mx-auto truncate font-medium";
             }
 
+            // Update Upload Indicators in Preview
+            const uploadIndicator = document.getElementById('preview-uploads-indicator');
+            const indProd = document.getElementById('p-ind-prod');
+            const indBrand = document.getElementById('p-ind-brand');
+            const indStore = document.getElementById('p-ind-store');
+            
+            if(state.imgProduct || state.imgBrand || state.imgStore) {
+                uploadIndicator.classList.remove('hidden');
+                
+                if(state.imgProduct) { indProd.style.backgroundImage = `url(${state.imgProduct})`; indProd.classList.remove('hidden'); }
+                else indProd.classList.add('hidden');
+                
+                if(state.imgBrand) { indBrand.style.backgroundImage = `url(${state.imgBrand})`; indBrand.classList.remove('hidden'); }
+                else indBrand.classList.add('hidden');
+                
+                if(state.imgStore) { indStore.style.backgroundImage = `url(${state.imgStore})`; indStore.classList.remove('hidden'); }
+                else indStore.classList.add('hidden');
+            } else {
+                uploadIndicator.classList.add('hidden');
+            }
+
             const footerEl = document.getElementById('preview-footer');
             const noFooterEl = document.getElementById('preview-no-footer');
             
@@ -1063,6 +1222,19 @@
             const highlightImgInstruction = state.highlightTitle ? ` Prominently feature bold, stylish typography displaying the text: "${state.highlightTitle}".` : '';
             const highlightTxtInstruction = state.highlightTitle ? `- Judul / Teks Wajib Highlight: "${state.highlightTitle}"\n` : '';
 
+            // Incorporating Upload References context into the prompt
+            let uploadReferencesNoticeImage = '';
+            let uploadReferencesNoticeText = '';
+            if(state.imgProduct || state.imgBrand || state.imgStore) {
+                let items = [];
+                if(state.imgProduct) items.push('Product Item');
+                if(state.imgBrand) items.push('Brand Logo');
+                if(state.imgStore) items.push('Store Logo');
+                
+                uploadReferencesNoticeImage = `\n[IMPORTANT: Incorporate the design elements/style from the attached reference collage image (${items.join(', ')}) accurately into the visual.]`;
+                uploadReferencesNoticeText = `\n- Referensi Visual: (Saya telah melampirkan gambar referensi yang berisi ${items.join(' & ')}. Mohon jadikan ini sebagai acuan warna atau konteks produk/logo).`;
+            }
+
             let balanceImgDetail = '';
             let balanceTxtDetail = '';
             
@@ -1092,7 +1264,7 @@
                 footerImageInstruction = `Include a clear, distinct footer area at the bottom using ${colorDesc} with negative space specifically reserved for tagline, contact, and social media text.${iconText}`;
             }
 
-            const imgPrompt = `A high-quality, professional ${typeName} design for "${safeProduct}"${isPromo ? ` (Category: ${safeCategory})` : ''}.${highlightImgInstruction} \nComposition: ${balanceImgDetail}\nVisual style: ${state.theme}. \nMain Color scheme: ${safeColors}. \nBackground Color/Style: ${safeBgColor}. \nKey visual elements to include: ${safeElements}. \nThe overall mood should feel designed to achieve ${safeGoal} and strongly appeal to ${safeAudience}. \nInclude clean, negative space for typography layout. ${footerImageInstruction}\nMasterpiece, highly detailed, visually striking, 8k resolution, commercial photography style. \n--ar ${state.aspectRatio.replace(':', ':')} --v 6.0`;
+            const imgPrompt = `A high-quality, professional ${typeName} design for "${safeProduct}"${isPromo ? ` (Category: ${safeCategory})` : ''}.${highlightImgInstruction} \nComposition: ${balanceImgDetail}\nVisual style: ${state.theme}. \nMain Color scheme: ${safeColors}. \nBackground Color/Style: ${safeBgColor}. \nKey visual elements to include: ${safeElements}. \nThe overall mood should feel designed to achieve ${safeGoal} and strongly appeal to ${safeAudience}. \nInclude clean, negative space for typography layout. ${footerImageInstruction}${uploadReferencesNoticeImage}\nMasterpiece, highly detailed, visually striking, 8k resolution, commercial photography style. \n--ar ${state.aspectRatio.replace(':', ':')} --v 6.0`;
 
             let footerTextInstruction = '';
             if (state.useFooter) {
@@ -1111,54 +1283,182 @@
             const promoStructure = `1. [HEADLINE]: Sangat singkat (maksimal 5 kata), memikat, dan *punchy*.\n2. [SUB-HEADLINE]: Penjelasan singkat dari penawaran/produk (1-2 kalimat, opsional).\n3. [BODY TEXT / BULLET POINTS]: Maksimal 3 poin keunggulan utama atau detail penawaran. Buat padat dan jelas.\n4. [CALL TO ACTION / CTA]: Kalimat ajakan bertindak yang kuat dan mendesak (contoh: "Beli Sekarang", "Klaim Diskon", dll).`;
             const greetingStructure = `1. [HEADLINE UCAPAN]: Besar, hangat, dan relevan (contoh: "Selamat Hari Raya...").\n2. [PESAN / DOA]: 1-2 kalimat pesan hangat, harapan, atau doa yang tulus.\n3. [DARI / PENGIRIM]: "Salam hangat dari..." atau nama entitas yang merayakan.`;
 
-            const txtPrompt = `Bertindaklah sebagai Copywriter Profesional kelas dunia. \nTolong buatkan teks copywriting untuk ${typeNameID} dengan detail berikut:\n\n- ${isPromo ? 'Nama Produk/Layanan' : 'Nama Hari Raya/Event'}: ${safeProduct}\n${isPromo ? `- Kategori Produk: ${safeCategory}\n` : ''}${highlightTxtInstruction}- ${isPromo ? 'Tujuan Promosi' : 'Pesan Khusus/Tujuan'}: ${safeGoal}\n- ${isPromo ? 'Target Audiens' : 'Ditujukan Kepada'}: ${safeAudience}\n- Tema Visual Poster: ${state.theme} (Dominasi warna: ${safeColors})\n- Tema Latar Background: ${safeBgColor}\n${balanceTxtDetail}\n\nMohon berikan struktur copy berikut:\n${isPromo ? promoStructure : greetingStructure}${footerTextInstruction}\n\nGunakan nada bahasa yang persuasif, natural, dan sangat relevan dengan audiens (${safeAudience}). Jangan menggunakan bahasa yang terlalu kaku.`;
+            const txtPrompt = `Bertindaklah sebagai Copywriter Profesional kelas dunia. \nTolong buatkan teks copywriting untuk ${typeNameID} dengan detail berikut:\n\n- ${isPromo ? 'Nama Produk/Layanan' : 'Nama Hari Raya/Event'}: ${safeProduct}\n${isPromo ? `- Kategori Produk: ${safeCategory}\n` : ''}${highlightTxtInstruction}- ${isPromo ? 'Tujuan Promosi' : 'Pesan Khusus/Tujuan'}: ${safeGoal}\n- ${isPromo ? 'Target Audiens' : 'Ditujukan Kepada'}: ${safeAudience}\n- Tema Visual Poster: ${state.theme} (Dominasi warna: ${safeColors})\n- Tema Latar Background: ${safeBgColor}\n${balanceTxtDetail}${uploadReferencesNoticeText}\n\nMohon berikan struktur copy berikut:\n${isPromo ? promoStructure : greetingStructure}${footerTextInstruction}\n\nGunakan nada bahasa yang persuasif, natural, dan sangat relevan dengan audiens (${safeAudience}). Jangan menggunakan bahasa yang terlalu kaku.`;
 
             document.getElementById('output-image').value = imgPrompt;
             document.getElementById('output-text').value = txtPrompt;
 
             document.getElementById('btn-copy-image').disabled = false;
-            document.getElementById('btn-copy-image').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 active:scale-[0.98] cursor-pointer shadow-sm";
+            document.getElementById('btn-copy-image').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 active:scale-[0.98] cursor-pointer shadow-sm relative overflow-hidden group";
             
             document.getElementById('btn-copy-text').disabled = false;
-            document.getElementById('btn-copy-text').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-purple-50 text-purple-600 hover:bg-purple-100 border border-purple-200 active:scale-[0.98] cursor-pointer shadow-sm";
+            document.getElementById('btn-copy-text').className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-purple-50 text-purple-600 hover:bg-purple-100 border border-purple-200 active:scale-[0.98] cursor-pointer shadow-sm relative overflow-hidden group";
+
+            document.getElementById('btn-floating-copy-image').classList.remove('hidden');
+            document.getElementById('btn-floating-copy-text').classList.remove('hidden');
 
             document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
 
-        async function copyToClipboard(type) {
+        // --- COMPOSITE IMAGE GENERATOR ---
+        function getCompositeImageBlob() {
+            return new Promise((resolve) => {
+                const imagesToDraw = [];
+                if (state.imgProduct) imagesToDraw.push({ src: state.imgProduct, label: 'Produk' });
+                if (state.imgBrand) imagesToDraw.push({ src: state.imgBrand, label: 'Merk/Brand' });
+                if (state.imgStore) imagesToDraw.push({ src: state.imgStore, label: 'Toko/Instansi' });
+
+                if (imagesToDraw.length === 0) {
+                    resolve(null);
+                    return;
+                }
+
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const boxSize = 400;
+                
+                canvas.width = imagesToDraw.length * boxSize;
+                canvas.height = boxSize + 60;
+
+                // Fill background
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                let loadedCount = 0;
+
+                imagesToDraw.forEach((imgObj, index) => {
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous"; // just in case
+                    img.onload = () => {
+                        // Draw scaled image into its grid box
+                        const scale = Math.min((boxSize - 40) / img.width, (boxSize - 40) / img.height);
+                        const w = img.width * scale;
+                        const h = img.height * scale;
+                        const x = (index * boxSize) + (boxSize - w) / 2;
+                        const y = (boxSize - h) / 2;
+                        
+                        ctx.drawImage(img, x, y, w, h);
+
+                        // Draw Label
+                        ctx.fillStyle = '#1e293b';
+                        ctx.font = 'bold 22px Inter, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(imgObj.label, (index * boxSize) + (boxSize / 2), boxSize + 30);
+
+                        loadedCount++;
+                        if (loadedCount === imagesToDraw.length) {
+                            canvas.toBlob((blob) => {
+                                resolve(blob);
+                            }, 'image/png');
+                        }
+                    };
+                    img.onerror = () => {
+                        loadedCount++;
+                        if (loadedCount === imagesToDraw.length) resolve(null);
+                    }
+                    img.src = imgObj.src;
+                });
+            });
+        }
+
+        async function copyToClipboardWithImage(type) {
             const textToCopy = document.getElementById(`output-${type}`).value;
             if(!textToCopy) return;
 
-            const handleSuccess = () => {
-                const btn = document.getElementById(`btn-copy-${type}`);
-                const icon = document.getElementById(`icon-copy-${type}`);
-                const text = document.getElementById(`text-copy-${type}`);
-                
-                const originalText = text.textContent;
-                const originalClass = btn.className;
+            const btn = document.getElementById(`btn-copy-${type}`);
+            const icon = document.getElementById(`icon-copy-${type}`);
+            const textEl = document.getElementById(`text-copy-${type}`);
+            
+            const floatBtn = document.getElementById(`btn-floating-copy-${type}`);
+            const floatIcon = document.getElementById(`icon-floating-copy-${type}`);
+            
+            const originalText = textEl.textContent;
+            const originalClass = btn.className;
+            const originalFloatClass = floatBtn.className;
 
-                btn.className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-sm";
+            const handleSuccess = () => {
+                btn.className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-sm relative overflow-hidden";
                 icon.setAttribute('data-lucide', 'check');
-                text.textContent = "Berhasil Disalin!";
+                textEl.textContent = "Teks & Gambar Berhasil Disalin!";
+                
+                floatBtn.className = "absolute top-3 right-3 p-2 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-lg shadow-sm transition-all z-10";
+                floatIcon.setAttribute('data-lucide', 'check');
+                
                 lucide.createIcons();
 
                 setTimeout(() => {
                     btn.className = originalClass;
                     icon.setAttribute('data-lucide', 'copy');
-                    text.textContent = originalText;
+                    textEl.textContent = originalText;
+                    
+                    floatBtn.className = originalFloatClass;
+                    floatIcon.setAttribute('data-lucide', 'copy');
+                    
                     lucide.createIcons();
-                }, 2000);
+                }, 3000);
             };
 
-            if (navigator.clipboard && window.isSecureContext) {
+            const handleFallback = () => {
+                fallbackCopy(textToCopy, () => {
+                    btn.className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-sm relative overflow-hidden";
+                    icon.setAttribute('data-lucide', 'check');
+                    textEl.textContent = "Teks Disalin (Gambar tidak didukung browser)";
+                    
+                    floatBtn.className = "absolute top-3 right-3 p-2 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-lg shadow-sm transition-all z-10";
+                    floatIcon.setAttribute('data-lucide', 'check');
+                    
+                    lucide.createIcons();
+
+                    setTimeout(() => {
+                        btn.className = originalClass;
+                        icon.setAttribute('data-lucide', 'copy');
+                        textEl.textContent = originalText;
+                        
+                        floatBtn.className = originalFloatClass;
+                        floatIcon.setAttribute('data-lucide', 'copy');
+                        
+                        lucide.createIcons();
+                    }, 3000);
+                });
+            }
+
+            // Using modern ClipboardItem API which supports writing both text and image!
+            if (navigator.clipboard && window.ClipboardItem) {
                 try {
-                    await navigator.clipboard.writeText(textToCopy);
-                    handleSuccess();
+                    // Update Button State to loading
+                    icon.setAttribute('data-lucide', 'loader-2');
+                    icon.classList.add('animate-spin');
+                    textEl.textContent = "Memproses Gambar...";
+                    
+                    floatIcon.setAttribute('data-lucide', 'loader-2');
+                    floatIcon.classList.add('animate-spin');
+                    
+                    lucide.createIcons();
+
+                    const imageBlob = await getCompositeImageBlob();
+                    
+                    if (imageBlob) {
+                        const textBlob = new Blob([textToCopy], { type: 'text/plain' });
+                        const item = new ClipboardItem({
+                            'text/plain': textBlob,
+                            'image/png': imageBlob
+                        });
+                        await navigator.clipboard.write([item]);
+                        handleSuccess();
+                    } else {
+                        // Fallback to purely text if no image uploaded
+                        await navigator.clipboard.writeText(textToCopy);
+                        handleSuccess();
+                    }
                 } catch (err) {
-                    fallbackCopy(textToCopy, handleSuccess);
+                    console.error("Advanced Clipboard write failed:", err);
+                    handleFallback();
+                } finally {
+                    icon.classList.remove('animate-spin');
+                    floatIcon.classList.remove('animate-spin');
                 }
             } else {
-                fallbackCopy(textToCopy, handleSuccess);
+                handleFallback();
             }
         }
 
