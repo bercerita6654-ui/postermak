@@ -40,13 +40,13 @@
         <!-- Header -->
         <header class="relative text-center space-y-4 pt-6 pb-2">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-indigo-100 shadow-sm rounded-full text-indigo-600 text-xs font-bold tracking-wide">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v3.5 (With Image Sync)
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-indigo-500"></i> AI Prompt Suite v4.0 (Studio Edition)
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-none">
-                Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Poster Prompt</span> Builder
+                Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Prompt</span> Builder
             </h1>
             <p class="text-sm md:text-base text-slate-500 max-w-2xl mx-auto font-medium">
-                Hasilkan instruksi (prompt) profesional, berstruktur rapi, dan konsisten untuk AI Gambar (Midjourney, DALL-E) serta AI Teks Copywriting (ChatGPT, Claude, Gemini).
+                Hasilkan instruksi (prompt) profesional untuk Desain Promosi, Flyer Event, hingga Foto Model Majalah / Studio untuk Midjourney, DALL-E, dan ChatGPT.
             </p>
         </header>
 
@@ -59,7 +59,7 @@
                         <div class="p-2 bg-indigo-50 rounded-xl text-indigo-600 border border-indigo-100">
                             <i data-lucide="layout-template" class="w-5 h-5"></i>
                         </div>
-                        Konfigurasi Desain
+                        Konfigurasi Visual
                     </h2>
                     <button id="btn-reset" class="text-xs font-semibold text-slate-400 hover:text-rose-500 flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-lg hover:bg-rose-50 border border-transparent">
                         <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Atur Ulang
@@ -68,12 +68,15 @@
 
                 <div class="space-y-6">
                     <!-- Type Selection -->
-                    <div class="grid grid-cols-2 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60" id="type-selector">
-                        <button data-type="promosi" class="type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50">
-                            <i data-lucide="megaphone" class="w-4 h-4 text-indigo-500"></i> Promosi Produk / Jasa
+                    <div class="grid grid-cols-1 sm:grid-cols-3 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60" id="type-selector">
+                        <button data-type="promosi" class="type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all bg-white text-indigo-600 shadow-sm border border-slate-200/50">
+                            <i data-lucide="megaphone" class="w-4 h-4 text-indigo-500"></i> Promosi Produk
                         </button>
-                        <button data-type="ucapan" class="type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
-                            <i data-lucide="party-popper" class="w-4 h-4"></i> Ucapan Hari Raya / Event
+                        <button data-type="model" class="type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
+                            <i data-lucide="camera" class="w-4 h-4"></i> Foto Model / Studio
+                        </button>
+                        <button data-type="ucapan" class="type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent">
+                            <i data-lucide="party-popper" class="w-4 h-4"></i> Ucapan / Event
                         </button>
                     </div>
 
@@ -87,11 +90,11 @@
                         </div>
 
                         <div id="wrapper-productCategory">
-                            <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <label id="label-productCategory" class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                                 <i data-lucide="tag" class="w-3.5 h-3.5 text-slate-400"></i> Kategori Produk
                             </label>
                             <div class="relative custom-combobox" id="combo-productCategory">
-                                <input type="text" id="productCategory" placeholder="Ketik kategori..." class="w-full pl-4 pr-12 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 placeholder-slate-400 text-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 font-medium">
+                                <input type="text" id="productCategory" placeholder="Ketik kategori / gaya..." class="w-full pl-4 pr-12 py-3.5 rounded-xl border border-slate-200 outline-none transition-all bg-slate-50 text-slate-900 placeholder-slate-400 text-sm focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 font-medium">
                                 <button type="button" class="combo-trigger absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 shadow-sm transition-colors cursor-pointer z-10">
                                     <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i>
                                 </button>
@@ -103,7 +106,7 @@
                     </div>
 
                     <!-- Highlight Title Input -->
-                    <div class="bg-indigo-50/50 border border-indigo-100 p-5 rounded-2xl relative overflow-hidden">
+                    <div class="bg-indigo-50/50 border border-indigo-100 p-5 rounded-2xl relative overflow-hidden" id="wrapper-highlightTitle">
                         <div class="absolute -right-4 -top-4 text-indigo-500/10"><i data-lucide="type" class="w-24 h-24"></i></div>
                         <label class="block text-[11px] font-bold text-indigo-800 uppercase tracking-wider mb-2 flex items-center gap-1.5 relative z-10">
                             <i data-lucide="type" class="w-3.5 h-3.5 text-indigo-500"></i> Teks Wajib Highlight / Judul Utama <span class="text-indigo-400 font-normal lowercase">(opsional)</span>
@@ -113,7 +116,7 @@
                     </div>
 
                     <!-- Flyer/Poster Information Balance Selector -->
-                    <div class="pt-4 border-t border-slate-100">
+                    <div class="pt-4 border-t border-slate-100" id="wrapper-balance">
                         <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
                             <i data-lucide="scale" class="w-3.5 h-3.5 text-slate-400"></i> Keseimbangan Komposisi (Desain Visual vs Teks Copywriting)
                         </label>
@@ -180,7 +183,7 @@
                         <!-- Main Color -->
                         <div>
                             <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                <i data-lucide="palette" class="w-3.5 h-3.5 text-slate-400"></i> Warna Utama Poster
+                                <i data-lucide="palette" class="w-3.5 h-3.5 text-slate-400"></i> Warna Utama / Dominan
                             </label>
                             <div class="flex gap-2">
                                 <div class="flex-shrink-0 flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-1 shadow-sm w-[46px] h-[46px]">
@@ -206,7 +209,7 @@
                         <!-- Background Color -->
                         <div>
                             <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                <i data-lucide="image" class="w-3.5 h-3.5 text-slate-400"></i> Warna Background
+                                <i data-lucide="image" class="w-3.5 h-3.5 text-slate-400"></i> Latar Belakang (Background)
                             </label>
                             <div class="flex gap-2">
                                 <div class="flex-shrink-0 flex items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-1 shadow-sm w-[46px] h-[46px]">
@@ -243,7 +246,7 @@
                     </div>
 
                     <!-- IMAGE UPLOADS: Product / Brand / Store -->
-                    <div class="pt-5 border-t border-slate-100">
+                    <div class="pt-5 border-t border-slate-100" id="wrapper-upload">
                         <div class="flex justify-between items-end mb-3">
                             <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                                 <i data-lucide="upload-cloud" class="w-3.5 h-3.5 text-indigo-500"></i> Referensi Visual Gambar (Opsional)
@@ -255,7 +258,7 @@
                                 <input type="file" id="upload-product" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                                 <div id="preview-box-product" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
                                     <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
-                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Gambar Produk</span>
+                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Subjek Utama</span>
                                 </div>
                                 <button type="button" id="remove-product" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
                                     <i data-lucide="x" class="w-3.5 h-3.5"></i>
@@ -279,7 +282,7 @@
                                 <input type="file" id="upload-store" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                                 <div id="preview-box-store" class="h-28 w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all group-hover:bg-indigo-50 group-hover:border-indigo-300 relative overflow-hidden">
                                     <i data-lucide="image-plus" class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
-                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Logo Toko / PT</span>
+                                    <span class="text-[10px] font-bold text-slate-500 text-center px-1">Latar Belakang / Ref</span>
                                 </div>
                                 <button type="button" id="remove-store" class="hidden absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md z-20 hover:bg-rose-600 transition-colors">
                                     <i data-lucide="x" class="w-3.5 h-3.5"></i>
@@ -289,13 +292,13 @@
                         <div class="mt-2.5 bg-blue-50/50 border border-blue-100 rounded-lg p-2.5 flex items-start gap-2">
                             <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0"></i>
                             <p class="text-[10px] text-blue-800 font-medium leading-relaxed">
-                                <strong class="text-blue-900">Kolase Otomatis:</strong> Gambar yang diunggah akan digabungkan menjadi satu gambar referensi. Saat Anda menekan tombol <strong>Salin Prompt</strong>, gambar referensi ini akan <span class="underline">ikut tersalin (Clipboard)</span> bersama teks untuk ditempel/paste di ChatGPT atau Discord!
+                                <strong class="text-blue-900">Kolase Otomatis:</strong> Gambar yang diunggah akan digabung otomatis. Setelah menekan tombol <strong>Buatkan Formula Prompt</strong>, Anda bisa menyalin atau mengunduh hasilnya di bagian bawah panel layar hasil.
                             </p>
                         </div>
                     </div>
 
                     <!-- Footer Section Toggle -->
-                    <div class="border border-slate-200 bg-slate-50/50 rounded-2xl overflow-hidden transition-all shadow-sm">
+                    <div class="border border-slate-200 bg-slate-50/50 rounded-2xl overflow-hidden transition-all shadow-sm" id="wrapper-footerToggle">
                         <label class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-100/50 transition-colors">
                             <div class="flex items-center gap-3">
                                 <input type="checkbox" id="useFooter" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
@@ -400,7 +403,7 @@
                 <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 flex flex-col items-center">
                     <div class="w-full flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
                         <span class="text-xs font-bold text-slate-800 tracking-wider uppercase flex items-center gap-1.5">
-                            <i data-lucide="layout-template" class="w-4 h-4 text-indigo-500"></i> Sketsa Layout Poster
+                            <i data-lucide="layout-template" class="w-4 h-4 text-indigo-500"></i> Sketsa Layout Visual
                         </span>
                         <span id="preview-ar-badge" class="text-[10px] bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded font-mono font-bold border border-indigo-100">AR 1:1</span>
                     </div>
@@ -417,7 +420,7 @@
 
                             <div class="relative z-10" id="preview-category-area">
                                 <span id="preview-category" class="text-[8px] tracking-widest text-indigo-600 uppercase font-bold block">
-                                    KATEGORI PRODUK
+                                    KATEGORI VISUAL
                                 </span>
                             </div>
 
@@ -430,7 +433,7 @@
                                     <div id="p-ind-store" class="hidden w-4 h-4 bg-white/80 rounded border border-black/10 shadow-sm bg-cover bg-center"></div>
                                 </div>
                                 <h3 id="preview-title" class="text-xs font-extrabold text-slate-800 leading-tight uppercase tracking-wider line-clamp-2 drop-shadow-sm">
-                                    JUDUL UTAMA POSTER
+                                    JUDUL UTAMA VISUAL
                                 </h3>
                                 <p id="preview-theme" class="text-[8px] text-slate-500 mt-1 max-w-[80%] mx-auto truncate font-medium">
                                     [Visual: Minimalis Modern]
@@ -488,7 +491,7 @@
                                 </button>
                             </div>
                             <button id="btn-copy-image" disabled class="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed relative overflow-hidden group">
-                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-image"></i> <span id="text-copy-image">Salin Prompt + Gambar Referensi</span>
+                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-image"></i> <span id="text-copy-image">Salin Prompt Teks Saja</span>
                             </button>
                         </div>
                     </div>
@@ -507,9 +510,24 @@
                                 </button>
                             </div>
                             <button id="btn-copy-text" disabled class="w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 border border-transparent cursor-not-allowed relative overflow-hidden group">
-                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-text"></i> <span id="text-copy-text">Salin Prompt + Gambar Referensi</span>
+                                <i data-lucide="copy" class="w-4 h-4" id="icon-copy-text"></i> <span id="text-copy-text">Salin Prompt Teks Copy</span>
                             </button>
                         </div>
+                    </div>
+                    
+                    <!-- Generated Image Output Container (Appears when there are images) -->
+                    <div id="generated-image-container" class="hidden p-5 border-t border-slate-100 bg-slate-50 flex flex-col items-center">
+                        <span class="text-[11px] font-bold text-slate-600 mb-3 flex items-center gap-1.5"><i data-lucide="image" class="w-4 h-4 text-indigo-500"></i> Kolase Referensi Visual (Siap Digunakan)</span>
+                        <img id="generated-image-result" src="" alt="Referensi" class="max-h-48 rounded-xl border border-slate-200 shadow-sm mb-3">
+                        <div class="flex gap-3">
+                            <button id="btn-copy-image-only" class="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-lg shadow-sm hover:bg-indigo-700 transition-all flex items-center gap-2">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin Gambar Ini
+                            </button>
+                            <a id="btn-download-image" href="#" download="referensi-poster.png" class="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-bold rounded-lg shadow-sm hover:bg-slate-50 hover:text-indigo-600 transition-all flex items-center gap-2">
+                                <i data-lucide="download" class="w-3.5 h-3.5"></i> Unduh Gambar
+                            </a>
+                        </div>
+                        <p class="text-[9px] text-slate-400 mt-2 text-center max-w-sm leading-relaxed">Gambar ini wajib Anda lampirkan bersama teks prompt di atas. Jika tombol Salin Gambar gagal karena izin browser, silakan gunakan tombol <strong>Unduh Gambar</strong>.</p>
                     </div>
                 </div>
 
@@ -561,7 +579,7 @@
                 { id: '3D Claymation', name: '3D Render', desc: 'Bentuk membulat, imut, Pixar style', icon: '🧸', gradient: 'from-sky-300 to-teal-300' },
             ],
             aspectRatios: [
-                { id: '1:1', label: '1:1 Square', desc: 'Instagram Feed, WhatsApp Status' },
+                { id: '1:1', label: '1:1 Square', desc: 'Instagram Feed, Profile Picture' },
                 { id: '9:16', label: '9:16 Portrait', desc: 'Instagram Story, Reels, TikTok' },
                 { id: '4:5', label: '4:5 Portrait', desc: 'Instagram Portrait Post' },
                 { id: '16:9', label: '16:9 Landscape', desc: 'Banner Web, YouTube Thumbnail' },
@@ -570,6 +588,12 @@
             goalPromo: ["Flash Sale / Diskon", "Peluncuran Produk Baru", "Brand Awareness", "Giveaway / Kuis", "Pre-Order", "Promo Spesial / Bundling", "Meningkatkan Penjualan"],
             goalUcapan: ["Ucapan Selamat", "Undangan Event / Acara", "Permintaan Maaf", "Pemberitahuan / Info", "Pesan Inspiratif", "Pengumuman Libur"],
             audience: ["Anak Muda / Gen Z", "Ibu Rumah Tangga", "Pekerja Kantoran / Profesional", "Anak-anak & Orang Tua", "Masyarakat Umum", "Mahasiswa & Pelajar", "Pecinta Teknologi", "Pecinta Olahraga"],
+            
+            // New Model Photography Lists
+            modelCategories: ["Fashion Editorial", "Beauty Close-up", "Street Style Photography", "Corporate Headshot", "Fitness / Sport Active", "Glamour Magazine Cover", "Fantasy / Cosplay", "Vintage / Retro Portrait"],
+            modelLighting: ["Studio Softbox Light", "Cinematic Dramatic Lighting", "Golden Hour Sunlight", "Neon Cyberpunk Glow", "Moody Low-Key Lighting", "Bright High-Key Setup", "Rembrandt Lighting"],
+            modelShot: ["Full Body Shot", "Medium Shot (Waist Up)", "Close-up Portrait", "Extreme Close-up Face", "Low Angle Shot (Heroic)", "High Angle Shot", "Over the Shoulder"],
+            
             palettes: [
                 { name: "Hitam & Emas (Eksklusif)", colors: ["#0f172a", "#fbbf24"] },
                 { name: "Pastel Lembut (Feminim)", colors: ["#fbcfe8", "#ddd6fe"] },
@@ -583,7 +607,9 @@
             bgColors: [
                 "Putih Bersih (Clean White)", 
                 "Hitam Gelap (Dark Mode)", 
-                "Gradasi Lembut (Soft Gradient)"
+                "Gradasi Lembut (Soft Gradient)",
+                "Studio Backdrop (Neutral Grey)",
+                "Outdoor City Street"
             ]
         };
 
@@ -613,7 +639,12 @@
 
             wrapperProdName: document.getElementById('wrapper-productName'),
             wrapperProdCat: document.getElementById('wrapper-productCategory'),
+            wrapperHighlightTitle: document.getElementById('wrapper-highlightTitle'),
+            wrapperBalance: document.getElementById('wrapper-balance'),
+            wrapperFooterToggle: document.getElementById('wrapper-footerToggle'),
+            
             labelProdName: document.getElementById('label-productName'),
+            labelProdCat: document.getElementById('label-productCategory'),
             labelGoal: document.getElementById('label-goal'),
             labelAudience: document.getElementById('label-audience'),
             footerDrawer: document.getElementById('footer-drawer'),
@@ -758,13 +789,11 @@
                         previewBox.style.backgroundRepeat = 'no-repeat';
                         previewBox.style.backgroundPosition = 'center';
                         
-                        // Hide internal icon and text
                         previewBox.querySelector('i').classList.add('hidden');
                         previewBox.querySelector('span').classList.add('hidden');
                         
-                        // Show remove btn
                         removeBtn.classList.remove('hidden');
-                        input.classList.add('hidden'); // Disable click
+                        input.classList.add('hidden');
                         
                         updateLivePreview();
                     };
@@ -789,9 +818,18 @@
         }
 
         function updateDynamicSelects() {
-            const isPromo = state.posterType === 'promosi';
-            const options = isPromo ? lists.goalPromo : lists.goalUcapan;
-            setupCustomCombobox('combo-goal', options);
+            if (state.posterType === 'promosi') {
+                setupCustomCombobox('combo-goal', lists.goalPromo);
+                setupCustomCombobox('combo-audience', lists.audience);
+                setupCustomCombobox('combo-productCategory', lists.productCategories);
+            } else if (state.posterType === 'ucapan') {
+                setupCustomCombobox('combo-goal', lists.goalUcapan);
+                setupCustomCombobox('combo-audience', lists.audience);
+            } else if (state.posterType === 'model') {
+                setupCustomCombobox('combo-goal', lists.modelLighting);
+                setupCustomCombobox('combo-audience', lists.modelShot);
+                setupCustomCombobox('combo-productCategory', lists.modelCategories);
+            }
         }
 
         function setupBalanceSelector() {
@@ -921,10 +959,13 @@
                     
                     document.querySelectorAll('.type-btn').forEach(b => {
                         if(b.dataset.type === state.posterType) {
-                            let accentColor = state.posterType === 'promosi' ? 'text-indigo-600' : 'text-purple-600';
-                            b.className = `type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all bg-white ${accentColor} shadow-sm border border-slate-200/50`;
+                            let accentColor = 'text-indigo-600';
+                            if (state.posterType === 'ucapan') accentColor = 'text-purple-600';
+                            if (state.posterType === 'model') accentColor = 'text-pink-600';
+                            
+                            b.className = `type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all bg-white ${accentColor} shadow-sm border border-slate-200/50`;
                         } else {
-                            b.className = `type-btn py-3 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent`;
+                            b.className = `type-btn py-3 px-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 border border-transparent`;
                         }
                     });
                 });
@@ -938,41 +979,111 @@
 
             document.getElementById('btn-reset').addEventListener('click', resetForm);
             els.btnGenerate.addEventListener('click', generatePrompts);
-            document.getElementById('btn-copy-image').addEventListener('click', () => copyToClipboardWithImage('image'));
-            document.getElementById('btn-copy-text').addEventListener('click', () => copyToClipboardWithImage('text'));
+            document.getElementById('btn-copy-image').addEventListener('click', () => copyToClipboard('image'));
+            document.getElementById('btn-copy-text').addEventListener('click', () => copyToClipboard('text'));
             
-            // Listener untuk tombol salin melayang (Floating button)
-            document.getElementById('btn-floating-copy-image').addEventListener('click', () => copyToClipboardWithImage('image'));
-            document.getElementById('btn-floating-copy-text').addEventListener('click', () => copyToClipboardWithImage('text'));
+            document.getElementById('btn-floating-copy-image').addEventListener('click', () => copyToClipboard('image'));
+            document.getElementById('btn-floating-copy-text').addEventListener('click', () => copyToClipboard('text'));
+            
+            document.getElementById('btn-copy-image-only').addEventListener('click', async (e) => {
+                const btn = e.currentTarget;
+                const originalHTML = btn.innerHTML;
+                try {
+                    btn.innerHTML = '<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Menyalin...';
+                    lucide.createIcons();
+                    
+                    const blob = await getCompositeImageBlob();
+                    const item = new ClipboardItem({ 'image/png': blob });
+                    await navigator.clipboard.write([item]);
+                    
+                    btn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i> Tersalin!';
+                    btn.classList.replace('bg-indigo-600', 'bg-emerald-500');
+                    btn.classList.replace('hover:bg-indigo-700', 'hover:bg-emerald-600');
+                } catch (err) {
+                    btn.innerHTML = '<i data-lucide="x" class="w-3.5 h-3.5"></i> Gagal (Izin Browser)';
+                }
+                lucide.createIcons();
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.replace('bg-emerald-500', 'bg-indigo-600');
+                    btn.classList.replace('hover:bg-emerald-600', 'hover:bg-indigo-700');
+                    lucide.createIcons();
+                }, 3000);
+            });
         }
 
         function updateUI() {
             const isPromo = state.posterType === 'promosi';
+            const isModel = state.posterType === 'model';
+            const isUcapan = state.posterType === 'ucapan';
             
-            els.labelProdName.innerHTML = (isPromo ? 'Nama Produk / Brand' : 'Nama Hari Raya / Event') + ' <span class="text-rose-500">*</span>';
-            els.labelGoal.innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5 text-slate-400"></i> ` + (isPromo ? 'Tujuan Promosi' : 'Pesan Tambahan');
-            els.labelAudience.innerHTML = `<i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i> ` + (isPromo ? 'Target Audiens' : 'Ditujukan / Dari');
-            
-            els.productName.placeholder = isPromo ? "Contoh: Kopi Susu Aren..." : "Contoh: Idul Fitri 1446 H...";
-            els.goal.placeholder = isPromo ? "Flash Sale, Launching..." : "Mohon maaf lahir batin...";
-            els.audience.placeholder = isPromo ? "Mahasiswa, Ibu-ibu..." : "Rekan kerja...";
+            if (isPromo) {
+                els.labelProdName.innerHTML = 'Nama Produk / Brand <span class="text-rose-500">*</span>';
+                els.labelGoal.innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5 text-slate-400"></i> Tujuan Promosi`;
+                els.labelAudience.innerHTML = `<i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i> Target Audiens`;
+                els.labelProdCat.innerHTML = `<i data-lucide="tag" class="w-3.5 h-3.5 text-slate-400"></i> Kategori Produk`;
+                
+                els.productName.placeholder = "Contoh: Kopi Susu Aren...";
+                els.goal.placeholder = "Flash Sale, Launching...";
+                els.audience.placeholder = "Mahasiswa, Ibu-ibu...";
+                els.productCategory.placeholder = "Ketik kategori...";
 
-            if(isPromo) {
                 els.wrapperProdCat.classList.remove('hidden');
                 els.wrapperProdName.classList.remove('md:col-span-2');
                 els.wrapperProdName.classList.add('md:col-span-1');
-            } else {
+                
+                els.wrapperHighlightTitle.classList.remove('hidden');
+                els.wrapperBalance.classList.remove('hidden');
+                els.wrapperFooterToggle.classList.remove('hidden');
+                
+                if(state.useFooter) els.footerDrawer.classList.remove('hidden');
+                
+            } else if (isUcapan) {
+                els.labelProdName.innerHTML = 'Nama Hari Raya / Event <span class="text-rose-500">*</span>';
+                els.labelGoal.innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5 text-slate-400"></i> Pesan Tambahan`;
+                els.labelAudience.innerHTML = `<i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i> Ditujukan / Dari`;
+                
+                els.productName.placeholder = "Contoh: Idul Fitri 1446 H...";
+                els.goal.placeholder = "Mohon maaf lahir batin...";
+                els.audience.placeholder = "Rekan kerja...";
+
                 els.wrapperProdCat.classList.add('hidden');
                 els.wrapperProdName.classList.remove('md:col-span-1');
                 els.wrapperProdName.classList.add('md:col-span-2');
+                
+                els.wrapperHighlightTitle.classList.remove('hidden');
+                els.wrapperBalance.classList.remove('hidden');
+                els.wrapperFooterToggle.classList.remove('hidden');
+                
+                if(state.useFooter) els.footerDrawer.classList.remove('hidden');
+
+            } else if (isModel) {
+                // FOTO MODEL MODE
+                els.labelProdName.innerHTML = 'Subjek / Deskripsi Karakter <span class="text-rose-500">*</span>';
+                els.labelGoal.innerHTML = `<i data-lucide="sun" class="w-3.5 h-3.5 text-slate-400"></i> Pencahayaan (Lighting)`;
+                els.labelAudience.innerHTML = `<i data-lucide="camera" class="w-3.5 h-3.5 text-slate-400"></i> Sudut Kamera (Angle)`;
+                els.labelProdCat.innerHTML = `<i data-lucide="user" class="w-3.5 h-3.5 text-slate-400"></i> Gaya Fotografi`;
+                
+                els.productName.placeholder = "Contoh: Wanita Asia usia 25 bergaun merah...";
+                els.goal.placeholder = "Studio lighting, Cinematic...";
+                els.audience.placeholder = "Close-up, Full Body...";
+                els.productCategory.placeholder = "Pilih gaya foto...";
+
+                els.wrapperProdCat.classList.remove('hidden');
+                els.wrapperProdName.classList.remove('md:col-span-2');
+                els.wrapperProdName.classList.add('md:col-span-1');
+                
+                // Hide Poster specific elements
+                els.wrapperHighlightTitle.classList.add('hidden');
+                els.wrapperBalance.classList.add('hidden');
+                els.wrapperFooterToggle.classList.add('hidden');
+                els.footerDrawer.classList.add('hidden');
             }
 
-            if(state.useFooter) {
-                els.footerDrawer.classList.remove('hidden');
+            if(state.useFooter && !isModel) {
                 els.footerStatusBadge.textContent = 'AKTIF';
                 els.footerStatusBadge.className = 'text-[10px] px-2.5 py-1 rounded font-bold uppercase transition-all bg-indigo-100 text-indigo-700 tracking-wider';
             } else {
-                els.footerDrawer.classList.add('hidden');
                 els.footerStatusBadge.textContent = 'MATI';
                 els.footerStatusBadge.className = 'text-[10px] px-2.5 py-1 rounded font-bold uppercase transition-all bg-slate-200 text-slate-500 tracking-wider';
             }
@@ -1039,9 +1150,13 @@
             
             document.getElementById('btn-floating-copy-image').classList.add('hidden');
             document.getElementById('btn-floating-copy-text').classList.add('hidden');
+            document.getElementById('generated-image-container').classList.add('hidden');
             
             const targetBtn = document.querySelector('[data-balance="50-50"]');
             if(targetBtn) targetBtn.click();
+            
+            const promoBtn = document.querySelector('[data-type="promosi"]');
+            if(promoBtn) promoBtn.click();
 
             renderThemes();
             renderAspectRatios();
@@ -1073,10 +1188,10 @@
             let isLightBg = true;
             const bgVal = state.bgColor.toLowerCase();
 
-            if (bgVal.includes('hitam') || bgVal.includes('dark') || bgVal.includes('gelap')) {
+            if (bgVal.includes('hitam') || bgVal.includes('dark') || bgVal.includes('gelap') || bgVal.includes('studio')) {
                 currentBgStyle = '#0f172a';
                 isLightBg = false;
-            } else if (bgVal.includes('putih') || bgVal.includes('clean') || bgVal.includes('cerah')) {
+            } else if (bgVal.includes('putih') || bgVal.includes('clean') || bgVal.includes('cerah') || bgVal.includes('outdoor')) {
                 currentBgStyle = '#ffffff';
                 isLightBg = true;
             } else if (bgVal.includes('gradasi') || bgVal.includes('gradient')) {
@@ -1119,9 +1234,17 @@
             const previewTitle = document.getElementById('preview-title');
             const previewTheme = document.getElementById('preview-theme');
             
-            document.getElementById('preview-category').textContent = state.productCategory || (state.posterType === 'promosi' ? 'KATEGORI PRODUK' : 'KATEGORI EVENT');
-            document.getElementById('preview-title').textContent = state.highlightTitle || (state.productName ? `PROMO ${state.productName}` : 'JUDUL UTAMA POSTER');
-            document.getElementById('preview-theme').textContent = `[Visual: ${state.theme}]`;
+            const isModel = state.posterType === 'model';
+
+            if (isModel) {
+                document.getElementById('preview-category').textContent = state.productCategory || 'GAYA FOTOGRAFI';
+                document.getElementById('preview-title').textContent = state.productName ? `MODEL: ${state.productName}` : 'SUBJEK / KARAKTER';
+                document.getElementById('preview-theme').textContent = `[Style: ${state.theme}]`;
+            } else {
+                document.getElementById('preview-category').textContent = state.productCategory || (state.posterType === 'promosi' ? 'KATEGORI PRODUK' : 'KATEGORI EVENT');
+                document.getElementById('preview-title').textContent = state.highlightTitle || (state.productName ? `PROMO ${state.productName}` : 'JUDUL UTAMA POSTER');
+                document.getElementById('preview-theme').textContent = `[Visual: ${state.theme}]`;
+            }
 
             // Adjust Layout guide based on Balance
             const textLines = document.getElementById('preview-text-lines');
@@ -1129,7 +1252,7 @@
 
             if (isLightBg) {
                 previewCategory.className = "text-[8px] tracking-widest text-indigo-600 uppercase font-bold block";
-                if (state.balance === '80-20') {
+                if (state.balance === '80-20' || isModel) { // Models always have minimal text interference
                     textLines.classList.add('hidden');
                     categoryArea.classList.add('hidden');
                     previewTitle.className = "text-[10px] font-bold text-slate-800 leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-sm";
@@ -1145,7 +1268,7 @@
                 previewTheme.className = "text-[8px] text-slate-500 mt-1 max-w-[80%] mx-auto truncate font-medium";
             } else {
                 previewCategory.className = "text-[8px] tracking-widest text-indigo-300 uppercase font-bold block";
-                if (state.balance === '80-20') {
+                if (state.balance === '80-20' || isModel) {
                     textLines.classList.add('hidden');
                     categoryArea.classList.add('hidden');
                     previewTitle.className = "text-[10px] font-bold text-white leading-tight uppercase tracking-wide line-clamp-1 opacity-90 mt-1 drop-shadow-md";
@@ -1185,7 +1308,7 @@
             const footerEl = document.getElementById('preview-footer');
             const noFooterEl = document.getElementById('preview-no-footer');
             
-            if(state.useFooter) {
+            if(state.useFooter && !isModel) {
                 footerEl.classList.remove('hidden');
                 noFooterEl.classList.add('hidden');
                 
@@ -1206,84 +1329,113 @@
             }
         }
 
-        function generatePrompts() {
+        async function generatePrompts() {
+            const btnGen = document.getElementById('btn-generate');
+            const origHtml = btnGen.innerHTML;
+            btnGen.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Memproses...';
+            lucide.createIcons();
+
             const isPromo = state.posterType === 'promosi';
-            const typeName = isPromo ? 'advertisement poster' : 'greeting card/event poster';
-            const typeNameID = isPromo ? 'poster promosi' : 'poster ucapan hari raya/event';
-            
-            const safeProduct = state.productName || (isPromo ? '[Nama Produk/Layanan]' : '[Nama Hari Raya/Event]');
-            const safeCategory = state.productCategory || 'Umum';
-            const safeGoal = state.goal || (isPromo ? 'menarik perhatian' : 'menyampaikan pesan hangat');
-            const safeAudience = state.audience || (isPromo ? 'masyarakat umum' : 'keluarga/klien/publik');
+            const isModel = state.posterType === 'model';
+            const isUcapan = state.posterType === 'ucapan';
+
+            let imgPrompt = '';
+            let txtPrompt = '';
+
+            // Common Fallbacks
             const safeColors = state.colors || 'warna yang sesuai dengan tema';
             const safeBgColor = state.bgColor || 'Putih Bersih';
             const safeElements = state.elements || 'elemen pendukung yang estetis';
-
-            const highlightImgInstruction = state.highlightTitle ? ` Prominently feature bold, stylish typography displaying the text: "${state.highlightTitle}".` : '';
-            const highlightTxtInstruction = state.highlightTitle ? `- Judul / Teks Wajib Highlight: "${state.highlightTitle}"\n` : '';
 
             // Incorporating Upload References context into the prompt
             let uploadReferencesNoticeImage = '';
             let uploadReferencesNoticeText = '';
             if(state.imgProduct || state.imgBrand || state.imgStore) {
                 let items = [];
-                if(state.imgProduct) items.push('Product Item');
+                if(state.imgProduct) items.push(isModel ? 'Subject Reference' : 'Product Item');
                 if(state.imgBrand) items.push('Brand Logo');
-                if(state.imgStore) items.push('Store Logo');
+                if(state.imgStore) items.push(isModel ? 'Background/Style Reference' : 'Store Logo');
                 
-                uploadReferencesNoticeImage = `\n[IMPORTANT: Incorporate the design elements/style from the attached reference collage image (${items.join(', ')}) accurately into the visual.]`;
-                uploadReferencesNoticeText = `\n- Referensi Visual: (Saya telah melampirkan gambar referensi yang berisi ${items.join(' & ')}. Mohon jadikan ini sebagai acuan warna atau konteks produk/logo).`;
+                uploadReferencesNoticeImage = `\n[IMPORTANT: Incorporate the design elements, face, or style from the attached reference collage image (${items.join(', ')}) accurately into the visual.]`;
+                uploadReferencesNoticeText = `\n- Referensi Visual: (Saya telah melampirkan gambar referensi yang berisi ${items.join(' & ')}. Mohon jadikan ini sebagai acuan warna atau konteks).`;
             }
 
-            let balanceImgDetail = '';
-            let balanceTxtDetail = '';
-            
-            if (state.balance === '80-20') {
-                balanceImgDetail = `The composition is highly artistic and minimalist, dominated by the visual graphic (80% visual focus). There is only a small, elegant negative space (20% layout) reserved at the bottom or corner for minimal branding text.`;
-                balanceTxtDetail = `- Gaya Penulisan: Super minimalis (80% Visual, 20% Teks). Batasi jumlah kata sekecil mungkin. Fokus hanya pada 1 headline pemikat dan 1 CTA singkat.`;
-            } else if (state.balance === '20-80') {
-                balanceImgDetail = `The poster layout is designed like an info-rich flyer, with a dense editorial grid structure (20% visual graphic, 80% text layout space). It includes expansive clean blocks of negative space structured specifically for comprehensive informational text, bullet points, and details.`;
-                balanceTxtDetail = `- Gaya Penulisan: Sangat lengkap, padat informasi, dan edukatif (20% Visual, 80% Teks). Tulis copywriting secara detail dengan penjelasan lengkap untuk setiap fitur, syarat & ketentuan, manfaat, serta info detail lainnya.`;
+            if (isModel) {
+                // FOTO MODEL LOGIC
+                const subject = state.productName || '[Subjek Foto]';
+                const style = state.productCategory || 'Professional Portrait';
+                const lighting = state.goal || 'Studio Lighting';
+                const shot = state.audience || 'Medium Shot';
+                
+                imgPrompt = `A high-end, professional magazine editorial photography of ${subject}. \nPhotography Style/Theme: ${style}. \nShot Type/Camera Angle: ${shot}. \nLighting: ${lighting}. \nColor Palette: ${safeColors}. \nBackground: ${safeBgColor}. \nAdditional Attire/Details: ${safeElements}. ${uploadReferencesNoticeImage}\nShot on 85mm lens, f/1.8, extremely detailed, highly realistic texture, 8k resolution, photorealistic masterpiece. \n--ar ${state.aspectRatio.replace(':', ':')} --style raw --v 6.0`;
+
+                const txtStructure = `1. [HEADLINE / CATCHPHRASE]: Kalimat pembuka yang memikat dan estetik (maks 6 kata).\n2. [CAPTION / DESKRIPSI]: Deskripsi editorial yang anggun dan sesuai dengan suasana foto (1-2 paragraf pendek).\n3. [HASHTAGS]: 5-7 hashtag relevan dan populer di Instagram (contoh: #FashionEditorial #OOTD).`;
+
+                txtPrompt = `Bertindaklah sebagai Manajer Media Sosial dan Copywriter Fashion/Editorial kelas dunia. \nTolong buatkan caption editorial Instagram / Majalah untuk mendampingi sebuah karya foto model dengan detail berikut:\n\n- Subjek Foto: ${subject}\n- Gaya / Tema Visual: ${style}\n- Pencahayaan / Mood: ${lighting}\n- Angle Kamera: ${shot}\n- Warna Dominan: ${safeColors}\n- Detail Pakaian/Latar: ${safeElements}${uploadReferencesNoticeText}\n\nMohon berikan struktur copy berikut:\n${txtStructure}\n\nGunakan nada bahasa yang elegan, modern, artistik dan sangat memikat.`;
+
             } else {
-                balanceImgDetail = `A clean, balanced composition (50% visual graphic, 50% copy layout space) with generous, modern negative space designed for prominent typography and structured headlines.`;
-                balanceTxtDetail = `- Gaya Penulisan: Seimbang dan dinamis (50% Visual, 50% Teks). Buat headline yang memikat, sub-headline penjelas, serta 3 poin utama penawaran secara ringkas.`;
-            }
-
-            let footerImageInstruction = '';
-            if (state.useFooter) {
-                let activeIcons = [];
-                if (state.socIg) activeIcons.push('Instagram');
-                if (state.socFb) activeIcons.push('Facebook');
-                if (state.socTiktok) activeIcons.push('TikTok');
-                if (state.markShopee) activeIcons.push('Shopee');
-                if (state.markTokped) activeIcons.push('Tokopedia');
-                if (state.markTiktok) activeIcons.push('TikTok Shop');
-
-                const colorDesc = state.footerColorType === 'monotone' ? `a clean solid color (${state.footerColor})` : `a color palette matching the main theme`;
-                let iconText = activeIcons.length > 0 ? ` Make sure to include recognizable minimal icons for: ${activeIcons.join(', ')} next to their respective text.` : '';
-                footerImageInstruction = `Include a clear, distinct footer area at the bottom using ${colorDesc} with negative space specifically reserved for tagline, contact, and social media text.${iconText}`;
-            }
-
-            const imgPrompt = `A high-quality, professional ${typeName} design for "${safeProduct}"${isPromo ? ` (Category: ${safeCategory})` : ''}.${highlightImgInstruction} \nComposition: ${balanceImgDetail}\nVisual style: ${state.theme}. \nMain Color scheme: ${safeColors}. \nBackground Color/Style: ${safeBgColor}. \nKey visual elements to include: ${safeElements}. \nThe overall mood should feel designed to achieve ${safeGoal} and strongly appeal to ${safeAudience}. \nInclude clean, negative space for typography layout. ${footerImageInstruction}${uploadReferencesNoticeImage}\nMasterpiece, highly detailed, visually striking, 8k resolution, commercial photography style. \n--ar ${state.aspectRatio.replace(':', ':')} --v 6.0`;
-
-            let footerTextInstruction = '';
-            if (state.useFooter) {
-                let socialTexts = [];
-                if (state.socIg) socialTexts.push(`- Instagram: ${state.socIg}`);
-                if (state.socFb) socialTexts.push(`- Facebook: ${state.socFb}`);
-                if (state.socTiktok) socialTexts.push(`- TikTok: ${state.socTiktok}`);
-                if (state.markShopee) socialTexts.push(`- Shopee: ${state.markShopee}`);
-                if (state.markTokped) socialTexts.push(`- Tokopedia: ${state.markTokped}`);
-                if (state.markTiktok) socialTexts.push(`- TikTok Shop: ${state.markTiktok}`);
+                // POSTER PROMOSI / UCAPAN LOGIC
+                const typeName = isPromo ? 'advertisement poster' : 'greeting card/event poster';
+                const typeNameID = isPromo ? 'poster promosi' : 'poster ucapan hari raya/event';
                 
-                let sosmedString = socialTexts.length > 0 ? `\nMedia Sosial & Marketplace:\n${socialTexts.join('\n')}` : '';
-                footerTextInstruction = `\n\n5. [FOOTER / KONTAK]: Tambahkan informasi berikut di bagian bawah:\n- Tagline: ${state.tagline || '[Isi Tagline]'}\n- Kontak: ${state.contact || '[No. WhatsApp/Telepon]'}${sosmedString}`;
+                const safeProduct = state.productName || (isPromo ? '[Nama Produk/Layanan]' : '[Nama Hari Raya/Event]');
+                const safeCategory = state.productCategory || 'Umum';
+                const safeGoal = state.goal || (isPromo ? 'menarik perhatian' : 'menyampaikan pesan hangat');
+                const safeAudience = state.audience || (isPromo ? 'masyarakat umum' : 'keluarga/klien/publik');
+
+                const highlightImgInstruction = state.highlightTitle ? ` Prominently feature bold, stylish typography displaying the text: "${state.highlightTitle}".` : '';
+                const highlightTxtInstruction = state.highlightTitle ? `- Judul / Teks Wajib Highlight: "${state.highlightTitle}"\n` : '';
+
+                let balanceImgDetail = '';
+                let balanceTxtDetail = '';
+                
+                if (state.balance === '80-20') {
+                    balanceImgDetail = `The composition is highly artistic and minimalist, dominated by the visual graphic (80% visual focus). There is only a small, elegant negative space (20% layout) reserved at the bottom or corner for minimal branding text.`;
+                    balanceTxtDetail = `- Gaya Penulisan: Super minimalis (80% Visual, 20% Teks). Batasi jumlah kata sekecil mungkin. Fokus hanya pada 1 headline pemikat dan 1 CTA singkat.`;
+                } else if (state.balance === '20-80') {
+                    balanceImgDetail = `The poster layout is designed like an info-rich flyer, with a dense editorial grid structure (20% visual graphic, 80% text layout space). It includes expansive clean blocks of negative space structured specifically for comprehensive informational text, bullet points, and details.`;
+                    balanceTxtDetail = `- Gaya Penulisan: Sangat lengkap, padat informasi, dan edukatif (20% Visual, 80% Teks). Tulis copywriting secara detail dengan penjelasan lengkap untuk setiap fitur, syarat & ketentuan, manfaat, serta info detail lainnya.`;
+                } else {
+                    balanceImgDetail = `A clean, balanced composition (50% visual graphic, 50% copy layout space) with generous, modern negative space designed for prominent typography and structured headlines.`;
+                    balanceTxtDetail = `- Gaya Penulisan: Seimbang dan dinamis (50% Visual, 50% Teks). Buat headline yang memikat, sub-headline penjelas, serta 3 poin utama penawaran secara ringkas.`;
+                }
+
+                let footerImageInstruction = '';
+                if (state.useFooter) {
+                    let activeIcons = [];
+                    if (state.socIg) activeIcons.push('Instagram');
+                    if (state.socFb) activeIcons.push('Facebook');
+                    if (state.socTiktok) activeIcons.push('TikTok');
+                    if (state.markShopee) activeIcons.push('Shopee');
+                    if (state.markTokped) activeIcons.push('Tokopedia');
+                    if (state.markTiktok) activeIcons.push('TikTok Shop');
+
+                    const colorDesc = state.footerColorType === 'monotone' ? `a clean solid color (${state.footerColor})` : `a color palette matching the main theme`;
+                    let iconText = activeIcons.length > 0 ? ` Make sure to include recognizable minimal icons for: ${activeIcons.join(', ')} next to their respective text.` : '';
+                    footerImageInstruction = `Include a clear, distinct footer area at the bottom using ${colorDesc} with negative space specifically reserved for tagline, contact, and social media text.${iconText}`;
+                }
+
+                imgPrompt = `A high-quality, professional ${typeName} design for "${safeProduct}"${isPromo ? ` (Category: ${safeCategory})` : ''}.${highlightImgInstruction} \nComposition: ${balanceImgDetail}\nVisual style: ${state.theme}. \nMain Color scheme: ${safeColors}. \nBackground Color/Style: ${safeBgColor}. \nKey visual elements to include: ${safeElements}. \nThe overall mood should feel designed to achieve ${safeGoal} and strongly appeal to ${safeAudience}. \nInclude clean, negative space for typography layout. ${footerImageInstruction}${uploadReferencesNoticeImage}\nMasterpiece, highly detailed, visually striking, 8k resolution, commercial photography style. \n--ar ${state.aspectRatio.replace(':', ':')} --v 6.0`;
+
+                let footerTextInstruction = '';
+                if (state.useFooter) {
+                    let socialTexts = [];
+                    if (state.socIg) socialTexts.push(`- Instagram: ${state.socIg}`);
+                    if (state.socFb) socialTexts.push(`- Facebook: ${state.socFb}`);
+                    if (state.socTiktok) socialTexts.push(`- TikTok: ${state.socTiktok}`);
+                    if (state.markShopee) socialTexts.push(`- Shopee: ${state.markShopee}`);
+                    if (state.markTokped) socialTexts.push(`- Tokopedia: ${state.markTokped}`);
+                    if (state.markTiktok) socialTexts.push(`- TikTok Shop: ${state.markTiktok}`);
+                    
+                    let sosmedString = socialTexts.length > 0 ? `\nMedia Sosial & Marketplace:\n${socialTexts.join('\n')}` : '';
+                    footerTextInstruction = `\n\n5. [FOOTER / KONTAK]: Tambahkan informasi berikut di bagian bawah:\n- Tagline: ${state.tagline || '[Isi Tagline]'}\n- Kontak: ${state.contact || '[No. WhatsApp/Telepon]'}${sosmedString}`;
+                }
+
+                const promoStructure = `1. [HEADLINE]: Sangat singkat (maksimal 5 kata), memikat, dan *punchy*.\n2. [SUB-HEADLINE]: Penjelasan singkat dari penawaran/produk (1-2 kalimat, opsional).\n3. [BODY TEXT / BULLET POINTS]: Maksimal 3 poin keunggulan utama atau detail penawaran. Buat padat dan jelas.\n4. [CALL TO ACTION / CTA]: Kalimat ajakan bertindak yang kuat dan mendesak (contoh: "Beli Sekarang", "Klaim Diskon", dll).`;
+                const greetingStructure = `1. [HEADLINE UCAPAN]: Besar, hangat, dan relevan (contoh: "Selamat Hari Raya...").\n2. [PESAN / DOA]: 1-2 kalimat pesan hangat, harapan, atau doa yang tulus.\n3. [DARI / PENGIRIM]: "Salam hangat dari..." atau nama entitas yang merayakan.`;
+
+                txtPrompt = `Bertindaklah sebagai Copywriter Profesional kelas dunia. \nTolong buatkan teks copywriting untuk ${typeNameID} dengan detail berikut:\n\n- ${isPromo ? 'Nama Produk/Layanan' : 'Nama Hari Raya/Event'}: ${safeProduct}\n${isPromo ? `- Kategori Produk: ${safeCategory}\n` : ''}${highlightTxtInstruction}- ${isPromo ? 'Tujuan Promosi' : 'Pesan Khusus/Tujuan'}: ${safeGoal}\n- ${isPromo ? 'Target Audiens' : 'Ditujukan Kepada'}: ${safeAudience}\n- Tema Visual Poster: ${state.theme} (Dominasi warna: ${safeColors})\n- Tema Latar Background: ${safeBgColor}\n${balanceTxtDetail}${uploadReferencesNoticeText}\n\nMohon berikan struktur copy berikut:\n${isPromo ? promoStructure : greetingStructure}${footerTextInstruction}\n\nGunakan nada bahasa yang persuasif, natural, dan sangat relevan dengan audiens (${safeAudience}). Jangan menggunakan bahasa yang terlalu kaku.`;
             }
-
-            const promoStructure = `1. [HEADLINE]: Sangat singkat (maksimal 5 kata), memikat, dan *punchy*.\n2. [SUB-HEADLINE]: Penjelasan singkat dari penawaran/produk (1-2 kalimat, opsional).\n3. [BODY TEXT / BULLET POINTS]: Maksimal 3 poin keunggulan utama atau detail penawaran. Buat padat dan jelas.\n4. [CALL TO ACTION / CTA]: Kalimat ajakan bertindak yang kuat dan mendesak (contoh: "Beli Sekarang", "Klaim Diskon", dll).`;
-            const greetingStructure = `1. [HEADLINE UCAPAN]: Besar, hangat, dan relevan (contoh: "Selamat Hari Raya...").\n2. [PESAN / DOA]: 1-2 kalimat pesan hangat, harapan, atau doa yang tulus.\n3. [DARI / PENGIRIM]: "Salam hangat dari..." atau nama entitas yang merayakan.`;
-
-            const txtPrompt = `Bertindaklah sebagai Copywriter Profesional kelas dunia. \nTolong buatkan teks copywriting untuk ${typeNameID} dengan detail berikut:\n\n- ${isPromo ? 'Nama Produk/Layanan' : 'Nama Hari Raya/Event'}: ${safeProduct}\n${isPromo ? `- Kategori Produk: ${safeCategory}\n` : ''}${highlightTxtInstruction}- ${isPromo ? 'Tujuan Promosi' : 'Pesan Khusus/Tujuan'}: ${safeGoal}\n- ${isPromo ? 'Target Audiens' : 'Ditujukan Kepada'}: ${safeAudience}\n- Tema Visual Poster: ${state.theme} (Dominasi warna: ${safeColors})\n- Tema Latar Background: ${safeBgColor}\n${balanceTxtDetail}${uploadReferencesNoticeText}\n\nMohon berikan struktur copy berikut:\n${isPromo ? promoStructure : greetingStructure}${footerTextInstruction}\n\nGunakan nada bahasa yang persuasif, natural, dan sangat relevan dengan audiens (${safeAudience}). Jangan menggunakan bahasa yang terlalu kaku.`;
 
             document.getElementById('output-image').value = imgPrompt;
             document.getElementById('output-text').value = txtPrompt;
@@ -1297,16 +1449,36 @@
             document.getElementById('btn-floating-copy-image').classList.remove('hidden');
             document.getElementById('btn-floating-copy-text').classList.remove('hidden');
 
+            // Handle Composite Image Data Url Display
+            const imgContainer = document.getElementById('generated-image-container');
+            const imgResult = document.getElementById('generated-image-result');
+            const btnDownload = document.getElementById('btn-download-image');
+            
+            if(state.imgProduct || state.imgBrand || state.imgStore) {
+                const dataUrl = await getCompositeImageDataUrl();
+                if(dataUrl) {
+                    imgResult.src = dataUrl;
+                    btnDownload.href = dataUrl;
+                    imgContainer.classList.remove('hidden');
+                }
+            } else {
+                imgContainer.classList.add('hidden');
+            }
+
+            btnGen.innerHTML = origHtml;
+            lucide.createIcons();
+
             document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
 
         // --- COMPOSITE IMAGE GENERATOR ---
-        function getCompositeImageBlob() {
+        function getCompositeImageDataUrl() {
             return new Promise((resolve) => {
+                const isModel = state.posterType === 'model';
                 const imagesToDraw = [];
-                if (state.imgProduct) imagesToDraw.push({ src: state.imgProduct, label: 'Produk' });
+                if (state.imgProduct) imagesToDraw.push({ src: state.imgProduct, label: isModel ? 'Subject Ref' : 'Produk' });
                 if (state.imgBrand) imagesToDraw.push({ src: state.imgBrand, label: 'Merk/Brand' });
-                if (state.imgStore) imagesToDraw.push({ src: state.imgStore, label: 'Toko/Instansi' });
+                if (state.imgStore) imagesToDraw.push({ src: state.imgStore, label: isModel ? 'Style Ref' : 'Toko/Instansi' });
 
                 if (imagesToDraw.length === 0) {
                     resolve(null);
@@ -1328,7 +1500,6 @@
 
                 imagesToDraw.forEach((imgObj, index) => {
                     const img = new Image();
-                    img.crossOrigin = "Anonymous"; // just in case
                     img.onload = () => {
                         // Draw scaled image into its grid box
                         const scale = Math.min((boxSize - 40) / img.width, (boxSize - 40) / img.height);
@@ -1347,21 +1518,28 @@
 
                         loadedCount++;
                         if (loadedCount === imagesToDraw.length) {
-                            canvas.toBlob((blob) => {
-                                resolve(blob);
-                            }, 'image/png');
+                            resolve(canvas.toDataURL('image/png'));
                         }
                     };
                     img.onerror = () => {
                         loadedCount++;
-                        if (loadedCount === imagesToDraw.length) resolve(null);
+                        if (loadedCount === imagesToDraw.length) {
+                            resolve(canvas.toDataURL('image/png'));
+                        }
                     }
                     img.src = imgObj.src;
                 });
             });
         }
 
-        async function copyToClipboardWithImage(type) {
+        async function getCompositeImageBlob() {
+            const dataUrl = await getCompositeImageDataUrl();
+            if (!dataUrl) return null;
+            const res = await fetch(dataUrl);
+            return await res.blob();
+        }
+
+        async function copyToClipboard(type) {
             const textToCopy = document.getElementById(`output-${type}`).value;
             if(!textToCopy) return;
 
@@ -1379,7 +1557,7 @@
             const handleSuccess = () => {
                 btn.className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-sm relative overflow-hidden";
                 icon.setAttribute('data-lucide', 'check');
-                textEl.textContent = "Teks & Gambar Berhasil Disalin!";
+                textEl.textContent = "Teks Berhasil Disalin!";
                 
                 floatBtn.className = "absolute top-3 right-3 p-2 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-lg shadow-sm transition-all z-10";
                 floatIcon.setAttribute('data-lucide', 'check');
@@ -1400,62 +1578,16 @@
 
             const handleFallback = () => {
                 fallbackCopy(textToCopy, () => {
-                    btn.className = "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-sm relative overflow-hidden";
-                    icon.setAttribute('data-lucide', 'check');
-                    textEl.textContent = "Teks Disalin (Gambar tidak didukung browser)";
-                    
-                    floatBtn.className = "absolute top-3 right-3 p-2 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-lg shadow-sm transition-all z-10";
-                    floatIcon.setAttribute('data-lucide', 'check');
-                    
-                    lucide.createIcons();
-
-                    setTimeout(() => {
-                        btn.className = originalClass;
-                        icon.setAttribute('data-lucide', 'copy');
-                        textEl.textContent = originalText;
-                        
-                        floatBtn.className = originalFloatClass;
-                        floatIcon.setAttribute('data-lucide', 'copy');
-                        
-                        lucide.createIcons();
-                    }, 3000);
+                    handleSuccess();
                 });
             }
 
-            // Using modern ClipboardItem API which supports writing both text and image!
-            if (navigator.clipboard && window.ClipboardItem) {
+            if (navigator.clipboard) {
                 try {
-                    // Update Button State to loading
-                    icon.setAttribute('data-lucide', 'loader-2');
-                    icon.classList.add('animate-spin');
-                    textEl.textContent = "Memproses Gambar...";
-                    
-                    floatIcon.setAttribute('data-lucide', 'loader-2');
-                    floatIcon.classList.add('animate-spin');
-                    
-                    lucide.createIcons();
-
-                    const imageBlob = await getCompositeImageBlob();
-                    
-                    if (imageBlob) {
-                        const textBlob = new Blob([textToCopy], { type: 'text/plain' });
-                        const item = new ClipboardItem({
-                            'text/plain': textBlob,
-                            'image/png': imageBlob
-                        });
-                        await navigator.clipboard.write([item]);
-                        handleSuccess();
-                    } else {
-                        // Fallback to purely text if no image uploaded
-                        await navigator.clipboard.writeText(textToCopy);
-                        handleSuccess();
-                    }
+                    await navigator.clipboard.writeText(textToCopy);
+                    handleSuccess();
                 } catch (err) {
-                    console.error("Advanced Clipboard write failed:", err);
                     handleFallback();
-                } finally {
-                    icon.classList.remove('animate-spin');
-                    floatIcon.classList.remove('animate-spin');
                 }
             } else {
                 handleFallback();
